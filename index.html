@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="동국대학교 공과대학 동문 강연 행사 T-Concert — 2026. 9. 3.(목) 16:00, 원흥관 3층 i.SPACE. 참여신청 8. 30.(일)까지.">
+<meta property="og:title" content="동문과 함께하는 T-Concert">
+<meta property="og:description" content="기술과 사람, 변화의 이야기를 한 무대에서 — 2026. 9. 3.(목) 16:00, 동국대 원흥관 i.SPACE">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://t-concert.neoax.kr/">
+<title>동국대 T-Concert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --bg:#070B1E;
+    --bg2:#0B1130;
+    --surface:#111936;
+    --surface2:#151F44;
+    --line:rgba(130,150,255,.16);
+    --line-strong:rgba(130,150,255,.32);
+    --text:#E9EDFB;
+    --muted:#9AA6CE;
+    --faint:#6B77A4;
+    --cyan:#4FE3EC;
+    --violet:#9D8CFF;
+    --amber:#FFC96B;
+    --grad:linear-gradient(92deg,#4FE3EC 0%,#7FA8FF 48%,#B58CFF 100%);
+    --kr:'Noto Sans KR',-apple-system,'Apple SD Gothic Neo',sans-serif;
+    --disp:'Unbounded','Noto Sans KR',sans-serif;
+    --mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--kr);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--cyan)}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(900px 420px at 85% -10%,rgba(157,140,255,.20),transparent 65%),
+      radial-gradient(700px 380px at 8% 8%,rgba(79,227,236,.14),transparent 60%),
+      var(--bg);
+    border-bottom:1px solid var(--line);
+    padding:88px 0 72px;
+  }
+  #net{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+  .hero .wrap{position:relative}
+  .eyebrow{
+    font-size:.9rem;font-weight:700;letter-spacing:.14em;
+    color:var(--cyan);text-transform:uppercase;
+  }
+  .hero h1{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:clamp(3rem,10vw,6.2rem);
+    line-height:1.05;
+    letter-spacing:-.01em;
+    margin:.35em 0 .2em;
+    background:var(--grad);
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;
+  }
+  .hero .kicker{
+    font-size:clamp(1.15rem,2.6vw,1.5rem);
+    font-weight:900;color:var(--text);
+    text-wrap:balance;
+  }
+  .tmean{
+    margin-top:14px;color:var(--muted);font-size:.95rem;
+  }
+  .tmean b{color:var(--text);font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line-strong);
+    background:rgba(17,25,54,.65);
+    border-radius:999px;padding:9px 16px;
+    font-size:.92rem;font-weight:500;color:var(--text);
+  }
+  .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none}
+  .chip.amber .dot{background:var(--amber)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .btn{
+    display:inline-block;text-decoration:none;font-weight:700;
+    border-radius:10px;padding:13px 24px;font-size:1rem;
+  }
+  .btn-primary{
+    background:var(--grad);color:#07102A;
+    box-shadow:0 6px 26px rgba(79,227,236,.28);
+  }
+  .btn-ghost{
+    color:var(--text);border:1px solid var(--line-strong);
+    background:rgba(17,25,54,.5);
+  }
+  .btn:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+
+  /* ---------- sections ---------- */
+  section{padding:72px 0}
+  section+section{border-top:1px solid var(--line)}
+  .sec-label{
+    font-family:var(--mono);font-size:.82rem;letter-spacing:.18em;
+    color:var(--violet);text-transform:uppercase;
+  }
+  h2{
+    font-size:clamp(1.5rem,3.4vw,2rem);font-weight:900;
+    margin:10px 0 8px;text-wrap:balance;
+  }
+  .sec-desc{color:var(--muted);max-width:38em}
+
+  /* T meaning */
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:36px}
+  .tcard{
+    border:1px solid var(--line);border-radius:14px;
+    background:linear-gradient(180deg,var(--surface),transparent);
+    padding:26px 22px;
+  }
+  .tcard .big{
+    font-family:var(--disp);font-weight:700;font-size:2rem;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .tcard h3{font-size:1.05rem;margin:8px 0 6px}
+  .tcard p{color:var(--muted);font-size:.92rem}
+
+  /* speakers */
+  .spgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:36px}
+  .sp{
+    border:1px solid var(--line);border-radius:14px;
+    background:var(--surface);padding:24px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .sp:hover{border-color:var(--line-strong)}
+  .sp .who{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .sp .name{font-weight:900;font-size:1.1rem}
+  .sp .org{color:var(--faint);font-size:.85rem}
+  .sp .title{
+    font-weight:700;color:var(--cyan);font-size:1rem;line-height:1.45;
+    text-wrap:balance;
+  }
+  .sp .desc{color:var(--muted);font-size:.9rem}
+  .sp .time{font-family:var(--mono);font-size:.8rem;color:var(--violet)}
+
+  /* timeline */
+  .tl{margin-top:36px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .row{
+    display:grid;grid-template-columns:150px 1fr;gap:16px;
+    padding:16px 22px;background:var(--surface);
+  }
+  .row:nth-child(even){background:var(--bg2)}
+  .row+.row{border-top:1px solid var(--line)}
+  .row .t{
+    font-family:var(--mono);font-size:.86rem;color:var(--cyan);
+    font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:2px;
+  }
+  .row .what{font-weight:700}
+  .row .sub{color:var(--muted);font-size:.86rem;font-weight:400}
+  .row.talk .what::after{
+    content:'강연';font-family:var(--mono);font-size:.68rem;color:var(--violet);
+    border:1px solid var(--line-strong);border-radius:5px;padding:2px 6px;
+    margin-left:10px;vertical-align:2px;font-weight:400;letter-spacing:.06em;
+  }
+  @media (max-width:560px){
+    .row{grid-template-columns:1fr;gap:4px}
+  }
+
+  /* info */
+  .infogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:36px}
+  .info{
+    border:1px solid var(--line);border-radius:14px;
+    background:var(--surface);padding:22px;
+  }
+  .info .k{
+    font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;
+    color:var(--faint);text-transform:uppercase;
+  }
+  .info .v{font-size:1.12rem;font-weight:700;margin-top:8px}
+  .info .n{color:var(--muted);font-size:.88rem;margin-top:4px}
+  .info.hot{border-color:rgba(255,201,107,.45)}
+  .info.hot .v{color:var(--amber)}
+
+  .notice{
+    margin-top:28px;border-left:3px solid var(--cyan);
+    background:var(--surface);border-radius:0 12px 12px 0;
+    padding:18px 22px;color:var(--muted);font-size:.94rem;
+  }
+  .notice b{color:var(--text)}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:44px 0 56px;color:var(--faint);font-size:.88rem;
+  }
+  footer .uni{
+    font-family:var(--disp);font-weight:500;color:var(--muted);
+    letter-spacing:.08em;font-size:.95rem;margin-bottom:8px;
+  }
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">Dongguk University · College of Engineering</p>
+    <h1>T-concert</h1>
+    <p class="kicker">동문과 함께하는 T-Concert — 기술과 사람, 변화의 이야기를 한 무대에서.</p>
+    <p class="tmean">T-Concert의 “T”는 <b>Technology(기술)</b>, <b>Trend(트렌드)</b>, <b>Transformation(변화)</b>을 의미합니다.</p>
+    <div class="chips">
+      <span class="chip"><span class="dot"></span>2026. 9. 3.(목) 16:00 – 18:25</span>
+      <span class="chip"><span class="dot"></span>원흥관 3층 i.SPACE</span>
+      <span class="chip amber"><span class="dot"></span>참여신청 마감 8. 30.(일)</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#apply">참여신청 안내</a>
+      <a class="btn btn-ghost" href="#program">프로그램 보기</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="sec-label">Why T-Concert</p>
+    <h2>강의실 밖의 선배들이 무대에 오릅니다</h2>
+    <p class="sec-desc">법정에서, 클라우드 데이터센터에서, 스타트업 현장에서 AI 시대를 먼저 통과하고 있는 동국대 동문 아홉 명이 각자의 답을 들고 돌아옵니다. 발표가 끝나면 자유토론과 Q&amp;A로 무엇이든 직접 물어볼 수 있습니다.</p>
+    <div class="tgrid">
+      <div class="tcard">
+        <div class="big">T</div>
+        <h3>Technology · 기술</h3>
+        <p>AI, 클라우드, 오픈소스, 리걸테크 — 지금 산업을 움직이는 기술을 현장의 언어로 듣습니다.</p>
+      </div>
+      <div class="tcard">
+        <div class="big">T</div>
+        <h3>Trend · 트렌드</h3>
+        <p>기술과 기업, 그리고 일자리가 어디로 움직이는지 — 뉴스보다 반 박자 빠른 감각을 나눕니다.</p>
+      </div>
+      <div class="tcard">
+        <div class="big">T</div>
+        <h3>Transformation · 변화</h3>
+        <p>변화의 시대에 학생이 준비해야 할 역량과 태도, 그리고 기회를 만드는 방법을 이야기합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="sec-label">Sessions</p>
+    <h2>연사와 세션</h2>
+    <p class="sec-desc">짧고 굵은 5분 스파크 토크부터 20분 메인 세션까지 — 겹치는 이야기는 하나도 없습니다.</p>
+    <div class="spgrid">
+      <article class="sp">
+        <span class="time">16:10 · 5'</span>
+        <div class="who"><span class="name">김후곤</span><span class="org">법무법인 광장 형사그룹 대표변호사</span></div>
+        <p class="title">리걸테크 분야 AI 활용</p>
+        <p class="desc">법과 기술이 만나는 최전선 — 법률 현장에서 AI가 실제로 어떻게 쓰이고 있는지를 압축해 전합니다.</p>
+      </article>
+      <article class="sp">
+        <span class="time">16:15 · 20'</span>
+        <div class="who"><span class="name">최지웅</span><span class="org">(전) KT클라우드 대표이사</span></div>
+        <p class="title">여러분의 인생은 아직 Beta입니다</p>
+        <p class="desc">완성본이 아니어도 괜찮은 이유 — 계속 업데이트되는 커리어와 인생에 대한 이야기.</p>
+      </article>
+      <article class="sp">
+        <span class="time">16:35 · 20'</span>
+        <div class="who"><span class="name">윤경아</span><span class="org">KT 자문위원</span></div>
+        <p class="title">AI, 변화의 시대와 우리의 준비</p>
+        <p class="desc">AI가 바꾸는 기술과 일의 변화를 살펴보고, 학생들이 준비해야 할 역량과 태도를 짚습니다. 기술은 계속 바뀌지만, 새로운 기술을 자기 문제와 연결해 결과를 만드는 사람은 계속 필요합니다.</p>
+      </article>
+      <article class="sp">
+        <span class="time">16:55 · 5'</span>
+        <div class="who"><span class="name">유은희</span><span class="org">오늘산책 대표이사</span></div>
+        <p class="title">기술의 시대 우리가 인문학을 말하는 이유</p>
+        <p class="desc">모두가 기술을 말할 때, 사람을 읽는 힘이 왜 더 귀해지는가에 대한 5분의 환기.</p>
+      </article>
+      <article class="sp">
+        <span class="time">17:00 · 20'</span>
+        <div class="who"><span class="name">박형준</span><span class="org">에스티씨랩 대표이사</span></div>
+        <p class="title">AI Era, Consistency &amp; Connectivity</p>
+        <p class="desc">사업에서 가장 중요하게 여겨온 두 가지 — 꾸준함(Consistency)과 미래와의 연결성(Connectivity), 그리고 AI 시대에 이 두 가지가 갖는 새로운 의미.</p>
+      </article>
+      <article class="sp">
+        <span class="time">17:20 · 20'</span>
+        <div class="who"><span class="name">안재석</span><span class="org">KT클라우드 기술본부장</span></div>
+        <p class="title">Beyond the Classroom: AI시대의 오픈소스 커뮤니티, 사람과 기술, 기회</p>
+        <p class="desc">AI가 기술로 사람을 대체한다지만, 어떤 사람을 만나 어떤 경험을 하느냐는 오히려 더 중요해집니다. 오픈소스로 배우는 기술, 커뮤니티에서 만나는 사람, 그리고 그 안에서 만들어지는 새로운 기회의 이야기.</p>
+      </article>
+      <article class="sp">
+        <span class="time">17:40 · 20'</span>
+        <div class="who"><span class="name">전화성</span><span class="org">씨엔티테크 대표이사</span></div>
+        <p class="title">동문 발표</p>
+        <p class="desc">스타트업 현장에서 길어 올린 이야기 — 세부 주제는 곧 공개됩니다.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="program">
+  <div class="wrap">
+    <p class="sec-label">Timetable</p>
+    <h2>전체 프로그램</h2>
+    <div class="tl">
+      <div class="row"><span class="t">16:00 – 16:05</span><div><span class="what">내외빈 참석자 소개</span> <span class="sub">황승훈 교수</span></div></div>
+      <div class="row"><span class="t">16:05 – 16:10</span><div><span class="what">공과대학장 인사말 및 행사 소개</span> <span class="sub">박현창 공과대학장</span></div></div>
+      <div class="row talk"><span class="t">16:10 – 16:15</span><div><span class="what">리걸테크 분야 AI 활용</span> <span class="sub">김후곤 동문 · 법무법인 광장</span></div></div>
+      <div class="row talk"><span class="t">16:15 – 16:35</span><div><span class="what">여러분의 인생은 아직 Beta입니다</span> <span class="sub">최지웅 동문 · (전) KT클라우드</span></div></div>
+      <div class="row talk"><span class="t">16:35 – 16:55</span><div><span class="what">AI, 변화의 시대와 우리의 준비</span> <span class="sub">윤경아 동문 · KT 자문위원</span></div></div>
+      <div class="row talk"><span class="t">16:55 – 17:00</span><div><span class="what">기술의 시대 우리가 인문학을 말하는 이유</span> <span class="sub">유은희 동문 · 오늘산책</span></div></div>
+      <div class="row talk"><span class="t">17:00 – 17:20</span><div><span class="what">AI Era, Consistency &amp; Connectivity</span> <span class="sub">박형준 동문 · 에스티씨랩</span></div></div>
+      <div class="row talk"><span class="t">17:20 – 17:40</span><div><span class="what">Beyond the Classroom: AI시대의 오픈소스 커뮤니티, 사람과 기술, 기회</span> <span class="sub">안재석 동문 · KT클라우드</span></div></div>
+      <div class="row talk"><span class="t">17:40 – 18:00</span><div><span class="what">동문 발표</span> <span class="sub">전화성 동문 · 씨엔티테크</span></div></div>
+      <div class="row"><span class="t">18:00 – 18:20</span><div><span class="what">주제 자유토론 및 Q&amp;A</span></div></div>
+      <div class="row"><span class="t">18:20 – 18:25</span><div><span class="what">단체 기념사진 촬영</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="wrap">
+    <p class="sec-label">Join</p>
+    <h2>참여 안내</h2>
+    <div class="infogrid">
+      <div class="info">
+        <p class="k">일시</p>
+        <p class="v">2026. 9. 3.(목) 16:00</p>
+        <p class="n">본 행사 16:00 – 18:25</p>
+      </div>
+      <div class="info">
+        <p class="k">장소</p>
+        <p class="v">원흥관 3층 i.SPACE</p>
+        <p class="n">동국대학교 서울캠퍼스</p>
+      </div>
+      <div class="info hot">
+        <p class="k">참여신청 · Q&amp;A 접수 (필수)</p>
+        <p class="v">8. 30.(일)까지</p>
+        <p class="n">포스터의 QR코드를 스마트폰으로 스캔해 신청하세요.</p>
+      </div>
+      <div class="info">
+        <p class="k">문의</p>
+        <p class="v">02-2260-8735</p>
+        <p class="n">공과대학 학사운영실</p>
+      </div>
+    </div>
+    <p class="notice"><b>미리 질문을 남겨 주세요.</b> 참여신청 시 접수된 질문은 18:00 자유토론 &amp; Q&amp;A 시간에 연사들이 직접 답합니다. 궁금했던 진로·기술·창업 이야기를 지금 적어 두세요.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="uni">DONGGUK UNIVERSITY</p>
+    <p>주최·주관 동국대학교 공과대학 · 동문과 함께하는 T-Concert</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var c=document.getElementById('net');
+  if(!c)return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx=c.getContext('2d'),w,h,pts=[];
+  function size(){
+    w=c.width=c.offsetWidth*devicePixelRatio;
+    h=c.height=c.offsetHeight*devicePixelRatio;
+  }
+  size();addEventListener('resize',size);
+  var N=Math.min(46,Math.floor(innerWidth/28));
+  for(var i=0;i<N;i++){
+    pts.push({x:Math.random()*1,y:Math.random()*1,
+      vx:(Math.random()-.5)*.0004,vy:(Math.random()-.5)*.0004});
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];
+      if(!reduce){
+        p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0||p.x>1)p.vx*=-1;
+        if(p.y<0||p.y>1)p.vy*=-1;
+      }
+      for(var j=i+1;j<pts.length;j++){
+        var q=pts[j],dx=(p.x-q.x)*w,dy=(p.y-q.y)*h,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<w*.11){
+          ctx.strokeStyle='rgba(127,168,255,'+(0.16*(1-d/(w*.11)))+')';
+          ctx.lineWidth=1;
+          ctx.beginPath();ctx.moveTo(p.x*w,p.y*h);ctx.lineTo(q.x*w,q.y*h);ctx.stroke();
+        }
+      }
+      ctx.fillStyle='rgba(79,227,236,.55)';
+      ctx.beginPath();ctx.arc(p.x*w,p.y*h,2.2*devicePixelRatio/2,0,7);ctx.fill();
+    }
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
