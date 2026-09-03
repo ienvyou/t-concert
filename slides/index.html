@@ -306,7 +306,7 @@
 
 
   /* ---------- slide 11b : 직지 · 방하착 ---------- */
-  .s11b h2{font-size:40px;margin-bottom:32px}
+  .s11b h2{font-size:40px;margin-bottom:24px}
   .zenwrap{display:flex;gap:44px;align-items:stretch}
   .zencol{display:flex;flex-direction:column}
   .zencol.left{width:500px;flex:none}
@@ -320,7 +320,7 @@
     display:block;margin-top:12px;font-style:normal;
     font-family:var(--mono);font-size:13.5px;color:var(--faint);
   }
-  .zencards{display:flex;gap:16px;margin-top:28px}
+  .zencards{display:flex;gap:16px;margin-top:22px}
   .zc{
     flex:1;background:var(--panel);border:1px solid var(--line);
     border-radius:14px;padding:18px 20px 20px;
@@ -373,9 +373,53 @@
   .doit .dtx{margin-top:14px;font-size:16px;line-height:1.75;color:var(--muted)}
   .doit .dtx b{color:var(--text)}
   .s11b .warn{
-    margin-top:30px;font-size:17px;color:var(--faint);
+    margin-top:20px;font-size:17px;color:var(--faint);
+  }
+  .s11b .grow{
+    margin-top:16px;font-family:var(--disp);font-weight:900;font-size:25px;
+  }
+  .s11b .grow .hl{
+    display:inline-block;padding-bottom:.14em;line-height:1.35;
+    background:linear-gradient(92deg,var(--cyan),var(--violet));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
   }
   .s11b .warn b{color:var(--red);font-weight:700}
+
+
+  /* ---------- slide 14 : 번외 (Q&A) ---------- */
+  .bonus{background:#080512}
+  .bonus .eyebrow{color:var(--amber);margin-bottom:16px}
+  .bonus h2{font-size:34px;margin-bottom:18px}
+  .bonus .theme{
+    font-family:var(--disp);font-weight:900;font-size:38px;letter-spacing:-.01em;
+    color:var(--faint);margin-bottom:30px;
+  }
+  .bonus .theme .hl{color:var(--amber)}
+  .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px}
+  .qcard{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:16px 20px 18px;position:relative;
+  }
+  .qcard .qtag{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;
+    color:var(--faint);display:block;margin-bottom:8px;
+  }
+  .qcard .qt{
+    display:block;font-family:var(--disp);font-weight:900;font-size:19px;
+    line-height:1.4;color:var(--text);margin-bottom:9px;
+  }
+  .qcard .qt em{font-style:normal;color:var(--amber)}
+  .qcard .qd{display:block;font-size:14.5px;line-height:1.72;color:var(--muted)}
+  .qcard .qd b{color:var(--text)}
+  .qcard .qd .ar{font-family:var(--mono);color:var(--faint);font-size:13px}
+  .bonus .kicker-last{
+    margin-top:26px;text-align:center;font-family:var(--disp);font-weight:900;font-size:26px;
+  }
+  .bonus .kicker-last .hl{
+    background:linear-gradient(92deg,var(--amber),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    display:inline-block;padding-bottom:.14em;line-height:1.35;
+  }
 
 </style>
 </head>
@@ -666,8 +710,9 @@
       </div>
     </div>
     <p class="warn frag">단, <b>바로 하지 말아야 할 것</b>도 있습니다 — 화내기, 욕심내기, 남 탓하기, 생각 없이 말하기.</p>
+    <p class="grow frag">결심은 쌓이지 않습니다. <span class="hl">실행만 쌓입니다.</span></p>
     <aside class="notes">
-      마지막으로 하나만 더 드리고 끝내겠습니다. 오늘 계속 &lsquo;해라&rsquo;라고 했는데, 이따 나가시면서 이렇게 생각하실 거예요. &ldquo;오, 나도 뭐 하나 만들어봐야지.&rdquo; <b>그 &lsquo;해야지&rsquo;가 함정입니다.</b> 저도 제일 어려운 게 이거예요. (인용 가리키며) &ldquo;일어나야지&rdquo; 하는 건 망상이다. 꿈 깨는 방법은? 그냥 일어나 버리는 것. 일어나 버리면 각오나 결심이 필요 없어집니다. <b>직지</b>는 지금 내 마음을 바로 알아차리는 것, <b>방하착</b>은 그걸 탁 놓아버리는 겁니다. 문제는 우리가 &ldquo;해야지&rdquo; 하는 자신을 기특해한다는 거예요. 그런데 <b>커밋 로그에는 결심이 안 남습니다.</b> (오른쪽 가리키며) &ldquo;만들어야지&rdquo; 말고 바로 만들기, &ldquo;연락해야지&rdquo; 말고 바로 연락하기. 자, 이 얘기도 말로 끝나면 그것도 &ldquo;해야지&rdquo;가 됩니다. 지금 30초 드릴게요. (버튼 클릭) 폰 꺼내세요. 메모 앱에 폴더 하나, 옆자리에 인사, 아니면 지원 페이지 열기. 시작합니다. …… 네, 방금 하신 게 <b>오늘의 첫 커밋</b>입니다. 아, <b>바로 하지 말아야 할 것</b>도 있어요. 화내기, 욕심내기, 남 탓하기, 생각 없이 말하기. 이건 반대로 한 박자 놓고 가세요.
+      마지막으로 하나만 더 드리고 끝내겠습니다. 오늘 계속 &lsquo;해라&rsquo;라고 했는데, 이따 나가시면서 이렇게 생각하실 거예요. &ldquo;오, 나도 뭐 하나 만들어봐야지.&rdquo; <b>그 &lsquo;해야지&rsquo;가 함정입니다.</b> 저도 제일 어려운 게 이거예요. (인용 가리키며) &ldquo;일어나야지&rdquo; 하는 건 망상이다. 꿈 깨는 방법은? 그냥 일어나 버리는 것. 일어나 버리면 각오나 결심이 필요 없어집니다. <b>직지</b>는 지금 내 마음을 바로 알아차리는 것, <b>방하착</b>은 그걸 탁 놓아버리는 겁니다. 문제는 우리가 &ldquo;해야지&rdquo; 하는 자신을 기특해한다는 거예요. 그런데 <b>커밋 로그에는 결심이 안 남습니다.</b> (오른쪽 가리키며) &ldquo;만들어야지&rdquo; 말고 바로 만들기, &ldquo;연락해야지&rdquo; 말고 바로 연락하기. 자, 이 얘기도 말로 끝나면 그것도 &ldquo;해야지&rdquo;가 됩니다. 지금 30초 드릴게요. (버튼 클릭) 폰 꺼내세요. 메모 앱에 폴더 하나, 옆자리에 인사, 아니면 지원 페이지 열기. 시작합니다. …… 네, 방금 하신 게 <b>오늘의 첫 커밋</b>입니다. 아, <b>바로 하지 말아야 할 것</b>도 있어요. 화내기, 욕심내기, 남 탓하기, 생각 없이 말하기. 이건 반대로 한 박자 놓고 가세요. 바로 하는 게 실천이라면, 바로 하지 않는 건 절제입니다. (마지막 줄) 그리고 이 말씀을 꼭 드리고 싶었는데요 &mdash; <b>결심은 쌓이지 않습니다.</b> 아무리 굳게 마음먹어도 로그에는 안 남아요. 쌓이는 건 실행뿐입니다. 방금 하신 그 30초 같은 것들이요. 그리고 그 하루치 차이가 4년 뒤에 완전히 다른 사람을 만듭니다.
     </aside>
   </section>
 
@@ -683,6 +728,39 @@
     </aside>
   </section>
 
+
+  <!-- ===== Slide 14 : 번외 ===== -->
+  <section class="slide s13 bonus">
+    <p class="eyebrow">BONUS TRACK — 미리 보내주신 질문 8개</p>
+    <h2>질문은 여덟 개였지만, 묻고 계신 건 하나였습니다.</h2>
+    <p class="theme">&ldquo;저는 <span class="hl">어느 쪽에 서 있어야 안전한가요?</span>&rdquo;</p>
+    <div class="qgrid">
+      <div class="qcard frag">
+        <span class="qtag">Q1 · Q2 · Q3 — 전공 전망 / 클라우드·통신 직무</span>
+        <span class="qt">전공은 사라지지 않습니다. <em>이름이 바뀔 뿐입니다.</em></span>
+        <span class="qd"><span class="ar">교환기 → 라우터 → SDN → 클라우드 → AI 인프라.</span> 30년간 레이어는 그대로였고 간판만 바뀌었습니다. <b>GPU를 늘릴수록 병목은 네트워크로 옵니다.</b></span>
+      </div>
+      <div class="qcard frag">
+        <span class="qtag">Q4 · Q5 — AI 시대의 역량 / 인간의 해자</span>
+        <span class="qt">AI가 못 하는 건 답이 아니라 <em>질문과 책임</em>입니다.</span>
+        <span class="qd">답은 이제 무한히 생성됩니다. 무엇이 진짜 문제인지 정하는 것, 그 답이 틀렸을 때 책임지는 것. <b>해자는 지식이 아니라 판단입니다.</b></span>
+      </div>
+      <div class="qcard frag">
+        <span class="qtag">Q6 · Q7 — 1학년의 활동 / 채용에서 보는 것</span>
+        <span class="qt">뽑을 때 보는 건 결과물이 아니라 <em>로그</em>입니다.</span>
+        <span class="qd">완성도는 안 봅니다. 왜 만들었고, 어디서 깨졌고, 어떻게 고쳤는지를 봅니다. 그래서 1학년의 가장 가치 있는 활동은 <b>끝까지 한 번 깨져보는 것</b>입니다.</span>
+      </div>
+      <div class="qcard frag">
+        <span class="qtag">Q8 — 전공자 · 부트캠프 · 마이스터고</span>
+        <span class="qt">출신은 <em>initial commit</em>일 뿐입니다.</span>
+        <span class="qd">3년 지나면 아무도 안 봅니다. 갈리는 건 그 뒤에 쌓인 커밋입니다. 전공자의 유일한 우위는 <b>&lsquo;왜 그렇게 동작하는가&rsquo;를 배울 4년</b>이 있다는 것.</span>
+      </div>
+</div>
+    <p class="kicker-last frag">안전한 스택은 없습니다. <span class="hl">갈아탈 수 있는 사람</span>이 있을 뿐입니다.</p>
+    <aside class="notes">
+      (본편 끝나고 질의응답으로 넘어가면서) 미리 질문을 여덟 개 보내주셨는데요, 읽으면서 좀 놀랐습니다. 표면적으로는 다 다른 질문이에요. 네트워크 전망, 클라우드 직무, 1학년 때 뭘 공부할지, AI 시대 역량, 인간의 해자, 대외활동, 채용 기준, 전공자와 부트캠프의 차이. 그런데 여덟 개를 나란히 놓고 보니 <b>사실 다 같은 질문</b>이더라고요. &ldquo;저는 어느 쪽에 서 있어야 안전한가요?&rdquo; 안전한 전공, 안전한 직무, 안전한 스펙, 안전한 출신. 정말 솔직하게 말씀드리면, <b>그 질문에는 답이 없습니다.</b> 안전한 자리를 고르는 게임이 아니라, 자리가 바뀔 때 옮겨탈 수 있느냐의 게임이기 때문입니다. 그래도 각각에 대해서는 제가 아는 만큼 말씀드릴게요. <b>(왼쪽 위, 1·2·3번) 전공 전망</b> — 전공은 안 없어집니다. 이름만 바뀝니다. 제가 일한 30년 동안 교환기가 라우터가 되고, SDN이 되고, 클라우드가 되고, 지금은 AI 인프라라고 불립니다. 레이어는 그대로예요. 그리고 지금 GPU를 아무리 꽂아도 병목은 결국 네트워크로 옵니다. 여러분 전공, 지금 제일 뜨거운 자리입니다. <b>(오른쪽 위, 4·5번) AI가 대체 못 하는 영역</b> — 답은 이제 무한히 생성됩니다. 그런데 <b>무엇이 진짜 문제인지 정하는 것</b>, 그리고 <b>그 답이 틀렸을 때 책임지는 것</b>은 아직 사람의 자리입니다. 해자는 지식의 양이 아니라 판단이에요. <b>(왼쪽 아래, 6·7번) 채용에서 보는 것</b> — 포트폴리오 보면서 완성도는 거의 안 봅니다. 왜 만들었는지, 어디서 깨졌는지, 그걸 어떻게 고쳤는지를 봅니다. 그래서 1학년 때 가장 가치 있는 활동은 뭐냐, 저는 <b>끝까지 한 번 제대로 깨져보는 것</b>이라고 생각합니다. 교육봉사도 좋고 동아리도 좋은데, 끝까지 가보는 게 핵심이에요. <b>(오른쪽 아래, 8번) 출신 차이</b> — 3년 지나면 아무도 안 봅니다. 제가 사람을 뽑고 같이 일해보면 전공자냐 부트캠프냐는 정말 안 보여요. 대신 전공자한테 딱 하나 우위가 있는데, <b>&lsquo;왜 그렇게 동작하는지&rsquo;를 배울 4년</b>이 주어졌다는 겁니다. 그 시간을 안 쓰면 그 우위도 없습니다. 정리하면 (마지막 줄) — 안전한 스택은 없습니다. 갈아탈 수 있는 사람이 있을 뿐입니다. 오늘 강연이 딱 그 얘기였습니다.
+    </aside>
+  </section>
 
 </div></div>
 
@@ -713,8 +791,14 @@
     cur=Math.max(0,Math.min(slides.length-1,i));
     slides.forEach(function(s,k){s.classList.toggle('active',k===cur)});
     frags(cur).forEach(function(f){f.classList.toggle('on',!!revealAll)});
-    progress.style.width=((cur+1)/slides.length*100)+'%';
-    counter.textContent=(cur+1)+' / '+slides.length;
+    var main=slides.filter(function(x){return !x.classList.contains('bonus')}).length;
+    if(slides[cur].classList.contains('bonus')){
+      progress.style.width='100%';
+      counter.textContent='번외';
+    }else{
+      progress.style.width=((cur+1)/main*100)+'%';
+      counter.textContent=(cur+1)+' / '+main;
+    }
     var n=slides[cur].querySelector('.notes');
     notesBody.innerHTML=n?n.innerHTML:'(노트 없음)';
   }
