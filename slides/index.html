@@ -86,23 +86,6 @@
     position:fixed;left:22px;bottom:14px;z-index:41;
     font-family:var(--mono);font-size:12px;color:var(--faint);
   }
-  #hint button{
-    font:inherit;color:inherit;background:none;border:1px solid var(--line);
-    border-radius:6px;padding:3px 8px;cursor:pointer;
-  }
-  #hint button:hover{color:var(--text);border-color:var(--line-strong)}
-  #notesPanel{
-    position:fixed;left:0;right:0;bottom:0;z-index:40;
-    background:rgba(10,15,38,.97);border-top:1px solid var(--line);
-    padding:22px 36px 30px;max-height:42vh;overflow-y:auto;display:none;
-    font-size:15.5px;line-height:1.8;color:var(--muted);
-  }
-  #notesPanel.open{display:block}
-  #notesPanel .np-label{
-    font-family:var(--mono);font-size:11px;letter-spacing:.2em;
-    color:var(--violet);text-transform:uppercase;margin-bottom:8px;
-  }
-  #notesPanel b{color:var(--text)}
 
   /* ---------- slide 1 ---------- */
   .s1 .ver{
@@ -766,8 +749,7 @@
 
 <div id="progress"></div>
 <div id="counter">1 / 13</div>
-<div id="hint">← → 이동 · <button id="noteBtn" type="button">N 스피커 노트</button></div>
-<div id="notesPanel"><p class="np-label">Speaker Notes</p><div id="notesBody"></div></div>
+<div id="hint">← → 이동 · 클릭으로 다음</div>
 
 <script>
 (function(){
@@ -775,8 +757,6 @@
   var stage=document.getElementById('stage');
   var progress=document.getElementById('progress');
   var counter=document.getElementById('counter');
-  var notesPanel=document.getElementById('notesPanel');
-  var notesBody=document.getElementById('notesBody');
   var cur=0;
 
   function fit(){
@@ -799,8 +779,6 @@
       progress.style.width=((cur+1)/main*100)+'%';
       counter.textContent=(cur+1)+' / '+main;
     }
-    var n=slides[cur].querySelector('.notes');
-    notesBody.innerHTML=n?n.innerHTML:'(노트 없음)';
   }
 
   function next(){
@@ -819,13 +797,9 @@
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
     else if(e.key==='Home'){show(0,false)}
     else if(e.key==='End'){show(slides.length-1,true)}
-    else if(e.code==='KeyN'||e.key==='n'||e.key==='N'){notesPanel.classList.toggle('open')}
-  });
-  document.getElementById('noteBtn').addEventListener('click',function(){
-    notesPanel.classList.toggle('open');
   });
   addEventListener('click',function(e){
-    if(notesPanel.contains(e.target)||e.target.closest('#hint')||e.target.closest('#zenGo'))return;
+    if(e.target.closest('#hint')||e.target.closest('#zenGo'))return;
     next();
   });
 
