@@ -287,21 +287,96 @@
   .item .tx b{color:var(--cyan);font-weight:900}
 
   /* ---------- slide 11 ---------- */
-  .s11{align-items:center;text-align:center}
+  .s11{align-items:center;text-align:center;background:#04060F}
   .s11 .small{font-size:22px;color:var(--muted);margin-bottom:44px}
   .s11 .huge{font-family:var(--disp);font-weight:900;font-size:100px;letter-spacing:-.02em}
   .s11 .huge .v{font-family:var(--mono);color:var(--cyan)}
-  .s11 .ship{margin-top:48px;font-family:var(--mono);font-size:23px;color:var(--violet)}
-
-  /* ---------- slide 12 ---------- */
-  .s12{align-items:center;text-align:center;background:#04060F}
-  .s12 .l1{font-family:var(--mono);font-size:40px;font-weight:700}
-  .s12 .l2{font-family:var(--mono);font-size:40px;font-weight:700;margin-top:20px;
+  .s11 .ship{margin-top:44px;font-family:var(--mono);font-size:22px;color:var(--violet)}
+  .s11 .fin{
+    margin-top:42px;font-family:var(--disp);font-weight:900;
+    font-size:31px;line-height:1.7;letter-spacing:-.01em;
+  }
+  .s11 .fin .grad{
+    display:inline-block;padding-bottom:.14em;line-height:1.35;
     background:linear-gradient(92deg,var(--cyan),var(--violet));
-    -webkit-background-clip:text;background-clip:text;color:transparent;}
-  .s12 .kr{margin-top:52px;font-size:23px;color:var(--muted);line-height:1.9}
-  .s12 .last{margin-top:56px;font-size:17px;color:var(--faint)}
-  .s12 .last .cm{font-family:var(--mono);color:var(--green)}
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .s11 .last{margin-top:40px;font-size:17px;color:var(--faint)}
+  .s11 .last .cm{font-family:var(--mono);color:var(--green)}
+
+
+  /* ---------- slide 11b : 직지 · 방하착 ---------- */
+  .s11b h2{font-size:40px;margin-bottom:32px}
+  .zenwrap{display:flex;gap:44px;align-items:stretch}
+  .zencol{display:flex;flex-direction:column}
+  .zencol.left{width:500px;flex:none}
+  .zencol.right{flex:1;min-width:0}
+  .zenq{
+    border-left:3px solid var(--amber);padding:4px 0 4px 22px;
+    font-size:19.5px;line-height:1.8;color:var(--muted);
+  }
+  .zenq b{color:var(--text)}
+  .zenq cite{
+    display:block;margin-top:12px;font-style:normal;
+    font-family:var(--mono);font-size:13.5px;color:var(--faint);
+  }
+  .zencards{display:flex;gap:16px;margin-top:28px}
+  .zc{
+    flex:1;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:18px 20px 20px;
+  }
+  .zc .hanja{
+    display:block;font-family:var(--disp);font-weight:900;font-size:36px;
+    letter-spacing:.08em;color:var(--amber);line-height:1.1;
+  }
+  .zc .zk{
+    display:block;margin-top:7px;font-family:var(--mono);font-size:12.5px;
+    letter-spacing:.2em;color:var(--faint);
+  }
+  .zc .zd{display:block;margin-top:13px;font-size:15.5px;line-height:1.7;color:var(--muted)}
+  .zc .zd b{color:var(--text)}
+
+  .swaps{display:flex;flex-direction:column;gap:16px}
+  .swap{display:flex;align-items:baseline;gap:16px;white-space:nowrap}
+  .swap .was{
+    font-size:21px;color:var(--faint);
+    text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px;
+  }
+  .swap .arw{font-family:var(--mono);font-size:17px;color:var(--faint)}
+  .swap .now{font-family:var(--disp);font-weight:900;font-size:26px;color:var(--cyan)}
+
+  .doit{
+    margin-top:30px;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:20px 22px 22px;
+  }
+  .doit .dhead{display:flex;align-items:center;gap:14px;white-space:nowrap}
+  .doit .dlab{font-family:var(--disp);font-weight:900;font-size:22px}
+  .doit .dlab .sec{font-family:var(--mono);color:var(--amber)}
+  .gobtn{
+    font-family:var(--mono);font-size:15px;font-weight:700;
+    color:#060A1C;background:var(--cyan);border:0;border-radius:8px;
+    padding:8px 16px;cursor:pointer;letter-spacing:.02em;
+    font-variant-numeric:tabular-nums;
+  }
+  .gobtn:hover{filter:brightness(1.12)}
+  .gobtn.running{background:var(--amber)}
+  .gobtn.done{background:var(--green)}
+  .dbar{
+    margin-top:16px;height:4px;border-radius:3px;
+    background:rgba(130,150,255,.16);overflow:hidden;
+  }
+  .dbar i{
+    display:block;height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,var(--amber),var(--cyan));
+    transition:width 1s linear;
+  }
+  .doit .dtx{margin-top:14px;font-size:16px;line-height:1.75;color:var(--muted)}
+  .doit .dtx b{color:var(--text)}
+  .s11b .warn{
+    margin-top:30px;font-size:17px;color:var(--faint);
+  }
+  .s11b .warn b{color:var(--red);font-weight:700}
+
 </style>
 </head>
 <body>
@@ -531,7 +606,7 @@
     <p class="bpunch frag">기록이 없는 사람에게 AI는 검색엔진,<br>기록이 쌓인 사람에게 AI는 <span class="accent">‘나를 아는 지능’</span>이 됩니다.</p>
     <p class="bcall frag">여러분의 2nd Brain — 지금 시작하세요. 오늘의 <span class="cm">commit</span>이 AI의 컨텍스트가 됩니다.</p>
     <aside class="notes">
-      하나만 더 보여드릴게요. 방금 실험의 비용이 무너지고 있다고 했는데, 그 AI를 남들보다 훨씬 잘 쓰게 되는 방법이 하나 있습니다. (화면 가리키며) 이건 제 맥북에 실제로 있는 폴더입니다. 이름이 '위키에이전트'인데, 저는 이걸 제 <b>두 번째 뇌, 2nd Brain</b>이라고 부릅니다. 저는 2002년부터 블로그에 3일에 하나씩 글을 올렸습니다. 24년이면 3,000개가 넘는 글이에요. 그런데 그 글들, 지금은 대부분 없습니다. 서비스가 사라지면서 같이 사라졌어요. 남의 플랫폼에 쌓은 기록은 그렇게 됩니다. 그래서 지금은 제 맥북의 이 폴더에, 제 손이 닿는 곳에 쌓습니다. 그리고 중요한 건, 이걸 정리하는 게 제가 아니라는 겁니다. AI 에이전트가 이 폴더를 읽고, 분류하고, 서로 연결하고, 제가 뭘 물어보면 제 과거 기록에서 근거를 찾아 답합니다. 왜 이 이야기를 하냐면 — <b>AI는 여러분이 준 맥락만큼만 똑똑해지기 때문입니다.</b> 똑같은 AI라도 빈손으로 쓰면 검색엔진이고, 자기 기록 위에서 쓰면 ‘나를 아는 지능’이 됩니다. 눈치채셨겠지만 이건 아까 말씀드린 RULE 01, Commit의 AI 시대 버전이에요. 경험을 저장하라고 했죠? 이제는 텍스트로 저장해 두면 AI가 그걸 전부 읽어줍니다. 그리고 여러분은 지금 시작하면 저보다 훨씬 유리합니다. 저는 흩어진 기록을 모으는 데만 한참 걸렸거든요. 오늘 배운 것, 프로젝트가 깨진 이유, 문득 든 생각 — 폴더 하나 만들어서 오늘부터 쌓으세요. 그 기록이 쌓이기 시작하는 순간부터, AI 시대의 복리가 시작됩니다.
+      하나만 더 보여드릴게요. (화면 가리키며) 이건 제 맥북에 실제로 있는 폴더입니다. 저는 이걸 제 <b>두 번째 뇌, 2nd Brain</b>이라고 부릅니다. 2002년부터 3일에 하나씩 글을 썼어요. 24년이면 3,000개가 넘습니다. 그런데 그 글들, 지금 대부분 없습니다. <b>남의 플랫폼에 쌓은 24년치가 통째로 날아갔어요.</b> 그래서 지금은 제 손이 닿는 이 폴더에 쌓습니다. 그리고 정리는 제가 안 합니다. AI 에이전트가 읽고, 분류하고, 연결하고, 제가 물어보면 제 과거 기록에서 근거를 찾아 답합니다. 핵심은 이겁니다 — <b>AI는 여러분이 준 맥락만큼만 똑똑해집니다.</b> 빈손으로 쓰면 검색엔진, 자기 기록 위에서 쓰면 ‘나를 아는 지능’이 됩니다. 눈치채셨겠지만 이건 RULE 01, 커밋의 AI 시대 버전이에요. 그리고 지금 시작하는 여러분이 저보다 훨씬 유리합니다. 오늘 배운 것, 프로젝트가 깨진 이유 — 폴더 하나 만들어서 오늘부터 쌓으세요.
     </aside>
   </section>
 
@@ -549,26 +624,65 @@
     </aside>
   </section>
 
-  <!-- ===== Slide 12 ===== -->
-  <section class="slide s11">
-    <p class="small">"졸업할 때 완성된 사람이 되어야 한다고 생각하지 마세요."</p>
-    <p class="huge frag"><span class="v">v1.0</span>이면 충분합니다.</p>
-    <p class="ship frag">Ship first. Update later.</p>
+
+  <!-- ===== Slide 12 : 직지 · 방하착 ===== -->
+  <section class="slide s11b">
+    <p class="eyebrow rule-eyebrow">ONE LAST THING — 지금 바로</p>
+    <h2>&ldquo;해야지&rdquo;는 아직 <span class="accent">commit</span>이 아닙니다</h2>
+    <div class="zenwrap">
+      <div class="zencol left">
+        <blockquote class="zenq">
+          &ldquo;<b>&lsquo;일어나야지&rsquo; 하는 것은 망상이다.</b> 각오, 결심, 노력을 해도 다 꿈속의 이야기다.<br>
+          꿈 깨는 도리는 뭐냐 &mdash; <b>그냥 바로 일어나 버리는 거</b>예요.&rdquo;
+          <cite>— 법륜 스님, 즉문즉설</cite>
+        </blockquote>
+        <div class="zencards">
+          <div class="zc">
+            <span class="hanja">直指</span>
+            <span class="zk">직지</span>
+            <span class="zd">곧장 가리킨다 — 내 마음을 꿰뚫어 <b>바로 알아차리기</b></span>
+          </div>
+          <div class="zc">
+            <span class="hanja">放下着</span>
+            <span class="zk">방하착</span>
+            <span class="zd">내려놓아라 — 붙잡고 있던 망설임을 <b>탁 놓아버리기</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="zencol right">
+        <div class="swaps">
+          <div class="swap frag"><span class="was">&ldquo;만들어야지&rdquo;</span><span class="arw">→</span><span class="now">바로 만들기</span></div>
+          <div class="swap frag"><span class="was">&ldquo;연락해야지&rdquo;</span><span class="arw">→</span><span class="now">바로 연락하기</span></div>
+          <div class="swap frag"><span class="was">&ldquo;지원해야지&rdquo;</span><span class="arw">→</span><span class="now">바로 지원하기</span></div>
+        </div>
+        <div class="doit frag">
+          <div class="dhead">
+            <p class="dlab">지금, 이 자리에서 <span class="sec">30초</span></p>
+            <button id="zenGo" type="button" class="gobtn">바로 해보기 ▶</button>
+          </div>
+          <div class="dbar"><i id="zenBar"></i></div>
+          <p class="dtx" id="zenTx">폰 꺼내서 딱 하나 — 메모 앱에 <b>폴더 하나 만들기</b> · 옆자리에 <b>인사 건네기</b> · <b>지원 페이지 열기</b></p>
+        </div>
+      </div>
+    </div>
+    <p class="warn frag">단, <b>바로 하지 말아야 할 것</b>도 있습니다 — 화내기, 욕심내기, 남 탓하기, 생각 없이 말하기.</p>
     <aside class="notes">
-      (톤을 낮추고, 천천히) 이제 거의 다 왔습니다. 여러분 중 많은 분들이 졸업이 다가올수록 초조해질 거예요. 완성된 사람이 되어서 세상에 나가야 할 것 같아서요. 스펙도, 실력도, 방향도 다 갖춘 완성본이요. 그런데 선배로서 말씀드리면 — 그런 졸업생은 없습니다. 저도 아니었고, 제가 뽑아본 수많은 신입 중에도 없었어요. <b>v1.0이면 충분합니다.</b> v1.0이 뭡니까? 핵심 기능이 돌아가는 최초 버전이에요. 버그도 있고, 없는 기능도 많죠. 그런데 v1.0의 진짜 의미는 완성이 아니라 '이제 업데이트를 시작할 수 있다'는 겁니다. 세상에 나와야 피드백을 받고, 피드백을 받아야 다음 버전이 나옵니다. 먼저 출시하세요. 업데이트는 평생 하는 겁니다.
+      마지막으로 하나만 더 드리고 끝내겠습니다. 오늘 계속 &lsquo;해라&rsquo;라고 했는데, 이따 나가시면서 이렇게 생각하실 거예요. &ldquo;오, 나도 뭐 하나 만들어봐야지.&rdquo; <b>그 &lsquo;해야지&rsquo;가 함정입니다.</b> 저도 제일 어려운 게 이거예요. (인용 가리키며) &ldquo;일어나야지&rdquo; 하는 건 망상이다. 꿈 깨는 방법은? 그냥 일어나 버리는 것. 일어나 버리면 각오나 결심이 필요 없어집니다. <b>직지</b>는 지금 내 마음을 바로 알아차리는 것, <b>방하착</b>은 그걸 탁 놓아버리는 겁니다. 문제는 우리가 &ldquo;해야지&rdquo; 하는 자신을 기특해한다는 거예요. 그런데 <b>커밋 로그에는 결심이 안 남습니다.</b> (오른쪽 가리키며) &ldquo;만들어야지&rdquo; 말고 바로 만들기, &ldquo;연락해야지&rdquo; 말고 바로 연락하기. 자, 이 얘기도 말로 끝나면 그것도 &ldquo;해야지&rdquo;가 됩니다. 지금 30초 드릴게요. (버튼 클릭) 폰 꺼내세요. 메모 앱에 폴더 하나, 옆자리에 인사, 아니면 지원 페이지 열기. 시작합니다. …… 네, 방금 하신 게 <b>오늘의 첫 커밋</b>입니다. 아, <b>바로 하지 말아야 할 것</b>도 있어요. 화내기, 욕심내기, 남 탓하기, 생각 없이 말하기. 이건 반대로 한 박자 놓고 가세요.
     </aside>
   </section>
 
   <!-- ===== Slide 13 ===== -->
-  <section class="slide s12">
-    <p class="l1">Don't plan your whole life.</p>
-    <p class="l2 frag">Keep shipping versions of yourself.</p>
-    <p class="kr frag">미래를 결정하려 하지 마세요.<br>계속 새로운 나를 배포하세요.</p>
+  <section class="slide s11">
+    <p class="small">"졸업할 때 완성된 사람이 되어야 한다고 생각하지 마세요."</p>
+    <p class="huge frag"><span class="v">v1.0</span>이면 충분합니다.</p>
+    <p class="ship frag">Ship first. Update later.</p>
+    <p class="fin frag">미래를 결정하려 하지 마세요.<br><span class="grad">계속 새로운 나를 배포하세요.</span></p>
     <p class="last frag">그리고 여러분의 다음 <span class="cm">commit</span>을 기대하겠습니다.</p>
     <aside class="notes">
-      마지막입니다. 오늘 이야기를 한 문장으로 줄이면 이겁니다. (첫 문장 읽고, 클릭) Don't plan your whole life. 인생 전체를 계획하려고 하지 마세요. 어차피 안 되고, 안 돼도 괜찮습니다. (클릭) Keep shipping versions of yourself. 대신 계속, 새로운 버전의 나를 배포하세요. 작게 커밋하고, 겁 없이 브랜치 만들고, 실패해도 리포지토리는 지우지 말고, 완벽하지 않아도 출시하세요. 여러분은 지금 Beta입니다. 그건 부족하다는 뜻이 아니라, <b>아직 무엇이든 될 수 있다는 뜻</b>입니다. 저는 그게 진심으로 부럽습니다. (클릭, 마지막 줄) 그리고 — 여러분의 다음 commit을 기대하겠습니다. 감사합니다. (인사)
+      방금 하신 그거, <b>v0.1</b>입니다. 완성 아니죠? 그래도 됩니다. (톤을 낮추고, 천천히) 여러분 중 많은 분들이 졸업이 다가올수록 초조해질 거예요. 완성된 사람이 되어서 세상에 나가야 할 것 같아서요. 그런데 선배로서 말씀드리면 &mdash; 그런 졸업생은 없습니다. 저도 아니었고, 제가 뽑아본 수많은 신입 중에도 없었어요. <b>v1.0이면 충분합니다.</b> v1.0이 뭡니까? 핵심 기능이 돌아가는 최초 버전이에요. 버그도 있고, 없는 기능도 많죠. 그런데 v1.0의 진짜 의미는 완성이 아니라 &lsquo;이제 업데이트를 시작할 수 있다&rsquo;는 겁니다. 세상에 나와야 피드백을 받고, 피드백을 받아야 다음 버전이 나옵니다. 먼저 출시하세요. 업데이트는 평생 하는 겁니다. (클릭) 오늘 이야기를 한 문장으로 줄이면 이겁니다. 인생 전체를 계획하려 하지 마세요. 어차피 안 되고, 안 돼도 괜찮습니다. 대신 계속, <b>새로운 버전의 나를 배포하세요.</b> 여러분은 지금 Beta입니다. 그건 부족하다는 뜻이 아니라, <b>아직 무엇이든 될 수 있다는 뜻</b>입니다. 저는 그게 진심으로 부럽습니다. (클릭, 마지막 줄) 그리고 &mdash; 여러분의 다음 commit을 기대하겠습니다. 감사합니다. (인사)
     </aside>
   </section>
+
 
 </div></div>
 
@@ -627,12 +741,42 @@
     notesPanel.classList.toggle('open');
   });
   addEventListener('click',function(e){
-    if(notesPanel.contains(e.target)||e.target.closest('#hint'))return;
+    if(notesPanel.contains(e.target)||e.target.closest('#hint')||e.target.closest('#zenGo'))return;
     next();
   });
 
   show(0,false);
+
+  /* ---- slide 14: 30초 '바로 해보기' 타이머 ---- */
+  var zenBtn=document.getElementById('zenGo'),
+      zenBar=document.getElementById('zenBar'),
+      zenTx=document.getElementById('zenTx'),
+      zenTimer=null;
+  if(zenBtn){
+    zenBtn.addEventListener('click',function(e){
+      e.stopPropagation();
+      if(zenTimer)return;
+      var total=30,left=total;
+      zenBtn.classList.remove('done');
+      zenBtn.classList.add('running');
+      zenBtn.textContent='00:30';
+      zenBar.style.width='0%';
+      zenTimer=setInterval(function(){
+        left--;
+        zenBar.style.width=((total-left)/total*100)+'%';
+        zenBtn.textContent='00:'+(left<10?'0':'')+left;
+        if(left<=0){
+          clearInterval(zenTimer);zenTimer=null;
+          zenBtn.classList.remove('running');
+          zenBtn.classList.add('done');
+          zenBtn.textContent='commit ✓';
+          zenTx.innerHTML='방금 하신 그거 — <b>오늘의 첫 커밋</b>입니다.';
+        }
+      },1000);
+    });
+  }
 })();
 </script>
+
 </body>
 </html>
