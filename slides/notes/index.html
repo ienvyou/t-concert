@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="인생은 아직 Beta — T-Concert 강연 진행 대본(스피커 노트)">
+<meta name="robots" content="noindex">
+<title>인생은 아직 Beta — 진행 대본</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#EEF1F6;
+    --card:#FFFFFF;
+    --ink:#12172A;
+    --muted:#5C6684;
+    --faint:#8590AC;
+    --line:#D6DCEA;
+    --line-soft:#E4E9F2;
+    --accent:#0F6E82;
+    --accent-soft:rgba(15,110,130,.10);
+    --violet:#5346C4;
+    --amber:#9A5B12;
+    --amber-soft:rgba(154,91,18,.10);
+    --disp:'Gothic A1','Noto Sans KR',-apple-system,sans-serif;
+    --body:'Noto Sans KR','Apple SD Gothic Neo',-apple-system,sans-serif;
+    --mono:'JetBrains Mono','SFMono-Regular',Consolas,monospace;
+    --fs:19px;
+    color-scheme:light dark;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#060A1C; --card:#0E1533; --ink:#EAEEFB; --muted:#93A0CC; --faint:#5E6A96;
+      --line:rgba(130,150,255,.20); --line-soft:rgba(130,150,255,.11);
+      --accent:#4FE3EC; --accent-soft:rgba(79,227,236,.12);
+      --violet:#9D8CFF; --amber:#FFC96B; --amber-soft:rgba(255,201,107,.12);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#060A1C; --card:#0E1533; --ink:#EAEEFB; --muted:#93A0CC; --faint:#5E6A96;
+    --line:rgba(130,150,255,.20); --line-soft:rgba(130,150,255,.11);
+    --accent:#4FE3EC; --accent-soft:rgba(79,227,236,.12);
+    --violet:#9D8CFF; --amber:#FFC96B; --amber-soft:rgba(255,201,107,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{max-width:100%}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+  /* ---------- top bar ---------- */
+  header{
+    position:sticky;top:0;z-index:20;background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .bar{
+    max-width:1180px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  }
+  .brand{display:flex;flex-direction:column;gap:3px;margin-right:auto}
+  .brand h1{font-family:var(--disp);font-size:19px;font-weight:900;letter-spacing:-.01em}
+  .brand p{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+  .brand p b{color:var(--accent);font-weight:500}
+  .tools{display:flex;align-items:center;gap:8px}
+  .timer{
+    display:flex;align-items:center;gap:10px;padding:6px 8px 6px 14px;
+    border:1px solid var(--line);border-radius:999px;background:var(--card);
+  }
+  #elapsed{font-family:var(--mono);font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;min-width:62px}
+  .timer.run #elapsed{color:var(--accent)}
+  #pace{font-family:var(--mono);font-size:11px;color:var(--muted);min-width:44px;text-align:right}
+  #pace.ahead{color:var(--accent)} #pace.late{color:var(--amber)}
+  button,.btn{
+    font:inherit;font-family:var(--mono);font-size:12px;color:var(--muted);
+    background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:6px 11px;cursor:pointer;transition:color .15s,border-color .15s;
+  }
+  button:hover,.btn:hover{color:var(--ink);border-color:var(--faint)}
+  .timer button{border-radius:999px;padding:5px 12px}
+  .timer button.primary{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:34px 24px 90px;display:grid;grid-template-columns:214px minmax(0,1fr);gap:44px;align-items:start}
+  nav{position:sticky;top:76px;display:flex;flex-direction:column;gap:1px;padding-right:6px}
+  .rail-item{display:grid;grid-template-columns:26px 1fr auto;gap:9px;align-items:baseline;padding:6px 8px;border-radius:7px;font-size:13px;color:var(--muted);transition:background .15s,color .15s}
+  .rail-item:hover{background:var(--line-soft);color:var(--ink)}
+  .rail-item.on{background:var(--accent-soft);color:var(--ink)}
+  .rail-item.on .rail-n{color:var(--accent)}
+  .rail-n{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .rail-t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rail-c{font-family:var(--mono);font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+  .rail-item.is-bonus{margin-top:9px;padding-top:11px;border-top:1px solid var(--line-soft)}
+
+  main{display:flex;flex-direction:column;gap:0}
+
+  /* ---------- script block ---------- */
+  .blk{padding:30px 0 34px;border-top:1px solid var(--line-soft);scroll-margin-top:84px}
+  .blk:first-child{border-top:0;padding-top:4px}
+  .blk.now{box-shadow:-16px 0 0 -13px var(--accent)}
+  .blk-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:baseline}
+  .num{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.06em;padding-top:6px}
+  .head-main h2{font-family:var(--disp);font-size:24px;font-weight:800;line-height:1.35;letter-spacing:-.015em;text-wrap:balance}
+  .cue{margin-top:7px;font-size:13.5px;color:var(--muted)}
+  .cue-k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--faint);margin-right:9px;text-transform:uppercase}
+  .clock{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .at{font-size:15px;font-weight:500}
+  .dur{font-size:11px;color:var(--faint)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0 0;padding-left:38px}
+  .chip{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 8px}
+  .chip.live{color:var(--amber);border-color:var(--amber);background:var(--amber-soft)}
+  .script{margin:18px 0 0 38px;max-width:44em;font-size:var(--fs);line-height:1.95;letter-spacing:-.004em}
+  .script p+p{margin-top:1.05em}
+  .script b{font-weight:700;background:linear-gradient(transparent 62%,var(--accent-soft) 62%);padding-bottom:1px}
+
+  .bonus .num{color:var(--violet)}
+  .bonus .script b{background:linear-gradient(transparent 62%,color-mix(in srgb,var(--violet) 14%,transparent) 62%)}
+  .bonus{border-top:1px solid var(--line);margin-top:16px}
+  .script b.marker{display:block;margin-bottom:.2em;background:none;font-family:var(--disp);font-weight:700;font-size:.92em;color:var(--violet);letter-spacing:-.01em}
+
+  footer{max-width:1180px;margin:0 auto;padding:0 24px 70px}
+  .note{margin-left:calc(214px + 44px + 38px);max-width:44em;font-size:12.5px;line-height:1.85;color:var(--muted);border-top:1px solid var(--line-soft);padding-top:16px}
+  .note code{font-family:var(--mono);font-size:11.5px;color:var(--ink)}
+
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr;gap:22px;padding-top:22px}
+    nav{position:static;flex-direction:row;flex-wrap:wrap;gap:5px}
+    .rail-item{grid-template-columns:auto auto;font-size:12px}
+    .rail-t{display:none}.rail-item.is-bonus{margin:0;padding-top:6px;border:0}
+    .blk-head{grid-template-columns:auto minmax(0,1fr);}
+    .clock{grid-column:2;flex-direction:row;align-items:baseline;gap:10px;justify-content:flex-start;margin-top:4px}
+    .chips,.script{padding-left:0;margin-left:0}
+    .note{margin-left:0}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  @media print{
+    header,nav,.rail-item{display:none}
+    body{background:#fff;color:#000}
+    .wrap{display:block;max-width:none;padding:0}
+    .blk{break-inside:avoid;page-break-inside:avoid;padding:0 0 22px;border-top:1px solid #ccc;margin-top:18px}
+    .script{font-size:13pt;line-height:1.8}
+    .script b{background:none;text-decoration:underline}
+    .note{margin-left:0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="brand">
+      <h1>인생은 아직 Beta — 진행 대본</h1>
+      <p>동국대 T-Concert · 본편 13장 <b>20:08</b> + 번외 <b>3:45</b> · 290자/분 기준</p>
+    </div>
+    <div class="tools">
+      <a class="btn" href="../">← 슬라이드</a>
+      <div class="timer" id="timerBox">
+        <span id="elapsed">0:00</span>
+        <span id="pace">—</span>
+        <button id="play" class="primary" type="button">시작</button>
+        <button id="reset" type="button">↺</button>
+      </div>
+      <button id="smaller" type="button">A−</button>
+      <button id="bigger" type="button">A+</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav aria-label="슬라이드 목차">
+      <a class="rail-item" href="#s1" data-i="0">
+        <span class="rail-n">01</span>
+        <span class="rail-t">오프닝 · 아직 Beta</span>
+        <span class="rail-c">0:00</span>
+      </a>
+      <a class="rail-item" href="#s2" data-i="1">
+        <span class="rail-n">02</span>
+        <span class="rail-t">스무 살의 질문</span>
+        <span class="rail-c">1:54</span>
+      </a>
+      <a class="rail-item" href="#s3" data-i="2">
+        <span class="rail-n">03</span>
+        <span class="rail-t">Waterfall 인생</span>
+        <span class="rail-c">3:06</span>
+      </a>
+      <a class="rail-item" href="#s4" data-i="3">
+        <span class="rail-n">04</span>
+        <span class="rail-t">Career is Git</span>
+        <span class="rail-c">4:17</span>
+      </a>
+      <a class="rail-item" href="#s5" data-i="4">
+        <span class="rail-n">05</span>
+        <span class="rail-t">제 인생의 git log</span>
+        <span class="rail-c">5:34</span>
+      </a>
+      <a class="rail-item" href="#s6" data-i="5">
+        <span class="rail-n">06</span>
+        <span class="rail-t">RULE 01 · Commit</span>
+        <span class="rail-c">6:49</span>
+      </a>
+      <a class="rail-item" href="#s7" data-i="6">
+        <span class="rail-n">07</span>
+        <span class="rail-t">RULE 02 · Branch</span>
+        <span class="rail-c">8:07</span>
+      </a>
+      <a class="rail-item" href="#s8" data-i="7">
+        <span class="rail-n">08</span>
+        <span class="rail-t">RULE 03 · rm -rf 금지</span>
+        <span class="rail-c">9:28</span>
+      </a>
+      <a class="rail-item" href="#s9" data-i="8">
+        <span class="rail-n">09</span>
+        <span class="rail-t">AI가 바꾼 게임</span>
+        <span class="rail-c">10:50</span>
+      </a>
+      <a class="rail-item" href="#s10" data-i="9">
+        <span class="rail-n">10</span>
+        <span class="rail-t">2nd Brain</span>
+        <span class="rail-c">12:10</span>
+      </a>
+      <a class="rail-item" href="#s11" data-i="10">
+        <span class="rail-n">11</span>
+        <span class="rail-t">세 가지 실천</span>
+        <span class="rail-c">13:48</span>
+      </a>
+      <a class="rail-item" href="#s12" data-i="11">
+        <span class="rail-n">12</span>
+        <span class="rail-t">직지 · 방하착</span>
+        <span class="rail-c">15:06</span>
+      </a>
+      <a class="rail-item" href="#s13" data-i="12">
+        <span class="rail-n">13</span>
+        <span class="rail-t">v1.0이면 충분</span>
+        <span class="rail-c">18:07</span>
+      </a>
+      <a class="rail-item is-bonus" href="#s14" data-i="13">
+        <span class="rail-n">번외</span>
+        <span class="rail-t">Q&amp;A · 여덟 질문</span>
+        <span class="rail-c">—</span>
+      </a>
+  </nav>
+  <main>
+      <section class="blk" id="s1" data-start="0" data-end="114" data-i="0">
+        <div class="blk-head">
+          <span class="num">01</span>
+          <div class="head-main">
+            <h2>여러분의 인생은 아직 Beta입니다</h2>
+            <p class="cue"><span class="cue-k">화면</span>타이틀 · 버전 태그 v5.3.2-alpha</p>
+          </div>
+          <div class="clock">
+            <span class="at">0:00</span>
+            <span class="dur">+1:54</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 없음</span>
+          <span class="chip">552자</span>
+        </div>
+        <div class="script">
+          <p>반갑습니다. 저는 여러분보다 이 학교를 한참 먼저 다닌 선배입니다. 시작하기 전에 질문 하나만 할게요. <b>"여러분 중에 10년 뒤 자기가 무슨 일을 하고 있을지 정확하게 아는 사람, 손 들어볼까요?"</b> 네, 정상입니다. 사실 저도 몰라요. 지금도요. 오늘 제목이 '여러분의 인생은 아직 Beta입니다'인데, 이건 위로가 아니라 사실을 말씀드리는 겁니다. 소프트웨어에서 Beta는 '아직 불완전하지만 이미 돌아가고 있고, 계속 업데이트될 예정'이라는 뜻이잖아요. 참고로 제 현재 버전이 저기 나와 있는데요 — <b>v5.3.2-alpha</b>입니다. 메이저 버전 5, 50대라는 뜻이고요. 그런데 잘 보시면 Beta도 아니고 alpha예요. 쉰이 넘었는데 아직도 실험 단계라는 겁니다. 그러니까 여러분이 Beta인 건 전혀 부끄러운 게 아니에요 — 저보다 한 단계 앞서 계신 겁니다. 오늘은 커리어를 로드맵이 아니라 버전 관리로 보자는 이야기를 하려고 합니다. 20분이면 됩니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s2" data-start="114" data-end="186" data-i="1">
+        <div class="blk-head">
+          <span class="num">02</span>
+          <div class="head-main">
+            <h2>스무 살 때 가장 어려운 질문</h2>
+            <p class="cue"><span class="cue-k">화면</span>질문 말풍선 5개 → “모르겠는데요?” → “정상입니다”</p>
+          </div>
+          <div class="clock">
+            <span class="at">1:54</span>
+            <span class="dur">+1:11</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 7회</span>
+          <span class="chip">345자</span>
+        </div>
+        <div class="script">
+          <p>스무 살 때 제일 많이 듣는 질문들이죠. 명절마다 버전만 바뀌어서 돌아옵니다. 저 때는 "컴퓨터 그거 해서 밥은 먹고 살겠냐"였는데, 요즘은 "AI 해야 되는 거 아니야?"로 바뀌었더라고요. 질문의 기술 스택만 업그레이드됐습니다. 그런데 이 질문들의 공통점은, 대답을 못 하면 내가 뭔가 뒤처진 것 같은 기분이 들게 만든다는 거예요. 오늘 제가 드리고 싶은 첫 번째 이야기는 이겁니다. <b>"모르겠는데요"는 틀린 답이 아니라, 그 나이에 나올 수 있는 가장 정직한 답</b>이라는 것. 저도 스무 살 때 몰랐고, 그게 문제가 된 적이 없었습니다. 문제는 모르는 게 아니라, 모른다는 이유로 아무것도 안 해보는 거였어요.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s3" data-start="186" data-end="257" data-i="2">
+        <div class="blk-head">
+          <span class="num">03</span>
+          <div class="head-main">
+            <h2>우리는 인생을 Waterfall처럼 배웠습니다</h2>
+            <p class="cue"><span class="cue-k">화면</span>직선 로드맵 다이어그램</p>
+          </div>
+          <div class="clock">
+            <span class="at">3:06</span>
+            <span class="dur">+1:12</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 2회</span>
+          <span class="chip">346자</span>
+        </div>
+        <div class="script">
+          <p>우리가 배운 인생 설계는 이렇습니다. 좋은 전공을 고르고, 학점을 잘 받고, 좋은 회사에 들어가서, 승진하면, 성공. 요구사항을 처음에 다 확정하고 순서대로 진행하는, 전형적인 Waterfall 방법론이죠. 그런데 소프트웨어 하시는 분들은 아시잖아요. Waterfall의 최대 약점이 뭡니까? <b>요구사항이 바뀌면 무너진다</b>는 겁니다. 그리고 인생은요, 요구사항이 계속 바뀝니다. 산업이 바뀌고, 기술이 바뀌고, 무엇보다 나 자신이 바뀌어요. 스무 살의 내가 확정한 스펙대로 마흔 살의 내가 살아야 한다면, 그건 설계가 아니라 형벌이죠. 저도 이 직선대로 살아보려고 했는데, 두 번째 화살표쯤에서 이미 어긋나기 시작했습니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s4" data-start="257" data-end="334" data-i="3">
+        <div class="blk-head">
+          <span class="num">04</span>
+          <div class="head-main">
+            <h2>Career is more like Git.</h2>
+            <p class="cue"><span class="cue-k">화면</span>git 그래프 · Commit / Branch / Merge / Release</p>
+          </div>
+          <div class="clock">
+            <span class="at">4:17</span>
+            <span class="dur">+1:17</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 4회</span>
+          <span class="chip">373자</span>
+        </div>
+        <div class="script">
+          <p>그래서 제가 찾은 더 정확한 비유는 이겁니다. 커리어는 Git에 가깝습니다. 이 그래프를 보세요. main 줄기가 있고, 중간에 다른 색 branch들이 갈라져 나갑니다. 어떤 branch는 다시 main으로 merge되고, 어떤 branch는 한참 따로 가기도 하죠. 중요한 건 네 가지 동작입니다. <b>Commit</b> — 작은 경험을 저장하는 것. <b>Branch</b> — 새로운 가능성을 시험해보는 것. <b>Merge</b> — 서로 다른 경험이 어느 순간 연결되는 것. <b>Release</b> — 완벽하지 않아도 일단 세상에 내놓는 것. 오늘 강연 전체가 이 네 단어입니다. 이것만 기억하고 가셔도 저는 성공입니다. 그리고 이 그래프가 실제로 어떻게 생겼는지, 제 인생 로그를 까서 보여드릴게요.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s5" data-start="334" data-end="409" data-i="4">
+        <div class="blk-head">
+          <span class="num">05</span>
+          <div class="head-main">
+            <h2>제 인생의 git log</h2>
+            <p class="cue"><span class="cue-k">화면</span>실제 커리어 로그 → 퀴즈 답 “0개”</p>
+          </div>
+          <div class="clock">
+            <span class="at">5:34</span>
+            <span class="dur">+1:14</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 1회</span>
+          <span class="chip">360자</span>
+        </div>
+        <div class="script">
+          <p>이게 제 커리어의 실제 로그입니다. 엔지니어로 시작해서, 컨설팅으로 branch를 탔다가, 오픈소스에서 merge되고, 창업이라는 상당히 위험한 branch도 만들었고, 경영을 거쳐 CEO까지 갔다가, 지금은 AI와 자문 쪽으로 새 branch를 또 만들고 있습니다. 이력서에는 이게 한 줄로 깔끔하게 정리돼 있는데요, 실제로는 이렇게 지저분한 그래프였습니다. 자, 퀴즈. <b>이 중에 제가 대학생 때 계획했던 건 몇 개였을까요?</b> 네, 0개입니다. 단 하나도 계획에 없었어요. 심지어 이 중 몇 개는 당시에 존재하지도 않던 직업입니다. 계획이 없었는데 어떻게 여기까지 왔느냐 — 그게 다음 세 가지 규칙입니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s6" data-start="409" data-end="487" data-i="5">
+        <div class="blk-head">
+          <span class="num">06</span>
+          <div class="head-main">
+            <h2>RULE 01 — Commit 자주 하기</h2>
+            <p class="cue"><span class="cue-k">화면</span>경험 칩 7개 → 인용 한 줄</p>
+          </div>
+          <div class="clock">
+            <span class="at">6:49</span>
+            <span class="dur">+1:18</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 1회</span>
+          <span class="chip">377자</span>
+        </div>
+        <div class="script">
+          <p>첫 번째 규칙, Commit을 자주 하세요. 개발할 때 코드를 며칠씩 쌓아두고 한 번에 커밋하면 어떻게 되죠? 꼬입니다. 인생도 똑같아요. "언젠가 준비되면 제대로 해봐야지"가 인생의 대형 커밋인데, 그 커밋은 대부분 push되지 않습니다. 여기 있는 것들 — 작은 프로젝트, 해커톤, 동아리, 인턴, 조그만 서비스 — 이게 다 작은 커밋이에요. 하나하나는 별거 아닌 것 같지만, 로그에 남는다는 게 중요합니다. 저도 대학 때 별생각 없이 했던 작은 경험 하나가 10년 뒤에 저를 완전히 다른 곳으로 데려갔습니다. 그때는 그게 중요한 커밋인지 몰랐어요. 커밋은 나중에 돌아봐야 어떤 게 중요했는지 보입니다. 그러니까 일단 저장부터 하세요. 완성도는 다음 문제입니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s7" data-start="487" data-end="568" data-i="6">
+        <div class="blk-head">
+          <span class="num">07</span>
+          <div class="head-main">
+            <h2>RULE 02 — Branch를 두려워하지 않기</h2>
+            <p class="cue"><span class="cue-k">화면</span>branch 5줄 순차 공개 → main은 안 망가진다</p>
+          </div>
+          <div class="clock">
+            <span class="at">8:07</span>
+            <span class="dur">+1:21</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 6회</span>
+          <span class="chip">391자</span>
+        </div>
+        <div class="script">
+          <p>두 번째 규칙, Branch를 두려워하지 마세요. 학생들과 이야기해보면 새로운 걸 시도하지 못하는 이유가 대부분 이겁니다. "지금 하는 걸 망칠까 봐요." 전공 공부에 방해될까 봐, 취업 준비에 늦을까 봐. 그런데 Git 쓰시는 분들은 아시잖아요 — <b>branch를 만든다고 main이 망가지지 않습니다.</b> branch는 원래 안전하게 실험하라고 있는 겁니다. 해보고 아니면 지우면 돼요. 아무 일도 일어나지 않습니다. 저는 창업이라는, 리스크가 꽤 큰 branch를 만들어봤는데요. 결과와 무관하게 그 branch에서 배운 것들이 이후의 모든 버전에 들어갔습니다. 시도 자체는 여러분의 main을 절대 망가뜨리지 않아요. 망가뜨리는 건 시도가 아니라, 시도했다는 이유로 자신을 너무 몰아붙이는 겁니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s8" data-start="568" data-end="650" data-i="7">
+        <div class="blk-head">
+          <span class="num">08</span>
+          <div class="head-main">
+            <h2>RULE 03 — Repository를 삭제하지 마세요</h2>
+            <p class="cue"><span class="cue-k">화면</span>터미널 rm -rf → permission denied → 결론</p>
+          </div>
+          <div class="clock">
+            <span class="at">9:28</span>
+            <span class="dur">+1:22</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 2회</span>
+          <span class="chip">396자</span>
+        </div>
+        <div class="script">
+          <p>세 번째 규칙입니다. 혹시 이 명령어 아시죠? 네, 치면 안 되는 명령어입니다. 그런데 살다 보면 이걸 인생에 치고 싶은 순간이 옵니다. "전공을 잘못 골랐어. 다 망했어. 처음부터 다시 해야 해." 저도 그런 순간이 몇 번 있었어요. 확실하게 말씀드릴 수 있는 건, <b>잘못된 선택 하나 때문에 리포지토리 전체를 지울 필요는 없다</b>는 겁니다. 잘못 갔으면 revert 하면 됩니다. 방향만 바꾸는 거예요. 그리고 신기하게도, 실패한 branch의 코드가 나중에 다른 데서 재사용됩니다. 저한테 안 맞았던 그 경험이, 몇 년 뒤 다른 일을 할 때 '아 이건 아니라는 걸 내가 이미 알지'라는 판단력이 돼 있더라고요. 실패는 삭제되는 게 아니라 로그에 남아서 다음 버전을 만듭니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s9" data-start="650" data-end="730" data-i="8">
+        <div class="blk-head">
+          <span class="num">09</span>
+          <div class="head-main">
+            <h2>AI가 바꾼 진짜 게임</h2>
+            <p class="cue"><span class="cue-k">화면</span>실험 비용의 붕괴 (몇 달 → 며칠)</p>
+          </div>
+          <div class="clock">
+            <span class="at">10:50</span>
+            <span class="dur">+1:21</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 3회</span>
+          <span class="chip">390자</span>
+        </div>
+        <div class="script">
+          <p>"AI가 일자리를 없애나요?" 저도 이 질문을 정말 많이 받는데, 솔직히 말씀드리면 저도 정확히는 모릅니다. 미래 예측은 제 전문이 아니고, 전문이라는 사람들도 계속 틀리더라고요. 대신 지금 확실하게 일어나고 있는 변화 하나만 보여드릴게요. 예전에는 아이디어 하나를 시험해보려면 배우고, 코딩하고, 만들고 — 몇 달이 걸렸습니다. 지금은 아이디어에서 프로토타입까지 며칠이면 됩니다. 이게 무슨 뜻이냐면, <b>실험의 비용이 무너지고 있다</b>는 거예요. 여러분에게 이건 위협이 아니라 역사상 가장 유리한 조건입니다. 아까 말한 Commit과 Branch — 작은 시도의 비용이 이렇게까지 싸진 시대가 없었어요. 시도를 많이 해본 사람과 안 해본 사람의 격차는, 오히려 AI 때문에 더 벌어질 겁니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s10" data-start="730" data-end="828" data-i="9">
+        <div class="blk-head">
+          <span class="num">10</span>
+          <div class="head-main">
+            <h2>제 맥북에는 24년치 기억을 먹고 자란 AI가 있습니다</h2>
+            <p class="cue"><span class="cue-k">화면</span>2nd Brain 폴더 화면</p>
+          </div>
+          <div class="clock">
+            <span class="at">12:10</span>
+            <span class="dur">+1:37</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 2회</span>
+          <span class="chip">471자</span>
+        </div>
+        <div class="script">
+          <p>하나만 더 보여드릴게요. 이건 제 맥북에 실제로 있는 폴더입니다. 저는 이걸 제 <b>두 번째 뇌, 2nd Brain</b>이라고 부릅니다. 2002년부터 3일에 하나씩 글을 썼어요. 24년이면 3,000개가 넘습니다. 그런데 그 글들, 지금 대부분 없습니다. <b>남의 플랫폼에 쌓은 24년치가 통째로 날아갔어요.</b> 그래서 지금은 제 손이 닿는 이 폴더에 쌓습니다. 그리고 정리는 제가 안 합니다. AI 에이전트가 읽고, 분류하고, 연결하고, 제가 물어보면 제 과거 기록에서 근거를 찾아 답합니다. 핵심은 이겁니다 — <b>AI는 여러분이 준 맥락만큼만 똑똑해집니다.</b> 빈손으로 쓰면 검색엔진, 자기 기록 위에서 쓰면 ‘나를 아는 지능’이 됩니다. 눈치채셨겠지만 이건 RULE 01, 커밋의 AI 시대 버전이에요. 그리고 지금 시작하는 여러분이 저보다 훨씬 유리합니다. 오늘 배운 것, 프로젝트가 깨진 이유 — 폴더 하나 만들어서 오늘부터 쌓으세요.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s11" data-start="828" data-end="906" data-i="10">
+        <div class="blk-head">
+          <span class="num">11</span>
+          <div class="head-main">
+            <h2>그래서 1·2학년 때 뭘 해야 할까요?</h2>
+            <p class="cue"><span class="cue-k">화면</span>한 학기에 하나씩, 세 가지</p>
+          </div>
+          <div class="clock">
+            <span class="at">13:48</span>
+            <span class="dur">+1:18</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 3회</span>
+          <span class="chip">379자</span>
+        </div>
+        <div class="script">
+          <p>"그래서 뭘 하면 되나요?" 취업 준비 체크리스트 40개짜리를 드릴 수도 있는데, 그런 건 어차피 안 하잖아요. 저도 안 합니다. 그래서 딱 세 개만 드릴게요. 한 학기에 하나씩입니다. 첫째, <b>하나 만들어보세요.</b> 뭐든 좋습니다. 조그만 웹 서비스, 게임, 봇. 완성도는 안 봐요, 커밋이 중요합니다. 둘째, <b>한 명 새롭게 만나보세요.</b> 다른 과 사람, 동아리 선배, 오픈소스 커뮤니티의 누군가. 기회는 검색창이 아니라 사람한테서 옵니다. 셋째, <b>한 번 낯선 곳에 지원해보세요.</b> 해커톤, 공모전, 인턴, 뭐든요. 떨어져도 됩니다. 지원 자체가 branch예요. 한 학기에 세 개면 8학기에 스물네 개의 커밋입니다. 졸업할 때 그 로그를 가진 사람은 생각보다 많지 않습니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s12" data-start="906" data-end="1087" data-i="11">
+        <div class="blk-head">
+          <span class="num">12</span>
+          <div class="head-main">
+            <h2>“해야지”는 아직 commit이 아닙니다</h2>
+            <p class="cue"><span class="cue-k">화면</span>직지·방하착 인용 · 30초 실행 타이머 버튼 ▶</p>
+          </div>
+          <div class="clock">
+            <span class="at">15:06</span>
+            <span class="dur">+3:01</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 6회</span>
+          <span class="chip">731자</span>
+          <span class="chip live">30초 실행 타이머 — 버튼을 눌러야 시작합니다</span>
+        </div>
+        <div class="script">
+          <p>마지막으로 하나만 더 드리고 끝내겠습니다. 오늘 계속 &lsquo;해라&rsquo;라고 했는데, 이따 나가시면서 이렇게 생각하실 거예요. &ldquo;오, 나도 뭐 하나 만들어봐야지.&rdquo; <b>그 &lsquo;해야지&rsquo;가 함정입니다.</b> 저도 제일 어려운 게 이거예요. &ldquo;일어나야지&rdquo; 하는 건 망상이다. 꿈 깨는 방법은? 그냥 일어나 버리는 것. 일어나 버리면 각오나 결심이 필요 없어집니다. <b>직지</b>는 지금 내 마음을 바로 알아차리는 것, <b>방하착</b>은 그걸 탁 놓아버리는 겁니다. 문제는 우리가 &ldquo;해야지&rdquo; 하는 자신을 기특해한다는 거예요. 그런데 <b>커밋 로그에는 결심이 안 남습니다.</b> &ldquo;만들어야지&rdquo; 말고 바로 만들기, &ldquo;연락해야지&rdquo; 말고 바로 연락하기. 자, 이 얘기도 말로 끝나면 그것도 &ldquo;해야지&rdquo;가 됩니다. 지금 30초 드릴게요. 폰 꺼내세요. 메모 앱에 폴더 하나, 옆자리에 인사, 아니면 지원 페이지 열기. 시작합니다. …… 네, 방금 하신 게 <b>오늘의 첫 커밋</b>입니다. 아, <b>바로 하지 말아야 할 것</b>도 있어요. 화내기, 욕심내기, 남 탓하기, 생각 없이 말하기. 이건 반대로 한 박자 놓고 가세요. 바로 하는 게 실천이라면, 바로 하지 않는 건 절제입니다. 그리고 이 말씀을 꼭 드리고 싶었는데요 &mdash; <b>결심은 쌓이지 않습니다.</b> 아무리 굳게 마음먹어도 로그에는 안 남아요. 쌓이는 건 실행뿐입니다. 방금 하신 그 30초 같은 것들이요. 그리고 그 하루치 차이가 4년 뒤에 완전히 다른 사람을 만듭니다.</p>
+        </div>
+      </section>
+
+      <section class="blk" id="s13" data-start="1087" data-end="1208" data-i="12">
+        <div class="blk-head">
+          <span class="num">13</span>
+          <div class="head-main">
+            <h2>v1.0이면 충분합니다</h2>
+            <p class="cue"><span class="cue-k">화면</span>Ship first. Update later. → 마지막 인사</p>
+          </div>
+          <div class="clock">
+            <span class="at">18:07</span>
+            <span class="dur">+2:01</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 4회</span>
+          <span class="chip">585자</span>
+        </div>
+        <div class="script">
+          <p>방금 하신 그거, <b>v0.1</b>입니다. 완성 아니죠? 그래도 됩니다. 여러분 중 많은 분들이 졸업이 다가올수록 초조해질 거예요. 완성된 사람이 되어서 세상에 나가야 할 것 같아서요. 그런데 선배로서 말씀드리면 &mdash; 그런 졸업생은 없습니다. 저도 아니었고, 제가 뽑아본 수많은 신입 중에도 없었어요. <b>v1.0이면 충분합니다.</b> v1.0이 뭡니까? 핵심 기능이 돌아가는 최초 버전이에요. 버그도 있고, 없는 기능도 많죠. 그런데 v1.0의 진짜 의미는 완성이 아니라 &lsquo;이제 업데이트를 시작할 수 있다&rsquo;는 겁니다. 세상에 나와야 피드백을 받고, 피드백을 받아야 다음 버전이 나옵니다. 먼저 출시하세요. 업데이트는 평생 하는 겁니다. 오늘 이야기를 한 문장으로 줄이면 이겁니다. 인생 전체를 계획하려 하지 마세요. 어차피 안 되고, 안 돼도 괜찮습니다. 대신 계속, <b>새로운 버전의 나를 배포하세요.</b> 여러분은 지금 Beta입니다. 그건 부족하다는 뜻이 아니라, <b>아직 무엇이든 될 수 있다는 뜻</b>입니다. 저는 그게 진심으로 부럽습니다. 그리고 &mdash; 여러분의 다음 commit을 기대하겠습니다. 감사합니다. </p>
+        </div>
+      </section>
+
+      <section class="blk bonus" id="s14" data-start="-1" data-end="-1" data-i="13">
+        <div class="blk-head">
+          <span class="num">번외</span>
+          <div class="head-main">
+            <h2>질문은 여덟 개였지만, 묻고 계신 건 하나였습니다</h2>
+            <p class="cue"><span class="cue-k">화면</span>사전 질문 8개를 4분면으로</p>
+          </div>
+          <div class="clock">
+            <span class="at">번외</span>
+            <span class="dur">+3:45</span>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">클릭 5회</span>
+          <span class="chip">1,087자</span>
+        </div>
+        <div class="script">
+          <p>미리 질문을 여덟 개 보내주셨는데요, 읽으면서 좀 놀랐습니다. 표면적으로는 다 다른 질문이에요. 네트워크 전망, 클라우드 직무, 1학년 때 뭘 공부할지, AI 시대 역량, 인간의 해자, 대외활동, 채용 기준, 전공자와 부트캠프의 차이. 그런데 여덟 개를 나란히 놓고 보니 <b>사실 다 같은 질문</b>이더라고요. &ldquo;저는 어느 쪽에 서 있어야 안전한가요?&rdquo; 안전한 전공, 안전한 직무, 안전한 스펙, 안전한 출신. 정말 솔직하게 말씀드리면, <b>그 질문에는 답이 없습니다.</b> 안전한 자리를 고르는 게임이 아니라, 자리가 바뀔 때 옮겨탈 수 있느냐의 게임이기 때문입니다. 그래도 각각에 대해서는 제가 아는 만큼 말씀드릴게요.</p>
+          <p><b class="marker">(왼쪽 위, 1·2·3번) 전공 전망</b> — 전공은 안 없어집니다. 이름만 바뀝니다. 제가 일한 30년 동안 교환기가 라우터가 되고, SDN이 되고, 클라우드가 되고, 지금은 AI 인프라라고 불립니다. 레이어는 그대로예요. 그리고 지금 GPU를 아무리 꽂아도 병목은 결국 네트워크로 옵니다. 여러분 전공, 지금 제일 뜨거운 자리입니다.</p>
+          <p><b class="marker">(오른쪽 위, 4·5번) AI가 대체 못 하는 영역</b> — 답은 이제 무한히 생성됩니다. 그런데 <b>무엇이 진짜 문제인지 정하는 것</b>, 그리고 <b>그 답이 틀렸을 때 책임지는 것</b>은 아직 사람의 자리입니다. 해자는 지식의 양이 아니라 판단이에요.</p>
+          <p><b class="marker">(왼쪽 아래, 6·7번) 채용에서 보는 것</b> — 포트폴리오 보면서 완성도는 거의 안 봅니다. 왜 만들었는지, 어디서 깨졌는지, 그걸 어떻게 고쳤는지를 봅니다. 그래서 1학년 때 가장 가치 있는 활동은 뭐냐, 저는 <b>끝까지 한 번 제대로 깨져보는 것</b>이라고 생각합니다. 교육봉사도 좋고 동아리도 좋은데, 끝까지 가보는 게 핵심이에요.</p>
+          <p><b class="marker">(오른쪽 아래, 8번) 출신 차이</b> — 3년 지나면 아무도 안 봅니다. 제가 사람을 뽑고 같이 일해보면 전공자냐 부트캠프냐는 정말 안 보여요. 대신 전공자한테 딱 하나 우위가 있는데, <b>&lsquo;왜 그렇게 동작하는지&rsquo;를 배울 4년</b>이 주어졌다는 겁니다. 그 시간을 안 쓰면 그 우위도 없습니다. 정리하면 — 안전한 스택은 없습니다. 갈아탈 수 있는 사람이 있을 뿐입니다. 오늘 강연이 딱 그 얘기였습니다.</p>
+        </div>
+      </section>
+  </main>
+</div>
+
+<footer>
+  <p class="note">시간은 대본 글자수 ÷ 290자/분으로 계산했습니다(12장은 30초 실행 타이머 포함). 실제 진행은 웃음·호흡·즉흥으로 10~20% 늘어나니, 본편 20:08은 <b>약 22~24분</b>으로 잡고 여유를 두세요. 번외 Q&amp;A는 본편 시간에 포함하지 않았습니다.<br>
+  진행 중에는 <code>시작</code>을 눌러두면 지금 있어야 할 슬라이드가 왼쪽 목차에 표시되고, 예정보다 빠른지 느린지 <code>±초</code>로 나옵니다. 인쇄(<code>⌘P</code>)하면 목차·타이머 없이 대본만 나갑니다. 덱은 <a href="../" style="text-decoration:underline">t-concert.neoax.kr/slides/</a>에 있습니다.</p>
+</footer>
+
+<script>
+(function(){
+  var blks=[].slice.call(document.querySelectorAll('.blk'));
+  var rails=[].slice.call(document.querySelectorAll('.rail-item'));
+  var elapsedEl=document.getElementById('elapsed'),paceEl=document.getElementById('pace'),
+      playBtn=document.getElementById('play'),resetBtn=document.getElementById('reset'),
+      box=document.getElementById('timerBox');
+  var t=0,tick=null;
+
+  function fmt(s){var m=Math.floor(s/60);return m+':'+String(Math.floor(s%60)).padStart(2,'0')}
+  function paint(){
+    elapsedEl.textContent=fmt(t);
+    var cur=-1;
+    for(var i=0;i<blks.length;i++){
+      var st=+blks[i].dataset.start,en=+blks[i].dataset.end;
+      if(st>=0&&t>=st&&t<en){cur=i;break}
+      if(st>=0&&t>=en)cur=i;
+    }
+    blks.forEach(function(b,i){b.classList.toggle('now',i===cur&&tick!==null)});
+    rails.forEach(function(r,i){r.classList.toggle('on',i===cur&&tick!==null)});
+    if(tick===null||cur<0){paceEl.textContent='—';paceEl.className='';return}
+    var d=Math.round(t-(+blks[cur].dataset.start));
+    var planned=+blks[cur].dataset.end-(+blks[cur].dataset.start);
+    var diff=Math.round(d-planned);
+    paceEl.textContent=(diff>0?'+':'')+diff+'s';
+    paceEl.className=diff>0?'late':'ahead';
+  }
+  playBtn.addEventListener('click',function(){
+    if(tick){clearInterval(tick);tick=null;playBtn.textContent='계속';box.classList.remove('run')}
+    else{tick=setInterval(function(){t++;paint()},1000);playBtn.textContent='일시정지';box.classList.add('run')}
+    paint();
+  });
+  resetBtn.addEventListener('click',function(){
+    clearInterval(tick);tick=null;t=0;playBtn.textContent='시작';box.classList.remove('run');paint();
+  });
+
+  var fs=19;
+  try{var saved=parseFloat(localStorage.getItem('beta-notes-fs'));if(saved>=15&&saved<=30)fs=saved}catch(e){}
+  function apply(){document.documentElement.style.setProperty('--fs',fs+'px');try{localStorage.setItem('beta-notes-fs',fs)}catch(e){}}
+  apply();
+  document.getElementById('bigger').addEventListener('click',function(){fs=Math.min(30,fs+1);apply()});
+  document.getElementById('smaller').addEventListener('click',function(){fs=Math.max(15,fs-1);apply()});
+
+  paint();
+})();
+</script>
+
+</body>
+</html>
