@@ -127,6 +127,11 @@
       box-sizing: border-box
     }
 
+    /* display 를 지정한 요소(.fallback 등)에도 hidden 이 먹도록 */
+    [hidden] {
+      display: none !important
+    }
+
     html {
       -webkit-text-size-adjust: 100%
     }
