@@ -1,771 +1,1146 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>당신이 본 나</title>
-<meta name="description" content="저를 잘 아는 분들께 드리는 네 가지 질문 — 강점, 동기 스위치, 레드버튼, 그림자. 5분이면 됩니다.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="당신이 본 저는 어떤 사람인가요?">
-<meta property="og:description" content="강점 · 동기 스위치 · 레드버튼 · 그림자. 네 가지만 솔직하게 들려주세요. 5분이면 됩니다.">
-<meta property="og:locale" content="ko_KR">
-<meta name="twitter:card" content="summary">
-<meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap">
-<style>
-/* ── tokens ─────────────────────────────────────────────── */
-:root{
-  --paper:#F1F1F5;
-  --surface:#FFFFFF;
-  --surface-2:#FAFAFC;
-  --ink:#17181F;
-  --ink-2:#3B3C49;
-  --muted:#71727F;
-  --line:#E3E3EB;
-  --line-strong:#CBCBD8;
-  --accent:#403A63;
-  --on-hue:#FFFFFF;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>당신이 본 최지웅</title>
+  <meta name="description" content="최지웅을 잘 아는 분들께 드리는 네 가지 질문 — 강점, 동기 스위치, 레드버튼, 그림자. 5분이면 됩니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="당신이 본 최지웅은 어떤 사람인가요?">
+  <meta property="og:description" content="강점 · 동기 스위치 · 레드버튼 · 그림자. 네 가지만 솔직하게 들려주세요. 5분이면 됩니다.">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap">
+  <style>
+    /* ── tokens ─────────────────────────────────────────────── */
+    :root {
+      --paper: #F1F1F5;
+      --surface: #FFFFFF;
+      --surface-2: #FAFAFC;
+      --ink: #17181F;
+      --ink-2: #3B3C49;
+      --muted: #71727F;
+      --line: #E3E3EB;
+      --line-strong: #CBCBD8;
+      --accent: #403A63;
+      --on-hue: #FFFFFF;
 
-  --h1c:#976310;  /* 01 강점  — 빛 */
-  --h2c:#14705E;  /* 02 동기  — 에너지 */
-  --h3c:#BD3827;  /* 03 레드버튼 — 불 */
-  --h4c:#514391;  /* 04 그림자 — 그늘 */
-  --g1:rgba(151,99,16,.17);
-  --g2:rgba(20,112,94,.15);
-  --g3:rgba(189,56,39,.14);
-  --g4:rgba(81,67,145,.17);
+      --h1c: #976310;
+      /* 01 강점  — 빛 */
+      --h2c: #14705E;
+      /* 02 동기  — 에너지 */
+      --h3c: #BD3827;
+      /* 03 레드버튼 — 불 */
+      --h4c: #514391;
+      /* 04 그림자 — 그늘 */
+      --g1: rgba(151, 99, 16, .17);
+      --g2: rgba(20, 112, 94, .15);
+      --g3: rgba(189, 56, 39, .14);
+      --g4: rgba(81, 67, 145, .17);
 
-  --hue:var(--accent);
-  --glow:rgba(64,58,99,.12);
+      --hue: var(--accent);
+      --glow: rgba(64, 58, 99, .12);
 
-  --lift:0 1px 2px rgba(23,24,31,.05), 0 18px 40px -22px rgba(23,24,31,.30);
+      --lift: 0 1px 2px rgba(23, 24, 31, .05), 0 18px 40px -22px rgba(23, 24, 31, .30);
 
-  --font-display:'Gowun Batang','Nanum Myeongjo','Apple SD Gothic Neo',serif;
-  --font-body:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
-  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#0F1016;
-    --surface:#191A22;
-    --surface-2:#1F202A;
-    --ink:#EEEEF4;
-    --ink-2:#C5C6D3;
-    --muted:#8C8D9E;
-    --line:#2B2C37;
-    --line-strong:#3D3E4D;
-    --accent:#A99DE2;
-    --on-hue:#13141A;
-    --h1c:#DFA74C;
-    --h2c:#4CBFA5;
-    --h3c:#EF7A64;
-    --h4c:#A294E8;
-    --g1:rgba(223,167,76,.16);
-    --g2:rgba(76,191,165,.14);
-    --g3:rgba(239,122,100,.14);
-    --g4:rgba(162,148,232,.17);
-    --glow:rgba(169,157,226,.12);
-    --lift:0 1px 2px rgba(0,0,0,.4), 0 18px 44px -20px rgba(0,0,0,.65);
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#0F1016; --surface:#191A22; --surface-2:#1F202A;
-  --ink:#EEEEF4; --ink-2:#C5C6D3; --muted:#8C8D9E;
-  --line:#2B2C37; --line-strong:#3D3E4D; --accent:#A99DE2; --on-hue:#13141A;
-  --h1c:#DFA74C; --h2c:#4CBFA5; --h3c:#EF7A64; --h4c:#A294E8;
-  --g1:rgba(223,167,76,.16); --g2:rgba(76,191,165,.14);
-  --g3:rgba(239,122,100,.14); --g4:rgba(162,148,232,.17);
-  --glow:rgba(169,157,226,.12);
-  --lift:0 1px 2px rgba(0,0,0,.4), 0 18px 44px -20px rgba(0,0,0,.65);
-}
-
-/* step → hue mapping */
-body[data-step="1"]{--hue:var(--h1c);--glow:var(--g1)}
-body[data-step="2"]{--hue:var(--h2c);--glow:var(--g2)}
-body[data-step="3"]{--hue:var(--h3c);--glow:var(--g3)}
-body[data-step="4"]{--hue:var(--h4c);--glow:var(--g4)}
-
-/* ── base ───────────────────────────────────────────────── */
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--font-body);
-  font-size:16px;
-  font-weight:400;
-  line-height:1.75;
-  letter-spacing:-.005em;
-  word-break:keep-all;
-  overflow-wrap:break-word;
-}
-.wrap{
-  max-width:43rem;
-  margin:0 auto;
-  padding-inline:20px;
-  padding-block:clamp(28px,6vw,64px) clamp(40px,8vw,88px);
-  position:relative;
-}
-.stage{position:relative}
-.stage::before{
-  content:"";
-  position:absolute;
-  left:-14%; right:-14%; top:-90px;
-  height:320px;
-  background:radial-gradient(58% 100% at 50% 0%, var(--glow) 0%, transparent 72%);
-  transition:background .7s ease;
-  pointer-events:none;
-  z-index:0;
-}
-h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:-.01em;text-wrap:balance;margin:0}
-p{margin:0}
-a{color:var(--hue)}
-
-/* ── masthead ───────────────────────────────────────────── */
-.masthead{
-  position:relative;z-index:1;
-  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  margin-bottom:clamp(24px,5vw,44px);
-}
-.wordmark{
-  font-family:var(--font-mono);font-size:11px;font-weight:500;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
-}
-.wordmark b{color:var(--ink);font-weight:500}
-.counter{
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;
-  color:var(--muted);font-variant-numeric:tabular-nums;
-}
-
-/* ── rail ───────────────────────────────────────────────── */
-.rail{
-  position:relative;z-index:1;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
-  margin-bottom:clamp(22px,4vw,34px);
-}
-.rail[hidden]{display:none!important}
-.seg{
-  background:none;border:0;padding:0;margin:0;
-  text-align:left;font:inherit;color:var(--muted);
-  cursor:default;display:grid;gap:7px;
-}
-.seg[data-nav]{cursor:pointer}
-.seg .bar{height:3px;border-radius:2px;background:var(--line-strong);transition:background .4s ease}
-.seg .tag{font-size:11.5px;letter-spacing:.02em;transition:color .4s ease;line-height:1.3}
-.seg.done .bar{background:var(--c)}
-.seg.active .bar{background:var(--c)}
-.seg.done .tag{color:var(--ink-2)}
-.seg.active .tag{color:var(--c);font-weight:600}
-.seg[data-i="1"]{--c:var(--h1c)}
-.seg[data-i="2"]{--c:var(--h2c)}
-.seg[data-i="3"]{--c:var(--h3c)}
-.seg[data-i="4"]{--c:var(--h4c)}
-
-/* ── panel ──────────────────────────────────────────────── */
-.panel{
-  position:relative;z-index:1;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:16px;
-  box-shadow:var(--lift);
-  padding:clamp(24px,5vw,40px);
-}
-.panel[hidden]{display:none!important}
-.eyebrow{
-  display:flex;align-items:center;gap:10px;
-  margin-bottom:14px;
-}
-.eyebrow .num{
-  font-family:var(--font-mono);font-size:12px;font-weight:500;
-  letter-spacing:.1em;color:var(--hue);font-variant-numeric:tabular-nums;
-}
-.eyebrow .dash{flex:0 0 18px;height:1px;background:var(--line-strong)}
-.eyebrow .word{
-  font-size:12.5px;font-weight:600;letter-spacing:.06em;color:var(--hue);
-}
-.q{font-size:clamp(23px,4.6vw,31px);line-height:1.42;margin-bottom:18px}
-.lede{color:var(--ink-2);font-size:16.5px;line-height:1.8}
-.lede + .lede{margin-top:14px}
-
-/* prompt list */
-.prompts{
-  list-style:none;margin:0 0 24px;padding:0;
-  display:grid;gap:9px;
-  border-left:2px solid var(--line);
-  padding-left:16px;
-}
-.prompts li{
-  color:var(--muted);font-size:15px;line-height:1.7;
-}
-.prompts li::before{
-  content:"—";margin-right:8px;color:var(--line-strong);
-}
-
-/* fields */
-.field{display:grid;gap:8px;margin-top:22px}
-.field:first-of-type{margin-top:0}
-.field > label{
-  font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--ink-2);
-  display:flex;align-items:baseline;justify-content:space-between;gap:4px 12px;
-  flex-wrap:wrap;
-}
-.field .opt{font-weight:400;color:var(--muted);letter-spacing:0;font-size:12px}
-textarea,input[type="text"],select{
-  width:100%;
-  font-family:var(--font-body);font-size:16px;line-height:1.75;color:var(--ink);
-  background-color:var(--surface-2);
-  border:1px solid var(--line);
-  border-radius:11px;
-  padding:13px 15px;
-  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
-}
-textarea{min-height:132px;resize:vertical;display:block}
-textarea::placeholder,input::placeholder{color:var(--muted);opacity:.75}
-textarea:focus,input[type="text"]:focus,select:focus{
-  outline:none;border-color:var(--hue);background-color:var(--surface);
-  box-shadow:0 0 0 3px var(--glow);
-}
-select{
-  appearance:none;-webkit-appearance:none;cursor:pointer;
-  padding-right:40px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.6 6 6.4 11 1.6' fill='none' stroke='%238C8D9E' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 15px center;
-}
-.count{
-  font-family:var(--font-mono);font-size:11px;color:var(--muted);
-  font-variant-numeric:tabular-nums;text-align:right;min-height:1em;
-  opacity:0;transition:opacity .2s ease;
-}
-.count.on{opacity:1}
-
-/* callout */
-.callout{
-  margin-top:26px;
-  border:1px solid var(--line);
-  border-left:3px solid var(--hue);
-  background:var(--surface-2);
-  border-radius:0 11px 11px 0;
-  padding:16px 18px;
-  font-size:14.5px;line-height:1.75;color:var(--ink-2);
-}
-.callout b{color:var(--ink);font-weight:600}
-
-/* meta chips */
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 4px}
-.chip{
-  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;
-  color:var(--muted);border:1px solid var(--line);border-radius:999px;
-  padding:5px 11px;background:var(--surface-2);
-}
-.chip.ko{font-family:var(--font-body);letter-spacing:.01em;font-size:12px}
-
-/* intro two-up */
-.twoup{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media (max-width:520px){.twoup{grid-template-columns:1fr}}
-
-/* ── actions ────────────────────────────────────────────── */
-.actions{
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  margin-top:30px;padding-top:24px;border-top:1px solid var(--line);
-}
-.btn{
-  font-family:var(--font-body);font-size:15px;font-weight:600;letter-spacing:-.005em;
-  border-radius:10px;padding:12px 22px;border:1px solid transparent;
-  cursor:pointer;transition:transform .12s ease, opacity .2s ease, background .2s ease, border-color .2s ease;
-}
-.btn:active{transform:translateY(1px)}
-.btn-primary{background:var(--hue);color:var(--on-hue)}
-.btn-primary:hover{opacity:.88}
-.btn-primary[disabled]{opacity:.45;cursor:progress}
-.btn-ghost{background:transparent;color:var(--ink-2);border-color:var(--line-strong)}
-.btn-ghost:hover{border-color:var(--ink-2);color:var(--ink)}
-.btn-quiet{background:none;border:0;color:var(--muted);font-weight:400;font-size:13.5px;padding:12px 4px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong);cursor:pointer}
-.btn-quiet:hover{color:var(--ink-2)}
-.spacer{flex:1 1 auto}
-.hint{font-size:13.5px;color:var(--h3c);line-height:1.6;flex-basis:100%;margin:0}
-.hint[hidden]{display:none}
-:focus-visible{outline:2px solid var(--hue);outline-offset:2px;border-radius:6px}
-
-/* ── done / fallback ────────────────────────────────────── */
-.done-mark{
-  font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;
-  color:var(--muted);margin-bottom:16px;
-}
-.fallback{margin-top:24px;display:grid;gap:14px}
-.fallback textarea{min-height:200px;font-size:14px;line-height:1.7}
-.foot{
-  position:relative;z-index:1;
-  margin-top:26px;text-align:center;
-  font-size:12.5px;color:var(--muted);line-height:1.7;
-}
-.saved{
-  font-size:12px;letter-spacing:.01em;text-align:right;
-  color:var(--muted);opacity:0;transition:opacity .3s ease;
-}
-.saved.on{opacity:1}
-
-@media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
-}
-</style>
-</head>
-<body data-step="0">
-<div class="wrap">
-  <div class="stage">
-
-    <header class="masthead">
-      <div class="wordmark">나를 <b>발견하기</b></div>
-      <div class="counter" id="counter">강점 · 동기 · 레드버튼 · 그림자</div>
-    </header>
-
-    <nav class="rail" id="rail" hidden aria-label="진행 단계">
-      <button type="button" class="seg" data-i="1"><span class="bar"></span><span class="tag">강점</span></button>
-      <button type="button" class="seg" data-i="2"><span class="bar"></span><span class="tag">동기 스위치</span></button>
-      <button type="button" class="seg" data-i="3"><span class="bar"></span><span class="tag">레드버튼</span></button>
-      <button type="button" class="seg" data-i="4"><span class="bar"></span><span class="tag">그림자</span></button>
-    </nav>
-
-    <!-- ── 0. 인트로 ─────────────────────────────────── -->
-    <section class="panel" id="p0" aria-labelledby="h-intro">
-      <div class="eyebrow">
-        <span class="num">360°</span><span class="dash"></span>
-        <span class="word">셀프 디스커버리</span>
-      </div>
-      <h1 class="q" id="h-intro">당신이 본 저는<br>어떤 사람인가요?</h1>
-      <p class="lede" id="introLede">요즘 듣고 있는 과정에서 <b>저를 잘 아는 서너 분께 저에 대해 직접 여쭤보라</b>는 과제를 받았습니다. 거울로는 끝내 안 보이는 얼굴이 있어서요.</p>
-      <p class="lede">여쭐 것은 네 가지입니다. 제 <b>강점</b>, 제 <b>에너지가 켜지고 꺼지는 순간</b>, 제가 <b>발끈하는 지점</b>, 그리고 제가 잘 못 보는 <b>그림자</b>.</p>
-      <p class="lede">듣기 좋은 말보다 솔직한 말이 훨씬 도움이 됩니다. 특히 마지막 질문이 그렇습니다.</p>
-
-      <div class="chips">
-        <span class="chip">4 QUESTIONS</span>
-        <span class="chip">약 5분</span>
-        <span class="chip ko">저에게만 전달됩니다</span>
-      </div>
-
-      <div class="twoup" style="margin-top:26px">
-        <div class="field" style="margin-top:0">
-          <label for="respondent">성함 <span class="opt">선택</span></label>
-          <input type="text" id="respondent" autocomplete="name" placeholder="비워두셔도 됩니다">
-        </div>
-        <div class="field" style="margin-top:0">
-          <label for="relation">저와의 관계 <span class="opt">선택</span></label>
-          <select id="relation">
-            <option value="">고르지 않음</option>
-            <option>가족</option>
-            <option>친구</option>
-            <option>직장 동료</option>
-            <option>선배 · 후배</option>
-            <option>함께 공부한 사이</option>
-            <option>그 외</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button type="button" class="btn btn-primary" data-go="1">시작하기</button>
-        <span class="spacer"></span>
-        <span class="saved" id="savedNote"></span>
-      </div>
-    </section>
-
-    <!-- ── 1. 강점 ───────────────────────────────────── -->
-    <section class="panel" id="p1" hidden aria-labelledby="h1q">
-      <div class="eyebrow"><span class="num">01</span><span class="dash"></span><span class="word">강점</span></div>
-      <h2 class="q" id="h1q">제 강점은 무엇인가요?</h2>
-      <ul class="prompts">
-        <li>제가 남들보다 잘한다고 느끼신 건 무엇인가요?</li>
-        <li>제가 어떤 일에서 잘 풀린다면, 그 비결이 뭐라고 보세요?</li>
-        <li>어떤 일이라면 저한테 믿고 맡기시겠어요?</li>
-      </ul>
-      <div class="field">
-        <label for="f-strength">적어주세요 <span class="opt">떠오르는 장면이 있다면 같이 적어주시면 더 좋습니다</span></label>
-        <textarea id="f-strength" data-key="strength" placeholder="예) 복잡한 상황에서 제일 먼저 정리를 시작하더라. 작년에 …했을 때도 그랬다."></textarea>
-        <div class="count" data-for="f-strength"></div>
-      </div>
-      <div class="actions">
-        <button type="button" class="btn btn-ghost" data-go="0">이전</button>
-        <button type="button" class="btn btn-primary" data-go="2">다음</button>
-        <span class="spacer"></span>
-        <button type="button" class="btn btn-quiet" data-skip="2">이 질문은 건너뛰기</button>
-        <p class="hint" hidden></p>
-      </div>
-    </section>
-
-    <!-- ── 2. 동기 스위치 ────────────────────────────── -->
-    <section class="panel" id="p2" hidden aria-labelledby="h2q">
-      <div class="eyebrow"><span class="num">02</span><span class="dash"></span><span class="word">동기 스위치</span></div>
-      <h2 class="q" id="h2q">제 에너지는 언제 켜지고,<br>언제 꺼지나요?</h2>
-      <ul class="prompts">
-        <li>제가 유난히 신나서 몰두하는 것처럼 보일 때는 언제인가요?</li>
-        <li>반대로 기운이 빠지고 무기력해 보일 때는 언제인가요?</li>
-      </ul>
-      <div class="field">
-        <label for="f-on">켜질 때 <span class="opt">몰두하고 눈이 반짝이는 순간</span></label>
-        <textarea id="f-on" data-key="energyOn" placeholder="예) 새로운 걸 처음 만들어볼 때. 누가 자기 일처럼 물어봐줄 때."></textarea>
-        <div class="count" data-for="f-on"></div>
-      </div>
-      <div class="field">
-        <label for="f-off">꺼질 때 <span class="opt">기운 빠지고 말수가 줄어드는 순간</span></label>
-        <textarea id="f-off" data-key="energyOff" placeholder="예) 결론이 이미 정해진 회의. 같은 얘기를 세 번째 할 때."></textarea>
-        <div class="count" data-for="f-off"></div>
-      </div>
-      <div class="actions">
-        <button type="button" class="btn btn-ghost" data-go="1">이전</button>
-        <button type="button" class="btn btn-primary" data-go="3">다음</button>
-        <span class="spacer"></span>
-        <button type="button" class="btn btn-quiet" data-skip="3">이 질문은 건너뛰기</button>
-        <p class="hint" hidden></p>
-      </div>
-    </section>
-
-    <!-- ── 3. 레드버튼 ───────────────────────────────── -->
-    <section class="panel" id="p3" hidden aria-labelledby="h3q">
-      <div class="eyebrow"><span class="num">03</span><span class="dash"></span><span class="word">레드버튼</span></div>
-      <h2 class="q" id="h3q">제가 언제 발끈하나요?</h2>
-      <ul class="prompts">
-        <li>어떤 말이나 상황에서 제가 “욱” 하는 것 같나요?</li>
-        <li>그럴 때 저는 어떤 모습이 되나요?</li>
-        <li>혹시 “저건 건드리면 안 되겠다” 싶은 주제가 있나요?</li>
-      </ul>
-      <div class="field">
-        <label for="f-red">적어주세요 <span class="opt">사소해 보여도 괜찮습니다</span></label>
-        <textarea id="f-red" data-key="redButton" placeholder="예) 성의 없이 대충 했다는 말을 들을 때. 말이 갑자기 빨라지고 짧아진다."></textarea>
-        <div class="count" data-for="f-red"></div>
-      </div>
-      <div class="actions">
-        <button type="button" class="btn btn-ghost" data-go="2">이전</button>
-        <button type="button" class="btn btn-primary" data-go="4">다음</button>
-        <span class="spacer"></span>
-        <button type="button" class="btn btn-quiet" data-skip="4">이 질문은 건너뛰기</button>
-        <p class="hint" hidden></p>
-      </div>
-    </section>
-
-    <!-- ── 4. 그림자 ─────────────────────────────────── -->
-    <section class="panel" id="p4" hidden aria-labelledby="h4q">
-      <div class="eyebrow"><span class="num">04</span><span class="dash"></span><span class="word">그림자</span></div>
-      <h2 class="q" id="h4q">제가 주위를 힘들게 하는 건<br>무엇일까요?</h2>
-      <ul class="prompts">
-        <li>저와 함께 있을 때 힘들거나 아쉬웠던 점은 무엇인가요?</li>
-        <li>딱 하나만 고칠 수 있다면, 무엇을 고치라고 하시겠어요?</li>
-      </ul>
-      <div class="field">
-        <label for="f-shadow">적어주세요 <span class="opt">돌려 말씀하지 않으셔도 됩니다</span></label>
-        <textarea id="f-shadow" data-key="shadow" placeholder="예) 본인 기준이 높아서 옆 사람이 숨이 차다. 말을 끝까지 안 듣고 답을 먼저 낸다."></textarea>
-        <div class="count" data-for="f-shadow"></div>
-      </div>
-      <div class="callout">
-        <b>이 질문이 제일 어렵고, 제일 필요한 질문입니다.</b><br>
-        서운해하지 않겠습니다. 변명하러 연락드리지도 않겠습니다. 약속드립니다.
-      </div>
-      <div class="field">
-        <label for="f-extra">마지막으로 한마디 <span class="opt">선택</span></label>
-        <textarea id="f-extra" data-key="extra" style="min-height:96px" placeholder="꼭 하고 싶으셨던 말이 있다면."></textarea>
-        <div class="count" data-for="f-extra"></div>
-      </div>
-      <div class="actions">
-        <button type="button" class="btn btn-ghost" data-go="3">이전</button>
-        <button type="button" class="btn btn-primary" id="submitBtn">보내기</button>
-        <span class="spacer"></span>
-        <p class="hint" hidden></p>
-      </div>
-    </section>
-
-    <!-- ── 5. 완료 ───────────────────────────────────── -->
-    <section class="panel" id="p5" hidden aria-labelledby="h5q">
-      <div class="done-mark" id="doneMark">04 / 04 — 전달 완료</div>
-      <h2 class="q" id="h5q">고맙습니다.</h2>
-      <p class="lede" id="doneLede">보내주신 이야기, 골라 듣지 않고 그대로 읽겠습니다.<br>시간 내주셔서 정말 감사합니다.</p>
-      <div class="fallback" id="fallback" hidden>
-        <div class="callout" style="margin-top:8px">
-          <b>자동 전송이 되지 않았습니다.</b><br>
-          아래 내용을 복사해서 카카오톡이나 메일로 보내주시면 됩니다. 번거롭게 해서 죄송합니다.
-        </div>
-        <textarea id="fallbackText" readonly aria-label="복사할 응답 내용"></textarea>
-        <div class="actions" style="margin-top:0;padding-top:0;border-top:0">
-          <button type="button" class="btn btn-primary" id="copyBtn">응답 복사하기</button>
-          <span class="spacer"></span>
-        </div>
-      </div>
-    </section>
-
-    <p class="foot" id="foot">이 페이지는 한 사람의 과제용으로 만들어졌고, 응답은 그 사람에게만 전달됩니다.</p>
-  </div>
-</div>
-
-<script>
-/* ═══════════════════════════════════════════════════════════
-   설정 — 이 두 줄만 고치면 됩니다.
-   ENDPOINT : Google Apps Script 웹앱 URL (…/exec). 비워두면 '복사해서 보내기'로 동작합니다.
-   OWNER    : 페이지에 표시할 이름. 비워두면 이름 없이 1인칭으로 나옵니다.
-   ═══════════════════════════════════════════════════════════ */
-var ENDPOINT = "";
-var OWNER    = "";
-
-(function () {
-  "use strict";
-
-  var STEPS = 5;                    // 0=인트로, 1~4=질문
-  var DRAFT_KEY = "inspire.draft.v1";
-  var body = document.body;
-  var rail = document.getElementById("rail");
-  var counter = document.getElementById("counter");
-  var savedNote = document.getElementById("savedNote");
-  var panels = [];
-  for (var i = 0; i <= STEPS; i++) panels.push(document.getElementById("p" + i));
-
-  var FIELDS = ["strength", "energyOn", "energyOff", "redButton", "shadow", "extra"];
-  var REQUIRED = { 1: ["strength"], 2: ["energyOn"], 3: ["redButton"], 4: ["shadow"] };
-  var LABELS = {
-    strength: "강점", energyOn: "에너지가 켜질 때", energyOff: "에너지가 꺼질 때",
-    redButton: "레드버튼", shadow: "그림자", extra: "한마디"
-  };
-
-  var els = {};
-  Array.prototype.forEach.call(document.querySelectorAll("[data-key]"), function (el) {
-    els[el.getAttribute("data-key")] = el;
-  });
-  var respondent = document.getElementById("respondent");
-  var relation = document.getElementById("relation");
-
-  /* ── 이름 적용 ─────────────────────────────────── */
-  if (OWNER) {
-    document.title = OWNER + "님을 발견하기";
-    document.querySelector(".wordmark").innerHTML = "<b>" + esc(OWNER) + "</b>님을 발견하기";
-    document.getElementById("h-intro").innerHTML = "당신이 본 " + esc(OWNER) + "는<br>어떤 사람인가요?";
-    document.getElementById("introLede").innerHTML =
-      "저 " + esc(OWNER) + "입니다. 요즘 듣고 있는 과정에서 <b>저를 잘 아는 서너 분께 저에 대해 직접 여쭤보라</b>는 과제를 받았습니다. 거울로는 끝내 안 보이는 얼굴이 있어서요.";
-  }
-  function esc(s) {
-    return String(s).replace(/[&<>"]/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
-    });
-  }
-
-  /* ── 초안 저장 / 복원 ──────────────────────────── */
-  function readDraft() {
-    try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}") || {}; }
-    catch (e) { return {}; }
-  }
-  function saveDraft() {
-    try {
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(collect()));
-      savedNote.textContent = "임시 저장됨";
-      savedNote.classList.add("on");
-      clearTimeout(saveDraft._t);
-      saveDraft._t = setTimeout(function () { savedNote.classList.remove("on"); }, 1800);
-    } catch (e) { /* 저장 불가 — 그대로 진행 */ }
-  }
-  function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} }
-
-  function collect() {
-    var out = {
-      respondent: respondent.value.trim(),
-      relation: relation.value
-    };
-    FIELDS.forEach(function (k) { out[k] = els[k] ? els[k].value.trim() : ""; });
-    return out;
-  }
-
-  (function restore() {
-    var d = readDraft();
-    if (!d || !Object.keys(d).length) return;
-    if (d.respondent) respondent.value = d.respondent;
-    if (d.relation) relation.value = d.relation;
-    var any = false;
-    FIELDS.forEach(function (k) {
-      if (d[k] && els[k]) { els[k].value = d[k]; any = true; }
-    });
-    if (any) {
-      savedNote.textContent = "지난번에 쓰시던 내용을 불러왔습니다";
-      savedNote.classList.add("on");
+      --font-display: 'Gowun Batang', 'Nanum Myeongjo', 'Apple SD Gothic Neo', serif;
+      --font-body: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     }
-    FIELDS.forEach(function (k) { if (els[k]) { autosize(els[k]); updateCount(els[k]); } });
-  })();
 
-  /* ── 텍스트영역 ────────────────────────────────── */
-  function autosize(el) {
-    el.style.height = "auto";
-    el.style.height = Math.max(el.scrollHeight, parseInt(getComputedStyle(el).minHeight, 10) || 0) + "px";
-  }
-  function updateCount(el) {
-    var box = document.querySelector('.count[data-for="' + el.id + '"]');
-    if (!box) return;
-    var n = el.value.trim().length;
-    box.textContent = n ? n + "자" : "";
-    box.classList.toggle("on", n > 0);
-  }
-  Array.prototype.forEach.call(document.querySelectorAll("textarea[data-key]"), function (el) {
-    el.addEventListener("input", function () {
-      autosize(el); updateCount(el); queueSave();
-      var hint = el.closest(".panel").querySelector(".hint");
-      if (hint) hint.hidden = true;
-    });
-  });
-  respondent.addEventListener("input", queueSave);
-  relation.addEventListener("change", queueSave);
-
-  var saveTimer = null;
-  function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 700); }
-
-  /* ── 단계 이동 ─────────────────────────────────── */
-  var step = 0;
-  var visited = { 0: true };
-
-  function show(n) {
-    step = n;
-    body.setAttribute("data-step", String(n <= 4 ? n : 4));
-    visited[n] = true;
-    panels.forEach(function (p, i) { if (p) p.hidden = (i !== n); });
-    rail.hidden = (n === 0 || n === 5);
-    Array.prototype.forEach.call(rail.querySelectorAll(".seg"), function (seg) {
-      var i = +seg.getAttribute("data-i");
-      seg.classList.toggle("active", i === n);
-      seg.classList.toggle("done", i < n);
-      if (visited[i]) seg.setAttribute("data-nav", "1"); else seg.removeAttribute("data-nav");
-    });
-    if (n === 0) counter.textContent = "강점 · 동기 · 레드버튼 · 그림자";
-    else if (n === 5) counter.textContent = "감사합니다";
-    else counter.textContent = "0" + n + " / 04";
-    window.scrollTo({ top: 0, behavior: visited._moved ? "smooth" : "auto" });
-    visited._moved = true;
-    var first = panels[n] && panels[n].querySelector("textarea, input[type=text]");
-    if (first && n > 0 && n < 5) first.focus({ preventScroll: true });
-  }
-
-  function validate(n) {
-    var need = REQUIRED[n];
-    if (!need) return true;
-    for (var i = 0; i < need.length; i++) {
-      var el = els[need[i]];
-      if (el && el.value.trim().length < 2) {
-        var hint = panels[n].querySelector(".hint");
-        if (hint) {
-          hint.textContent = "한 줄이라도 좋습니다. 정 떠오르지 않으시면 ‘건너뛰기’를 눌러주세요.";
-          hint.hidden = false;
-        }
-        el.focus();
-        return false;
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #0F1016;
+        --surface: #191A22;
+        --surface-2: #1F202A;
+        --ink: #EEEEF4;
+        --ink-2: #C5C6D3;
+        --muted: #8C8D9E;
+        --line: #2B2C37;
+        --line-strong: #3D3E4D;
+        --accent: #A99DE2;
+        --on-hue: #13141A;
+        --h1c: #DFA74C;
+        --h2c: #4CBFA5;
+        --h3c: #EF7A64;
+        --h4c: #A294E8;
+        --g1: rgba(223, 167, 76, .16);
+        --g2: rgba(76, 191, 165, .14);
+        --g3: rgba(239, 122, 100, .14);
+        --g4: rgba(162, 148, 232, .17);
+        --glow: rgba(169, 157, 226, .12);
+        --lift: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 44px -20px rgba(0, 0, 0, .65);
       }
     }
-    return true;
-  }
 
-  document.addEventListener("click", function (e) {
-    var go = e.target.closest("[data-go]");
-    if (go) {
-      var n = +go.getAttribute("data-go");
-      if (n > step && !validate(step)) return;
-      saveDraft(); show(n); return;
+    :root[data-theme="dark"] {
+      --paper: #0F1016;
+      --surface: #191A22;
+      --surface-2: #1F202A;
+      --ink: #EEEEF4;
+      --ink-2: #C5C6D3;
+      --muted: #8C8D9E;
+      --line: #2B2C37;
+      --line-strong: #3D3E4D;
+      --accent: #A99DE2;
+      --on-hue: #13141A;
+      --h1c: #DFA74C;
+      --h2c: #4CBFA5;
+      --h3c: #EF7A64;
+      --h4c: #A294E8;
+      --g1: rgba(223, 167, 76, .16);
+      --g2: rgba(76, 191, 165, .14);
+      --g3: rgba(239, 122, 100, .14);
+      --g4: rgba(162, 148, 232, .17);
+      --glow: rgba(169, 157, 226, .12);
+      --lift: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 44px -20px rgba(0, 0, 0, .65);
     }
-    var skip = e.target.closest("[data-skip]");
-    if (skip) { saveDraft(); show(+skip.getAttribute("data-skip")); return; }
-    var seg = e.target.closest(".seg[data-nav]");
-    if (seg) {
-      var i = +seg.getAttribute("data-i");
-      if (i > step && !validate(step)) return;
-      saveDraft(); show(i);
+
+    /* step → hue mapping */
+    body[data-step="1"] {
+      --hue: var(--h1c);
+      --glow: var(--g1)
     }
-  });
 
-  document.addEventListener("keydown", function (e) {
-    if ((e.metaKey || e.ctrlKey) && e.key === "Enter" && step >= 0 && step <= 4) {
-      e.preventDefault();
-      if (step === 4) submit();
-      else if (validate(step)) { saveDraft(); show(step + 1); }
+    body[data-step="2"] {
+      --hue: var(--h2c);
+      --glow: var(--g2)
     }
-  });
 
-  /* ── 제출 ──────────────────────────────────────── */
-  var submitBtn = document.getElementById("submitBtn");
-  submitBtn.addEventListener("click", submit);
+    body[data-step="3"] {
+      --hue: var(--h3c);
+      --glow: var(--g3)
+    }
 
-  function plain(d) {
-    var lines = [];
-    lines.push("■ " + (OWNER ? OWNER + "님에 대한" : "나를 발견하기") + " 응답");
-    lines.push("보낸 사람: " + (d.respondent || "(익명)") + (d.relation ? " · " + d.relation : ""));
-    lines.push("작성 시각: " + new Date().toLocaleString("ko-KR"));
-    lines.push("");
-    FIELDS.forEach(function (k) {
-      if (!d[k]) return;
-      lines.push("[" + LABELS[k] + "]");
-      lines.push(d[k]);
-      lines.push("");
-    });
-    return lines.join("\n").trim();
-  }
+    body[data-step="4"] {
+      --hue: var(--h4c);
+      --glow: var(--g4)
+    }
 
-  function submit() {
-    if (!validate(4)) return;
-    var data = collect();
-    data.ts = new Date().toISOString();
-    data.ua = navigator.userAgent;
+    /* ── base ───────────────────────────────────────────────── */
+    * {
+      box-sizing: border-box
+    }
 
-    if (!ENDPOINT) { finish(false, data); return; }
+    html {
+      -webkit-text-size-adjust: 100%
+    }
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = "보내는 중…";
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.75;
+      letter-spacing: -.005em;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
 
-    fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(data)
-    })
-      .then(function (r) { return r.ok ? r.text() : Promise.reject(new Error("HTTP " + r.status)); })
-      .then(function (t) {
-        var ok = true;
-        try { ok = JSON.parse(t).ok !== false; } catch (e) { /* 본문이 JSON이 아니어도 성공으로 본다 */ }
-        if (!ok) throw new Error("server");
-        finish(true, data);
-      })
-      .catch(function () {
-        /* 응답을 못 읽는 환경(CORS) — 그래도 요청은 갔을 수 있으니 한 번 더 시도 */
-        fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify(data) })
-          .then(function () { finish(true, data); })
-          .catch(function () { finish(false, data); });
+    .wrap {
+      max-width: 43rem;
+      margin: 0 auto;
+      padding-inline: 20px;
+      padding-block: clamp(28px, 6vw, 64px) clamp(40px, 8vw, 88px);
+      position: relative;
+    }
+
+    .stage {
+      position: relative
+    }
+
+    .stage::before {
+      content: "";
+      position: absolute;
+      left: -14%;
+      right: -14%;
+      top: -90px;
+      height: 320px;
+      background: radial-gradient(58% 100% at 50% 0%, var(--glow) 0%, transparent 72%);
+      transition: background .7s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -.01em;
+      text-wrap: balance;
+      margin: 0
+    }
+
+    p {
+      margin: 0
+    }
+
+    a {
+      color: var(--hue)
+    }
+
+    /* ── masthead ───────────────────────────────────────────── */
+    .masthead {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: clamp(24px, 5vw, 44px);
+    }
+
+    .wordmark {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .wordmark b {
+      color: var(--ink);
+      font-weight: 500
+    }
+
+    .counter {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── rail ───────────────────────────────────────────────── */
+    .rail {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: clamp(22px, 4vw, 34px);
+    }
+
+    .rail[hidden] {
+      display: none !important
+    }
+
+    .seg {
+      background: none;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      font: inherit;
+      color: var(--muted);
+      cursor: default;
+      display: grid;
+      gap: 7px;
+    }
+
+    .seg[data-nav] {
+      cursor: pointer
+    }
+
+    .seg .bar {
+      height: 3px;
+      border-radius: 2px;
+      background: var(--line-strong);
+      transition: background .4s ease
+    }
+
+    .seg .tag {
+      font-size: 11.5px;
+      letter-spacing: .02em;
+      transition: color .4s ease;
+      line-height: 1.3
+    }
+
+    .seg.done .bar {
+      background: var(--c)
+    }
+
+    .seg.active .bar {
+      background: var(--c)
+    }
+
+    .seg.done .tag {
+      color: var(--ink-2)
+    }
+
+    .seg.active .tag {
+      color: var(--c);
+      font-weight: 600
+    }
+
+    .seg[data-i="1"] {
+      --c: var(--h1c)
+    }
+
+    .seg[data-i="2"] {
+      --c: var(--h2c)
+    }
+
+    .seg[data-i="3"] {
+      --c: var(--h3c)
+    }
+
+    .seg[data-i="4"] {
+      --c: var(--h4c)
+    }
+
+    /* ── panel ──────────────────────────────────────────────── */
+    .panel {
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--lift);
+      padding: clamp(24px, 5vw, 40px);
+    }
+
+    .panel[hidden] {
+      display: none !important
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow .num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      color: var(--hue);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .eyebrow .dash {
+      flex: 0 0 18px;
+      height: 1px;
+      background: var(--line-strong)
+    }
+
+    .eyebrow .word {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      color: var(--hue);
+    }
+
+    .q {
+      font-size: clamp(23px, 4.6vw, 31px);
+      line-height: 1.42;
+      margin-bottom: 18px
+    }
+
+    .lede {
+      color: var(--ink-2);
+      font-size: 16.5px;
+      line-height: 1.8
+    }
+
+    .lede+.lede {
+      margin-top: 14px
+    }
+
+    /* prompt list */
+    .prompts {
+      list-style: none;
+      margin: 0 0 24px;
+      padding: 0;
+      display: grid;
+      gap: 9px;
+      border-left: 2px solid var(--line);
+      padding-left: 16px;
+    }
+
+    .prompts li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .prompts li::before {
+      content: "—";
+      margin-right: 8px;
+      color: var(--line-strong);
+    }
+
+    /* fields */
+    .field {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px
+    }
+
+    .field:first-of-type {
+      margin-top: 0
+    }
+
+    .field>label {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--ink-2);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 4px 12px;
+      flex-wrap: wrap;
+    }
+
+    .field .opt {
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+      font-size: 12px
+    }
+
+    textarea,
+    input[type="text"],
+    select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink);
+      background-color: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      padding: 13px 15px;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    textarea {
+      min-height: 132px;
+      resize: vertical;
+      display: block
+    }
+
+    textarea::placeholder,
+    input::placeholder {
+      color: var(--muted);
+      opacity: .75
+    }
+
+    textarea:focus,
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--hue);
+      background-color: var(--surface);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      padding-right: 40px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.6 6 6.4 11 1.6' fill='none' stroke='%238C8D9E' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+    }
+
+    .count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      min-height: 1em;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+
+    .count.on {
+      opacity: 1
+    }
+
+    /* callout */
+    .callout {
+      margin-top: 26px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--hue);
+      background: var(--surface-2);
+      border-radius: 0 11px 11px 0;
+      padding: 16px 18px;
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--ink-2);
+    }
+
+    .callout b {
+      color: var(--ink);
+      font-weight: 600
+    }
+
+    /* meta chips */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 26px 0 4px
+    }
+
+    .chip {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      letter-spacing: .04em;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 11px;
+      background: var(--surface-2);
+    }
+
+    .chip.ko {
+      font-family: var(--font-body);
+      letter-spacing: .01em;
+      font-size: 12px
+    }
+
+    /* intro two-up */
+    .twoup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    @media (max-width:520px) {
+      .twoup {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* ── actions ────────────────────────────────────────────── */
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .btn {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -.005em;
+      border-radius: 10px;
+      padding: 12px 22px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform .12s ease, opacity .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px)
+    }
+
+    .btn-primary {
+      background: var(--hue);
+      color: var(--on-hue)
+    }
+
+    .btn-primary:hover {
+      opacity: .88
+    }
+
+    .btn-primary[disabled] {
+      opacity: .45;
+      cursor: progress
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-2);
+      border-color: var(--line-strong)
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--ink-2);
+      color: var(--ink)
+    }
+
+    .btn-quiet {
+      background: none;
+      border: 0;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 13.5px;
+      padding: 12px 4px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--line-strong);
+      cursor: pointer
+    }
+
+    .btn-quiet:hover {
+      color: var(--ink-2)
+    }
+
+    .spacer {
+      flex: 1 1 auto
+    }
+
+    .hint {
+      font-size: 13.5px;
+      color: var(--h3c);
+      line-height: 1.6;
+      flex-basis: 100%;
+      margin: 0
+    }
+
+    .hint[hidden] {
+      display: none
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--hue);
+      outline-offset: 2px;
+      border-radius: 6px
+    }
+
+    /* ── done / fallback ────────────────────────────────────── */
+    .done-mark {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: .16em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .fallback {
+      margin-top: 24px;
+      display: grid;
+      gap: 14px
+    }
+
+    .fallback textarea {
+      min-height: 200px;
+      font-size: 14px;
+      line-height: 1.7
+    }
+
+    .foot {
+      position: relative;
+      z-index: 1;
+      margin-top: 26px;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .saved {
+      font-size: 12px;
+      letter-spacing: .01em;
+      text-align: right;
+      color: var(--muted);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .saved.on {
+      opacity: 1
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important
+      }
+    }
+  </style>
+</head>
+
+<body data-step="0">
+  <div class="wrap">
+    <div class="stage">
+
+      <header class="masthead">
+        <div class="wordmark"><b>최지웅</b> 발견하기</div>
+        <div class="counter" id="counter">강점 · 동기 · 레드버튼 · 그림자</div>
+      </header>
+
+      <nav class="rail" id="rail" hidden aria-label="진행 단계">
+        <button type="button" class="seg" data-i="1"><span class="bar"></span><span class="tag">강점</span></button>
+        <button type="button" class="seg" data-i="2"><span class="bar"></span><span class="tag">동기 스위치</span></button>
+        <button type="button" class="seg" data-i="3"><span class="bar"></span><span class="tag">레드버튼</span></button>
+        <button type="button" class="seg" data-i="4"><span class="bar"></span><span class="tag">그림자</span></button>
+      </nav>
+
+      <!-- ── 0. 인트로 ─────────────────────────────────── -->
+      <section class="panel" id="p0" aria-labelledby="h-intro">
+        <div class="eyebrow">
+          <span class="num">360°</span><span class="dash"></span>
+          <span class="word">셀프 디스커버리</span>
+        </div>
+        <h1 class="q" id="h-intro">당신이 본 최지웅은<br>어떤 사람인가요?</h1>
+        <p class="lede" id="introLede">저 최지웅입니다. 요즘 듣고 있는 과정에서 <b>저를 잘 아는 서너 분께 저에 대해 직접 여쭤보라</b>는 과제를 받았습니다. 거울로는 끝내 안 보이는 얼굴이
+          있어서요.</p>
+        <p class="lede">여쭐 것은 네 가지입니다. 제 <b>강점</b>, 제 <b>에너지가 켜지고 꺼지는 순간</b>, 제가 <b>발끈하는 지점</b>, 그리고 제가 잘 못 보는
+          <b>그림자</b>.</p>
+        <p class="lede">듣기 좋은 말보다 솔직한 말이 훨씬 도움이 됩니다. 특히 마지막 질문이 그렇습니다.</p>
+
+        <div class="chips">
+          <span class="chip">4 QUESTIONS</span>
+          <span class="chip">약 5분</span>
+          <span class="chip ko">저에게만 전달됩니다</span>
+        </div>
+
+        <div class="twoup" style="margin-top:26px">
+          <div class="field" style="margin-top:0">
+            <label for="respondent">성함 <span class="opt">선택</span></label>
+            <input type="text" id="respondent" autocomplete="name" placeholder="비워두셔도 됩니다">
+          </div>
+          <div class="field" style="margin-top:0">
+            <label for="relation">저와의 관계 <span class="opt">선택</span></label>
+            <select id="relation">
+              <option value="">고르지 않음</option>
+              <option>가족</option>
+              <option>친구</option>
+              <option>직장 동료</option>
+              <option>선배 · 후배</option>
+              <option>함께 공부한 사이</option>
+              <option>그 외</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-primary" data-go="1">시작하기</button>
+          <span class="spacer"></span>
+          <span class="saved" id="savedNote"></span>
+        </div>
+      </section>
+
+      <!-- ── 1. 강점 ───────────────────────────────────── -->
+      <section class="panel" id="p1" hidden aria-labelledby="h1q">
+        <div class="eyebrow"><span class="num">01</span><span class="dash"></span><span class="word">강점</span></div>
+        <h2 class="q" id="h1q">제 강점은 무엇인가요?</h2>
+        <ul class="prompts">
+          <li>제가 남들보다 잘한다고 느끼신 건 무엇인가요?</li>
+          <li>제가 어떤 일에서 잘 풀린다면, 그 비결이 뭐라고 보세요?</li>
+          <li>어떤 일이라면 저한테 믿고 맡기시겠어요?</li>
+        </ul>
+        <div class="field">
+          <label for="f-strength">적어주세요 <span class="opt">떠오르는 장면이 있다면 같이 적어주시면 더 좋습니다</span></label>
+          <textarea id="f-strength" data-key="strength"
+            placeholder="예) 복잡한 상황에서 제일 먼저 정리를 시작하더라. 작년에 …했을 때도 그랬다."></textarea>
+          <div class="count" data-for="f-strength"></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" data-go="0">이전</button>
+          <button type="button" class="btn btn-primary" data-go="2">다음</button>
+          <span class="spacer"></span>
+          <button type="button" class="btn btn-quiet" data-skip="2">이 질문은 건너뛰기</button>
+          <p class="hint" hidden></p>
+        </div>
+      </section>
+
+      <!-- ── 2. 동기 스위치 ────────────────────────────── -->
+      <section class="panel" id="p2" hidden aria-labelledby="h2q">
+        <div class="eyebrow"><span class="num">02</span><span class="dash"></span><span class="word">동기 스위치</span></div>
+        <h2 class="q" id="h2q">제 에너지는 언제 켜지고,<br>언제 꺼지나요?</h2>
+        <ul class="prompts">
+          <li>제가 유난히 신나서 몰두하는 것처럼 보일 때는 언제인가요?</li>
+          <li>반대로 기운이 빠지고 무기력해 보일 때는 언제인가요?</li>
+        </ul>
+        <div class="field">
+          <label for="f-on">켜질 때 <span class="opt">몰두하고 눈이 반짝이는 순간</span></label>
+          <textarea id="f-on" data-key="energyOn" placeholder="예) 새로운 걸 처음 만들어볼 때. 누가 자기 일처럼 물어봐줄 때."></textarea>
+          <div class="count" data-for="f-on"></div>
+        </div>
+        <div class="field">
+          <label for="f-off">꺼질 때 <span class="opt">기운 빠지고 말수가 줄어드는 순간</span></label>
+          <textarea id="f-off" data-key="energyOff" placeholder="예) 결론이 이미 정해진 회의. 같은 얘기를 세 번째 할 때."></textarea>
+          <div class="count" data-for="f-off"></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" data-go="1">이전</button>
+          <button type="button" class="btn btn-primary" data-go="3">다음</button>
+          <span class="spacer"></span>
+          <button type="button" class="btn btn-quiet" data-skip="3">이 질문은 건너뛰기</button>
+          <p class="hint" hidden></p>
+        </div>
+      </section>
+
+      <!-- ── 3. 레드버튼 ───────────────────────────────── -->
+      <section class="panel" id="p3" hidden aria-labelledby="h3q">
+        <div class="eyebrow"><span class="num">03</span><span class="dash"></span><span class="word">레드버튼</span></div>
+        <h2 class="q" id="h3q">제가 언제 발끈하나요?</h2>
+        <ul class="prompts">
+          <li>어떤 말이나 상황에서 제가 “욱” 하는 것 같나요?</li>
+          <li>그럴 때 저는 어떤 모습이 되나요?</li>
+          <li>혹시 “저건 건드리면 안 되겠다” 싶은 주제가 있나요?</li>
+        </ul>
+        <div class="field">
+          <label for="f-red">적어주세요 <span class="opt">사소해 보여도 괜찮습니다</span></label>
+          <textarea id="f-red" data-key="redButton" placeholder="예) 성의 없이 대충 했다는 말을 들을 때. 말이 갑자기 빨라지고 짧아진다."></textarea>
+          <div class="count" data-for="f-red"></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" data-go="2">이전</button>
+          <button type="button" class="btn btn-primary" data-go="4">다음</button>
+          <span class="spacer"></span>
+          <button type="button" class="btn btn-quiet" data-skip="4">이 질문은 건너뛰기</button>
+          <p class="hint" hidden></p>
+        </div>
+      </section>
+
+      <!-- ── 4. 그림자 ─────────────────────────────────── -->
+      <section class="panel" id="p4" hidden aria-labelledby="h4q">
+        <div class="eyebrow"><span class="num">04</span><span class="dash"></span><span class="word">그림자</span></div>
+        <h2 class="q" id="h4q">제가 주위를 힘들게 하는 건<br>무엇일까요?</h2>
+        <ul class="prompts">
+          <li>저와 함께 있을 때 힘들거나 아쉬웠던 점은 무엇인가요?</li>
+          <li>딱 하나만 고칠 수 있다면, 무엇을 고치라고 하시겠어요?</li>
+        </ul>
+        <div class="field">
+          <label for="f-shadow">적어주세요 <span class="opt">돌려 말씀하지 않으셔도 됩니다</span></label>
+          <textarea id="f-shadow" data-key="shadow"
+            placeholder="예) 본인 기준이 높아서 옆 사람이 숨이 차다. 말을 끝까지 안 듣고 답을 먼저 낸다."></textarea>
+          <div class="count" data-for="f-shadow"></div>
+        </div>
+        <div class="callout">
+          <b>이 질문이 제일 어렵고, 제일 필요한 질문입니다.</b><br>
+          서운해하지 않겠습니다. 변명하러 연락드리지도 않겠습니다. 약속드립니다.
+        </div>
+        <div class="field">
+          <label for="f-extra">마지막으로 한마디 <span class="opt">선택</span></label>
+          <textarea id="f-extra" data-key="extra" style="min-height:96px" placeholder="꼭 하고 싶으셨던 말이 있다면."></textarea>
+          <div class="count" data-for="f-extra"></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" data-go="3">이전</button>
+          <button type="button" class="btn btn-primary" id="submitBtn">보내기</button>
+          <span class="spacer"></span>
+          <p class="hint" hidden></p>
+        </div>
+      </section>
+
+      <!-- ── 5. 완료 ───────────────────────────────────── -->
+      <section class="panel" id="p5" hidden aria-labelledby="h5q">
+        <div class="done-mark" id="doneMark">04 / 04 — 전달 완료</div>
+        <h2 class="q" id="h5q">고맙습니다.</h2>
+        <p class="lede" id="doneLede">보내주신 이야기, 골라 듣지 않고 그대로 읽겠습니다.<br>시간 내주셔서 정말 감사합니다.</p>
+        <div class="fallback" id="fallback" hidden>
+          <div class="callout" style="margin-top:8px">
+            <b>자동 전송이 되지 않았습니다.</b><br>
+            아래 내용을 복사해서 카카오톡이나 메일로 보내주시면 됩니다. 번거롭게 해서 죄송합니다.
+          </div>
+          <textarea id="fallbackText" readonly aria-label="복사할 응답 내용"></textarea>
+          <div class="actions" style="margin-top:0;padding-top:0;border-top:0">
+            <button type="button" class="btn btn-primary" id="copyBtn">응답 복사하기</button>
+            <span class="spacer"></span>
+          </div>
+        </div>
+      </section>
+
+      <p class="foot" id="foot">이 페이지는 한 사람의 과제용으로 만들어졌고, 응답은 그 사람에게만 전달됩니다.</p>
+    </div>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════════
+       설정 — 이 두 줄만 고치면 됩니다.
+       ENDPOINT : Google Apps Script 웹앱 URL (…/exec). 비워두면 '복사해서 보내기'로 동작합니다.
+       OWNER    : 페이지에 표시할 이름. 비워두면 이름 없이 1인칭으로 나옵니다.
+       ═══════════════════════════════════════════════════════════ */
+    var ENDPOINT = "https://script.google.com/macros/s/AKfycbxXGXa_xjqBXw8RWTZhVJhKNTx8NDQf_fvXYmEx5nrKoO_RqgdeWTZ4jJZIS4fIsVbGqQ/exec";
+    var OWNER = "최지웅";
+
+    (function () {
+      "use strict";
+
+      var STEPS = 5;                    // 0=인트로, 1~4=질문
+      var DRAFT_KEY = "inspire.draft.v1";
+      var body = document.body;
+      var rail = document.getElementById("rail");
+      var counter = document.getElementById("counter");
+      var savedNote = document.getElementById("savedNote");
+      var panels = [];
+      for (var i = 0; i <= STEPS; i++) panels.push(document.getElementById("p" + i));
+
+      var FIELDS = ["strength", "energyOn", "energyOff", "redButton", "shadow", "extra"];
+      var REQUIRED = { 1: ["strength"], 2: ["energyOn"], 3: ["redButton"], 4: ["shadow"] };
+      var LABELS = {
+        strength: "강점", energyOn: "에너지가 켜질 때", energyOff: "에너지가 꺼질 때",
+        redButton: "레드버튼", shadow: "그림자", extra: "한마디"
+      };
+
+      var els = {};
+      Array.prototype.forEach.call(document.querySelectorAll("[data-key]"), function (el) {
+        els[el.getAttribute("data-key")] = el;
       });
-  }
+      var respondent = document.getElementById("respondent");
+      var relation = document.getElementById("relation");
 
-  function finish(sent, data) {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "보내기";
-    clearDraft();
-    show(5);
-    var fb = document.getElementById("fallback");
-    var mark = document.getElementById("doneMark");
-    if (sent) {
-      fb.hidden = true;
-      mark.textContent = "04 / 04 — 전달 완료";
-    } else {
-      fb.hidden = false;
-      mark.textContent = "04 / 04 — 작성 완료";
-      document.getElementById("doneLede").innerHTML =
-        "다 적어주셨습니다. 한 단계만 더 부탁드립니다.";
-      var ta = document.getElementById("fallbackText");
-      ta.value = plain(data);
-    }
-  }
+      /* ── 이름 적용 ─────────────────────────────────── */
+      if (OWNER) {
+        var N = esc(OWNER);
+        document.title = "당신이 본 " + OWNER;
+        document.querySelector(".wordmark").innerHTML = "<b>" + N + "</b> 발견하기";
+        document.getElementById("h-intro").innerHTML =
+          "당신이 본 " + N + josa(OWNER, "은", "는") + "<br>어떤 사람인가요?";
+        document.getElementById("introLede").innerHTML =
+          "저 " + N + "입니다. 요즘 듣고 있는 과정에서 <b>저를 잘 아는 서너 분께 저에 대해 직접 여쭤보라</b>는 과제를 받았습니다. 거울로는 끝내 안 보이는 얼굴이 있어서요.";
+      }
+      /* 받침에 따라 조사를 고른다 — 최지웅"은", 김하나"는" */
+      function josa(word, withJong, withoutJong) {
+        var c = word.charCodeAt(word.length - 1);
+        var hasJong = c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 !== 0;
+        return hasJong ? withJong : withoutJong;
+      }
+      function esc(s) {
+        return String(s).replace(/[&<>"]/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+        });
+      }
 
-  document.getElementById("copyBtn").addEventListener("click", function () {
-    var ta = document.getElementById("fallbackText");
-    var btn = this;
-    function done() { btn.textContent = "복사했습니다"; setTimeout(function () { btn.textContent = "응답 복사하기"; }, 2000); }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(ta.value).then(done, legacy);
-    } else legacy();
-    function legacy() {
-      ta.removeAttribute("readonly"); ta.select(); ta.setSelectionRange(0, 999999);
-      try { document.execCommand("copy"); done(); } catch (e) { btn.textContent = "직접 선택해 복사해주세요"; }
-      ta.setAttribute("readonly", "readonly");
-    }
-  });
+      /* ── 초안 저장 / 복원 ──────────────────────────── */
+      function readDraft() {
+        try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}") || {}; }
+        catch (e) { return {}; }
+      }
+      function saveDraft() {
+        try {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(collect()));
+          savedNote.textContent = "임시 저장됨";
+          savedNote.classList.add("on");
+          clearTimeout(saveDraft._t);
+          saveDraft._t = setTimeout(function () { savedNote.classList.remove("on"); }, 1800);
+        } catch (e) { /* 저장 불가 — 그대로 진행 */ }
+      }
+      function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) { } }
 
-  show(0);
-})();
-</script>
+      function collect() {
+        var out = {
+          respondent: respondent.value.trim(),
+          relation: relation.value
+        };
+        FIELDS.forEach(function (k) { out[k] = els[k] ? els[k].value.trim() : ""; });
+        return out;
+      }
+
+      (function restore() {
+        var d = readDraft();
+        if (!d || !Object.keys(d).length) return;
+        if (d.respondent) respondent.value = d.respondent;
+        if (d.relation) relation.value = d.relation;
+        var any = false;
+        FIELDS.forEach(function (k) {
+          if (d[k] && els[k]) { els[k].value = d[k]; any = true; }
+        });
+        if (any) {
+          savedNote.textContent = "지난번에 쓰시던 내용을 불러왔습니다";
+          savedNote.classList.add("on");
+        }
+        FIELDS.forEach(function (k) { if (els[k]) { autosize(els[k]); updateCount(els[k]); } });
+      })();
+
+      /* ── 텍스트영역 ────────────────────────────────── */
+      function autosize(el) {
+        el.style.height = "auto";
+        el.style.height = Math.max(el.scrollHeight, parseInt(getComputedStyle(el).minHeight, 10) || 0) + "px";
+      }
+      function updateCount(el) {
+        var box = document.querySelector('.count[data-for="' + el.id + '"]');
+        if (!box) return;
+        var n = el.value.trim().length;
+        box.textContent = n ? n + "자" : "";
+        box.classList.toggle("on", n > 0);
+      }
+      Array.prototype.forEach.call(document.querySelectorAll("textarea[data-key]"), function (el) {
+        el.addEventListener("input", function () {
+          autosize(el); updateCount(el); queueSave();
+          var hint = el.closest(".panel").querySelector(".hint");
+          if (hint) hint.hidden = true;
+        });
+      });
+      respondent.addEventListener("input", queueSave);
+      relation.addEventListener("change", queueSave);
+
+      var saveTimer = null;
+      function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 700); }
+
+      /* ── 단계 이동 ─────────────────────────────────── */
+      var step = 0;
+      var visited = { 0: true };
+
+      function show(n) {
+        step = n;
+        body.setAttribute("data-step", String(n <= 4 ? n : 4));
+        visited[n] = true;
+        panels.forEach(function (p, i) { if (p) p.hidden = (i !== n); });
+        rail.hidden = (n === 0 || n === 5);
+        Array.prototype.forEach.call(rail.querySelectorAll(".seg"), function (seg) {
+          var i = +seg.getAttribute("data-i");
+          seg.classList.toggle("active", i === n);
+          seg.classList.toggle("done", i < n);
+          if (visited[i]) seg.setAttribute("data-nav", "1"); else seg.removeAttribute("data-nav");
+        });
+        if (n === 0) counter.textContent = "강점 · 동기 · 레드버튼 · 그림자";
+        else if (n === 5) counter.textContent = "감사합니다";
+        else counter.textContent = "0" + n + " / 04";
+        window.scrollTo({ top: 0, behavior: visited._moved ? "smooth" : "auto" });
+        visited._moved = true;
+        var first = panels[n] && panels[n].querySelector("textarea, input[type=text]");
+        if (first && n > 0 && n < 5) first.focus({ preventScroll: true });
+      }
+
+      function validate(n) {
+        var need = REQUIRED[n];
+        if (!need) return true;
+        for (var i = 0; i < need.length; i++) {
+          var el = els[need[i]];
+          if (el && el.value.trim().length < 2) {
+            var hint = panels[n].querySelector(".hint");
+            if (hint) {
+              hint.textContent = "한 줄이라도 좋습니다. 정 떠오르지 않으시면 ‘건너뛰기’를 눌러주세요.";
+              hint.hidden = false;
+            }
+            el.focus();
+            return false;
+          }
+        }
+        return true;
+      }
+
+      document.addEventListener("click", function (e) {
+        var go = e.target.closest("[data-go]");
+        if (go) {
+          var n = +go.getAttribute("data-go");
+          if (n > step && !validate(step)) return;
+          saveDraft(); show(n); return;
+        }
+        var skip = e.target.closest("[data-skip]");
+        if (skip) { saveDraft(); show(+skip.getAttribute("data-skip")); return; }
+        var seg = e.target.closest(".seg[data-nav]");
+        if (seg) {
+          var i = +seg.getAttribute("data-i");
+          if (i > step && !validate(step)) return;
+          saveDraft(); show(i);
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === "Enter" && step >= 0 && step <= 4) {
+          e.preventDefault();
+          if (step === 4) submit();
+          else if (validate(step)) { saveDraft(); show(step + 1); }
+        }
+      });
+
+      /* ── 제출 ──────────────────────────────────────── */
+      var submitBtn = document.getElementById("submitBtn");
+      submitBtn.addEventListener("click", submit);
+
+      function plain(d) {
+        var lines = [];
+        lines.push("■ " + (OWNER ? OWNER + "님에 대한" : "나를 발견하기") + " 응답");
+        lines.push("보낸 사람: " + (d.respondent || "(익명)") + (d.relation ? " · " + d.relation : ""));
+        lines.push("작성 시각: " + new Date().toLocaleString("ko-KR"));
+        lines.push("");
+        FIELDS.forEach(function (k) {
+          if (!d[k]) return;
+          lines.push("[" + LABELS[k] + "]");
+          lines.push(d[k]);
+          lines.push("");
+        });
+        return lines.join("\n").trim();
+      }
+
+      function submit() {
+        if (!validate(4)) return;
+        var data = collect();
+        data.ts = new Date().toISOString();
+        data.ua = navigator.userAgent;
+
+        if (!ENDPOINT) { finish(false, data); return; }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "보내는 중…";
+
+        fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(data)
+        })
+          .then(function (r) { return r.ok ? r.text() : Promise.reject(new Error("HTTP " + r.status)); })
+          .then(function (t) {
+            var ok = true;
+            try { ok = JSON.parse(t).ok !== false; } catch (e) { /* 본문이 JSON이 아니어도 성공으로 본다 */ }
+            if (!ok) throw new Error("server");
+            finish(true, data);
+          })
+          .catch(function () {
+            /* 응답을 못 읽는 환경(CORS) — 그래도 요청은 갔을 수 있으니 한 번 더 시도 */
+            fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify(data) })
+              .then(function () { finish(true, data); })
+              .catch(function () { finish(false, data); });
+          });
+      }
+
+      function finish(sent, data) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "보내기";
+        clearDraft();
+        show(5);
+        var fb = document.getElementById("fallback");
+        var mark = document.getElementById("doneMark");
+        if (sent) {
+          fb.hidden = true;
+          mark.textContent = "04 / 04 — 전달 완료";
+        } else {
+          fb.hidden = false;
+          mark.textContent = "04 / 04 — 작성 완료";
+          document.getElementById("doneLede").innerHTML =
+            "다 적어주셨습니다. 한 단계만 더 부탁드립니다.";
+          var ta = document.getElementById("fallbackText");
+          ta.value = plain(data);
+        }
+      }
+
+      document.getElementById("copyBtn").addEventListener("click", function () {
+        var ta = document.getElementById("fallbackText");
+        var btn = this;
+        function done() { btn.textContent = "복사했습니다"; setTimeout(function () { btn.textContent = "응답 복사하기"; }, 2000); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(ta.value).then(done, legacy);
+        } else legacy();
+        function legacy() {
+          ta.removeAttribute("readonly"); ta.select(); ta.setSelectionRange(0, 999999);
+          try { document.execCommand("copy"); done(); } catch (e) { btn.textContent = "직접 선택해 복사해주세요"; }
+          ta.setAttribute("readonly", "readonly");
+        }
+      });
+
+      show(0);
+    })();
+  </script>
 </body>
+
 </html>
