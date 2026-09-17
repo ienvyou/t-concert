@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="대한민국 클라우드, 수순이 맞는가? — AI 인프라 붐과 비어 있는 계층 · 미국·중국과의 '순서' 비교 (최지웅 · NeoAX)">
+<meta name="robots" content="noindex">
+<title>대한민국 클라우드, 수순이 맞는가?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --ink:#161A23;
+    --ink2:#2A3140;
+    --body-c:#4B5566;
+    --muted:#6B7688;
+    --faint:#8D97A8;
+    --panel:#F4F6F9;
+    --panel2:#EAEEF4;
+    --line:#DDE2EB;
+    --line-soft:#EBEEF4;
+    --amber:#E39A2E;
+    --amber-ink:#A96708;
+    --amber-soft:#FDF2E0;
+    --amber-line:#F0D5A8;
+    --teal:#0F6E82;
+    --red:#C0392B;
+    --disp:'Gothic A1','Noto Sans KR',-apple-system,sans-serif;
+    --body:'Noto Sans KR','Apple SD Gothic Neo',-apple-system,sans-serif;
+    --mono:'JetBrains Mono','SFMono-Regular',Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:#0C0F16;color:var(--ink);font-family:var(--body);
+    overflow:hidden;-webkit-font-smoothing:antialiased;
+  }
+
+  /* ================= stage ================= */
+  #viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  #stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center}
+
+  .slide{
+    position:absolute;inset:0;background:var(--paper);
+    padding:38px 50px 46px;display:flex;flex-direction:column;
+    opacity:0;visibility:hidden;transform:translateY(10px);
+    transition:opacity .34s ease,transform .34s ease,visibility 0s .34s;
+  }
+  .slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .34s ease,transform .34s ease,visibility 0s}
+  @media (prefers-reduced-motion:reduce){.slide{transition:none!important}}
+  .slide.dark{
+    --paper:#161A23;--ink:#F3F5F8;--ink2:#F3F5F8;--body-c:#C3CAD6;
+    --muted:#98A2B3;--faint:#7A8494;
+    --panel:#212836;--panel2:#2A3140;
+    --line:#3D4655;--line-soft:#2A3140;
+    --amber-ink:#F0B354;--amber-soft:rgba(227,154,46,.13);--amber-line:rgba(227,154,46,.38);
+    background:#161A23;color:#F3F5F8;
+  }
+
+  /* ---- shared header ---- */
+  .shead{flex:none;margin-bottom:22px}
+  .shead h2{
+    font-family:var(--disp);font-weight:900;font-size:32px;line-height:1.24;
+    letter-spacing:-.02em;color:var(--ink);
+  }
+  .shead .sub{
+    margin-top:8px;font-size:14.5px;color:var(--muted);font-weight:500;letter-spacing:-.01em;
+  }
+  .sbody{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center}
+  .src{
+    flex:none;margin-top:16px;font-size:10.5px;line-height:1.6;color:var(--faint);
+    border-top:1px solid var(--line-soft);padding-top:8px;letter-spacing:-.01em;
+  }
+  .slide .notes{display:none}
+
+  /* running footer */
+  .runfoot{
+    position:absolute;left:50px;right:50px;bottom:16px;
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.03em;
+  }
+
+  /* ---- generic atoms ---- */
+  .grid{display:grid;gap:12px}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;
+  }
+  .card.amber{background:var(--amber-soft);border-color:var(--amber-line)}
+  .card h4{font-family:var(--disp);font-weight:700;font-size:15.5px;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+  .card p{font-size:13px;line-height:1.68;color:var(--body-c)}
+  .lbl{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--amber-ink);font-weight:700;margin-bottom:8px;
+  }
+  .big{font-family:var(--disp);font-weight:900;letter-spacing:-.03em;color:var(--ink);line-height:1}
+  .banner{
+    margin-top:16px;border-radius:12px;padding:18px 22px;
+    background:var(--amber-soft);border:1px solid var(--amber-line);
+    font-size:16px;line-height:1.65;color:var(--ink2);font-weight:500;
+  }
+  .banner b{color:var(--amber-ink);font-weight:700}
+  .banner .bl{
+    display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--amber-ink);font-weight:700;margin-bottom:5px;
+  }
+  .note{
+    font-size:12.5px;line-height:1.65;color:var(--muted);
+    background:var(--panel);border:1px dashed var(--line);border-radius:9px;padding:12px 15px;
+  }
+  .num{
+    flex:none;width:25px;height:25px;border-radius:7px;background:var(--amber);
+    color:#161A23;font-family:var(--mono);font-weight:700;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .dark .num{color:#161A23}
+
+  /* ---- stack (7 layers) ---- */
+  .stack{display:flex;flex-direction:column;gap:7px}
+  .stack .row{
+    border-radius:8px;padding:11px 14px;font-size:13.5px;font-weight:500;
+    border:1px solid var(--line);background:var(--panel);color:var(--body-c);
+    display:flex;align-items:center;gap:8px;
+  }
+  .stack .row.hi{
+    background:var(--amber-soft);border-color:var(--amber-line);color:var(--ink);font-weight:700;
+  }
+  .dark .stack .row{background:#212836;border-color:#3D4655;color:#C3CAD6}
+  .dark .stack .row.hi{background:rgba(227,154,46,.16);border-color:rgba(227,154,46,.45);color:#FBEBD2}
+  .stack .row .tag{
+    margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+    color:var(--faint);line-height:1;
+  }
+
+  /* ---- table ---- */
+  table.t{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.t th,table.t td{
+    border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top;
+    line-height:1.55;color:var(--body-c);
+  }
+  table.t thead th{
+    background:var(--ink);color:#F3F5F8;font-weight:700;font-size:12px;
+    border-color:var(--ink);letter-spacing:-.01em;
+  }
+  table.t tbody th{background:var(--panel2);color:var(--ink);font-weight:700;white-space:nowrap}
+  table.t td.hi{background:var(--amber-soft);color:var(--ink);font-weight:600}
+  .g-강,.g-중,.g-약,.g-없음{
+    display:inline-block;min-width:34px;text-align:center;border-radius:5px;
+    padding:3px 7px;font-size:11.5px;font-weight:700;font-family:var(--body);
+  }
+  .g-강{background:#1F6F4A;color:#EAF7F0}
+  .g-중{background:var(--amber);color:#2A1A05}
+  .g-약{background:#EDEFF3;color:#6B7688;border:1px solid var(--line)}
+  .g-없음{background:#FBE9E7;color:#B03A2E;border:1px solid #F1C5BE}
+
+  /* ---- bar chart ---- */
+  .bars{display:flex;flex-direction:column;gap:20px}
+  .bars .b{display:grid;grid-template-columns:200px 1fr 54px;align-items:center;gap:14px}
+  .bars .bn{font-size:13.5px;line-height:1.35;color:var(--ink);font-weight:600}
+  .bars .bn small{display:block;font-weight:400;color:var(--faint);font-size:10.5px;margin-top:2px}
+  .bars .track{height:34px;background:var(--panel2);border-radius:4px;overflow:hidden}
+  .bars .fill{height:100%;border-radius:4px;background:var(--amber)}
+  .bars .fill.mid{background:#7A8494}
+  .bars .fill.low{background:#C2C8D2}
+  .bars .bv{font-family:var(--mono);font-size:17px;font-weight:700;color:var(--ink);text-align:right}
+
+  /* ---- timeline ---- */
+  .tl{display:flex;flex-direction:column;gap:11px}
+  .tl .e{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:start}
+  .tl .d{
+    font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--amber-ink);
+    background:var(--amber-soft);border:1px solid var(--amber-line);border-radius:5px;
+    padding:4px 0;text-align:center;
+  }
+  .tl .x{font-size:12.5px;line-height:1.6;color:var(--body-c);padding-top:3px}
+  .tl .x b{color:var(--ink);font-weight:700}
+
+  /* ---- steps (horizontal) ---- */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
+  .steps .s{
+    border:1px solid var(--line);border-radius:11px;padding:18px 17px;background:var(--panel);
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .steps .s.last{background:var(--amber-soft);border-color:var(--amber-line)}
+  .steps .y{font-family:var(--mono);font-size:11px;color:var(--amber-ink);font-weight:700;letter-spacing:.06em}
+  .steps .h{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink)}
+  .steps .p{font-size:12.5px;line-height:1.65;color:var(--body-c)}
+
+  /* ---- stat tiles ---- */
+  .stats{display:grid;gap:16px}
+  .stat{border:1px solid var(--line);border-radius:12px;padding:24px 22px;background:var(--panel)}
+  .stat .v{font-family:var(--disp);font-weight:900;font-size:40px;letter-spacing:-.03em;color:var(--amber-ink);line-height:1.05}
+  .stat .k{margin-top:13px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.5}
+  .stat .m{margin-top:7px;font-size:11.5px;line-height:1.65;color:var(--faint)}
+
+  /* ================= per-slide ================= */
+  /* s1 */
+  .s1{padding:0;display:grid;grid-template-columns:1fr 360px}
+  .s1 .l{padding:64px 56px;display:flex;flex-direction:column;justify-content:center}
+  .s1 h1{font-family:var(--disp);font-weight:900;font-size:56px;line-height:1.18;letter-spacing:-.035em;color:#F3F5F8}
+  .s1 h1 em{font-style:normal;color:var(--amber)}
+  .s1 .tag{
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:22px;
+  }
+  .s1 .sub{margin-top:26px;font-size:17px;line-height:1.7;color:#C3CAD6;font-weight:500}
+  .s1 .by{margin-top:38px;font-family:var(--mono);font-size:13px;color:#98A2B3;letter-spacing:.04em}
+  .s1 .r{
+    background:#1C222E;border-left:1px solid #3D4655;
+    padding:56px 30px;display:flex;flex-direction:column;justify-content:center;gap:5px;
+  }
+  .s1 .r .cap{
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:#7A8494;
+    margin-top:12px;text-align:right;
+  }
+
+  /* s3 */
+  .s3grid{display:grid;grid-template-columns:1fr 330px;gap:26px;align-items:center}
+  .s3 .brk{display:grid;grid-template-columns:1fr 62px;gap:10px;align-items:center}
+  .s3 .bk{
+    font-family:var(--mono);font-size:9.5px;line-height:1.7;color:var(--amber-ink);
+    border-left:2px solid var(--amber);padding-left:8px;font-weight:700;
+  }
+  .s3 .bk.low{color:var(--faint);border-color:var(--line)}
+
+  /* s5 */
+  .s5row{display:grid;grid-template-columns:29px 1fr;gap:12px;align-items:start;margin-bottom:18px}
+  .s5row h4{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink);margin-bottom:5px}
+  .s5row p{font-size:13.5px;line-height:1.65;color:var(--body-c)}
+
+  /* s12 aside list */
+  .aside-p{font-size:12.5px;line-height:1.7;color:var(--body-c);margin-bottom:11px}
+  .aside-p:last-child{margin-bottom:0}
+  .aside-p b{color:var(--ink);font-weight:700}
+  .aside-p.q{color:var(--amber-ink);font-weight:600}
+
+  /* s13 sovereignty */
+  .sov{display:flex;flex-direction:column;gap:18px}
+  .sov .s{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start}
+  .sov .ic{
+    width:20px;height:20px;border-radius:50%;border:2px solid var(--line);
+    margin-top:2px;position:relative;
+  }
+  .sov .s.hi .ic{border-color:var(--amber);background:var(--amber-soft)}
+  .sov .s.hi .ic::after{
+    content:'';position:absolute;inset:3px;border-radius:50%;background:var(--amber);
+  }
+  .sov h4{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink);letter-spacing:.02em}
+  .sov .s.hi h4{color:var(--amber-ink)}
+  .sov p{font-size:13px;line-height:1.6;color:var(--body-c);margin-top:3px}
+
+  /* s17 chips */
+  .chips{display:grid;grid-template-columns:repeat(6,1fr);gap:11px;margin-top:14px}
+  .chip{
+    border:1px solid var(--amber-line);background:var(--amber-soft);border-radius:10px;
+    padding:13px 13px;
+  }
+  .chip .ch{font-family:var(--disp);font-weight:700;font-size:13.5px;color:var(--amber-ink)}
+  .chip .cp{margin-top:5px;font-size:11px;line-height:1.55;color:var(--body-c)}
+
+  /* s18 debate */
+  .deb{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .deb .d{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--panel)}
+  .deb .d h4{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:10px}
+  .deb .d p{font-size:12.5px;line-height:1.65;color:var(--body-c);margin-bottom:8px}
+  .deb .d p:last-child{margin-bottom:0}
+  .deb .k{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;font-weight:700;
+    display:inline-block;margin-right:6px;padding:1px 5px;border-radius:4px;
+    background:var(--panel2);color:var(--muted);
+  }
+  .deb .k.lim{background:var(--amber-soft);color:var(--amber-ink)}
+
+  /* s19 options */
+  .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .opt{border:1px solid var(--line);border-radius:12px;padding:16px 17px;background:var(--panel)}
+  .opt .oh{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px}
+  .opt .ot{font-family:var(--disp);font-weight:700;font-size:14px;line-height:1.35;color:var(--ink)}
+  .opt p{font-size:12px;line-height:1.62;color:var(--body-c)}
+
+  /* s20 conclusion */
+  .s20 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .s20 .c .n{
+    font-family:var(--disp);font-weight:900;font-size:34px;color:var(--amber);line-height:1;
+  }
+  .s20 .c h3{font-family:var(--disp);font-weight:900;font-size:21px;color:#F3F5F8;margin:12px 0 10px;letter-spacing:-.02em}
+  .s20 .c p{font-size:12.5px;line-height:1.7;color:#C3CAD6}
+  .s20 .close{
+    margin-top:30px;padding-top:22px;border-top:1px solid #3D4655;
+    font-family:var(--disp);font-weight:700;font-size:19px;line-height:1.65;color:#F3F5F8;letter-spacing:-.02em;
+  }
+  .s20 .close em{font-style:normal;color:var(--amber)}
+
+  /* s21 qa */
+  .qa{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .qa .q{border:1px solid var(--line);border-radius:11px;padding:16px 18px;background:var(--panel)}
+  .qa .q h4{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--amber-ink);margin-bottom:7px}
+  .qa .q p{font-size:12.5px;line-height:1.65;color:var(--body-c)}
+
+  /* s22 sources */
+  .srclist{columns:2;column-gap:30px;font-size:11.5px;line-height:1.7;color:var(--body-c)}
+  .srclist li{margin-bottom:9px;break-inside:avoid;list-style:none;padding-left:11px;position:relative}
+  .srclist li::before{content:'·';position:absolute;left:2px;color:var(--amber);font-weight:700}
+
+  /* ================= chrome ================= */
+  #progress{
+    position:fixed;left:0;bottom:0;height:3px;width:0;z-index:40;
+    background:linear-gradient(90deg,#E39A2E,#C77C11);transition:width .3s ease;
+  }
+  #counter{
+    position:fixed;right:18px;bottom:12px;z-index:41;font-family:var(--mono);
+    font-size:12px;color:#8D97A8;font-variant-numeric:tabular-nums;
+  }
+  #hint{
+    position:fixed;left:18px;bottom:11px;z-index:41;font-family:var(--mono);
+    font-size:11px;color:#69738A;background:rgba(12,15,22,.82);
+    padding:4px 9px;border-radius:6px;
+    opacity:1;transition:opacity .5s ease;pointer-events:none;
+  }
+  #hint.off{opacity:0}
+  #hint b{color:#B9C2D2;font-weight:500}
+
+  /* notes panel */
+  #notes{
+    position:fixed;left:0;right:0;bottom:0;z-index:50;max-height:42vh;overflow:auto;
+    background:#0E1320;border-top:1px solid #2A3140;color:#C3CAD6;
+    padding:16px 22px 22px;font-size:14px;line-height:1.75;
+    transform:translateY(101%);transition:transform .3s ease;
+  }
+  #notes.on{transform:none}
+  #notes .nh{
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:#E39A2E;margin-bottom:9px;
+  }
+
+  /* overview */
+  #ov{
+    position:fixed;inset:0;z-index:60;background:#0C0F16;overflow:auto;padding:28px;
+    display:none;
+  }
+  #ov.on{display:block}
+  #ov .og{display:grid;grid-template-columns:repeat(auto-fill,minmax(192px,1fr));gap:14px}
+  #ov .oi{
+    border:1px solid #2A3140;border-radius:9px;background:#151A26;cursor:pointer;
+    padding:13px 14px;min-height:96px;display:flex;flex-direction:column;gap:6px;
+    transition:border-color .15s ease,background .15s ease;
+  }
+  #ov .oi:hover,#ov .oi.cur{border-color:#E39A2E;background:#1C2230}
+  #ov .oi .on{font-family:var(--mono);font-size:10px;color:#E39A2E;letter-spacing:.1em}
+  #ov .oi .ot{font-family:var(--disp);font-weight:700;font-size:12.5px;line-height:1.4;color:#EAEEF4}
+  #ov .oh{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#69738A;margin-bottom:16px;
+  }
+
+  @media print{
+    body{overflow:visible;background:#fff}
+    #viewport{position:static;display:block}
+    #stage{transform:none!important;width:auto;height:auto}
+    .slide{position:relative;opacity:1;visibility:visible;transform:none;
+      width:1280px;height:720px;page-break-after:always;break-after:page}
+    #progress,#counter,#hint,#notes,#ov{display:none!important}
+  }
+</style>
+</head>
+<body>
+
+<div id="viewport"><div id="stage">
+
+<!-- ========== 1 ========== -->
+<section class="slide dark s1" data-title="대한민국 클라우드, 수순이 맞는가?">
+  <div class="l">
+    <div class="tag">NeoAX · 30min Keynote</div>
+    <h1>대한민국 클라우드,<br><em>수순이 맞는가?</em></h1>
+    <p class="sub">AI 인프라 붐과 비어 있는 계층<br>— 미국·중국과의 '순서' 비교</p>
+    <p class="by">최지웅 &nbsp;·&nbsp; NeoAX &nbsp;·&nbsp; 2026. 9</p>
+  </div>
+  <div class="r">
+    <div class="stack">
+      <div class="row hi">Enterprise AX <span class="tag">활용</span></div>
+      <div class="row hi">Software <span class="tag">SaaS·Agent</span></div>
+      <div class="row hi">AI Platform <span class="tag">API·RAG</span></div>
+      <div class="row hi">Cloud Platform <span class="tag">PaaS·MLOps</span></div>
+      <div class="row">Cloud Infra <span class="tag">IaaS·K8s</span></div>
+      <div class="row">AI Infra <span class="tag">AIDC·전력</span></div>
+      <div class="row">반도체 <span class="tag">GPU·HBM</span></div>
+    </div>
+    <div class="cap">▲ 부가가치 · Lock-in</div>
+  </div>
+  <div class="notes">[0:00~1:00] 오프닝. 제목의 '수순'이 오늘의 키워드입니다. 잘하고 있나/못하고 있나가 아니라, '순서가 맞나'를 묻겠습니다. 오른쪽 스택은 오늘 반복될 그림입니다. 주황색이 부가가치와 Lock-in이 생기는 상위 계층입니다.</div>
+</section>
+
+<!-- ========== 2 ========== -->
+<section class="slide" data-title="우리는 지금 GPU를 사고, 데이터센터를 짓고 있다">
+  <header class="shead">
+    <h2>우리는 지금 GPU를 사고, 데이터센터를 짓고 있다</h2>
+    <p class="sub">2025~2026 대한민국 AI 인프라 붐</p>
+  </header>
+  <div class="sbody">
+    <div class="stats" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat">
+        <div class="v">26만장</div>
+        <div class="k">정부+산업계 GPU 확대 계획(이상)</div>
+        <div class="m">NVIDIA 2025.10.31 발표 — 정부 단독 구매·현재 가동량 아님</div>
+      </div>
+      <div class="stat">
+        <div class="v">9.9조원</div>
+        <div class="k">2026년 정부 AI 예산</div>
+        <div class="m">전년의 약 3배, 41개 부처 741개 사업</div>
+      </div>
+      <div class="stat">
+        <div class="v">7조원</div>
+        <div class="k">SK–AWS 울산 AI 데이터센터</div>
+        <div class="m">GPU 6만장, 103MW→1GW급</div>
+      </div>
+      <div class="stat">
+        <div class="v">1 EF</div>
+        <div class="k">국가 AI 컴퓨팅센터(해남)</div>
+        <div class="m">2회 유찰 → 공공지분 51%→30%미만·풋옵션 삭제 후 2026.5 삼성SDS 컨소시엄 확정</div>
+      </div>
+    </div>
+    <div class="banner" style="margin-top:22px;font-size:19px;font-family:var(--disp);font-weight:700;text-align:center;padding:20px">
+      그런데 — GPU가 많아지면, 대한민국 클라우드 산업은 <b>강해지는가?</b>
+    </div>
+  </div>
+  <div class="src">출처: aikorea.go.kr 2026 AI 예산 설명자료 / NVIDIA IR 2025.10.31 / ZDNet·Bloter 2025.6(SK–AWS 울산) / 과기정통부 2025.9.8 국가AI컴퓨팅센터 추진계획·정책브리핑 2026.5.11. 발표·계약 → 설치·검수 → 서비스 개방 → 실사용 → 업무 성과는 각각 다른 증거가 필요한 단계 — 위 숫자는 첫 단계(계획)다.</div>
+  <div class="notes">[1:00~3:00] 숫자 네 개로 '붐'의 규모를 보여줍니다. 모두 인프라 계층의 숫자이고, 모두 '계획' 단계의 숫자입니다. 26만장은 NVIDIA 발표에 담긴 정부+산업계 확대 계획이지 정부가 산 수량도 지금 돌아가는 수량도 아닙니다. 국가AI컴퓨팅센터는 두 번 유찰되고 공공지분을 51%에서 30% 미만으로 낮추고 풋옵션을 빼고서야 사업자가 정해졌습니다 — 컴퓨팅 규모와 별개로 운영권·위험 부담·사업 구조도 설계 대상이라는 뜻입니다. 그리고 질문을 던집니다: 이 GPU들 위에 무엇이 올라가는가?</div>
+</section>
+
+<!-- ========== 3 ========== -->
+<section class="slide s3" data-title="부가가치와 Lock-in은 Stack의 위쪽에서 만들어진다">
+  <header class="shead">
+    <h2>부가가치와 Lock-in은 Stack의 위쪽에서 만들어진다</h2>
+    <p class="sub">분석 프레임 — AI/Cloud Value Chain 7계층</p>
+  </header>
+  <div class="sbody">
+    <div class="s3grid">
+      <div class="brk">
+        <div class="stack">
+          <div class="row hi">Enterprise AX (지능이 일하는 환경·활용)</div>
+          <div class="row hi">Software (SaaS → AI-Native·Agent)</div>
+          <div class="row hi">AI Platform (Model API·Agent·RAG)</div>
+          <div class="row hi">Cloud Platform (PaaS·Data·MLOps)</div>
+          <div class="row">Cloud Infra (IaaS·GPUaaS·K8s)</div>
+          <div class="row">AI Infra (AI DC·Power·Cooling)</div>
+          <div class="row">반도체 (GPU·NPU·HBM)</div>
+        </div>
+        <div>
+          <div class="bk">마진<br>Lock-in<br>차별화</div>
+          <div class="bk low" style="margin-top:34px">CAPEX<br>전력<br>감가상각</div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:11px">
+          <h4>위쪽 4계층</h4>
+          <p>소프트웨어·데이터·API로 고객을 묶는다. 한 번 들어오면 나가기 어렵다. 매출총이익률 75~89%.</p>
+        </div>
+        <div class="card" style="margin-bottom:11px">
+          <h4>아래 3계층</h4>
+          <p>CAPEX·전력·감가상각으로 경쟁한다. 가격이 곧 경쟁력. GPU 임대 영업이익률 한 자릿수.</p>
+        </div>
+        <div class="card amber">
+          <h4>질문</h4>
+          <p>글로벌 사업자·한국 사업자·정부 예산은 각각 어느 계층에 얼마를 쓰고 있는가? 그리고 비어 있는 계층은 어디인가?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">마진 수치: NVIDIA·Salesforce·ServiceNow IR, CoreWeave 10-K(FY2025), Dell IR. 계층 구분은 발표자 프레임(Interpretation).</div>
+  <div class="notes">[3:00~5:00] 오늘의 렌즈입니다. 7계층 중 위 4개(주황)가 돈과 고객을 묶는 곳, 아래 3개가 자본과 전력으로 싸우는 곳입니다. 이 프레임으로 미국·중국·한국 세 나라가 어떤 '순서'로 스택을 채웠는지 보겠습니다.</div>
+</section>
+
+<!-- ========== 4 ========== -->
+<section class="slide" data-title="미국: 수요가 먼저, 인프라는 나중">
+  <header class="shead">
+    <h2>미국: 20년간 소프트웨어·플랫폼 수요를 쌓은 뒤, 인프라를 샀다</h2>
+    <p class="sub">수순 ① — 수요(위층)가 먼저, 공급(아래층)은 나중</p>
+  </header>
+  <div class="sbody">
+    <div class="steps">
+      <div class="s">
+        <div class="y">1999~</div><div class="h">SW중심 변화</div>
+        <div class="p">Salesforce, Red Hat. 소프트웨어를 '구독'으로 파는 문화 정착</div>
+      </div>
+      <div class="s">
+        <div class="y">2006~</div><div class="h">Cloud</div>
+        <div class="p">AWS S3·EC2 출시. 개발자 생태계와 API 경제 형성</div>
+      </div>
+      <div class="s">
+        <div class="y">2010s</div><div class="h">Platform</div>
+        <div class="p">PaaS·데이터 플랫폼·마켓플레이스. 고객 Lock-in 완성</div>
+      </div>
+      <div class="s">
+        <div class="y">2022~</div><div class="h">AI Platform</div>
+        <div class="p">Bedrock·AgentCore, Foundry·Copilot, Vertex — 모델과 운영(권한·관측·평가)을 '플랫폼'으로 흡수. M365 Copilot 유료좌석 3,000만+(FY26Q4, 좌석≠활성)</div>
+      </div>
+      <div class="s last">
+        <div class="y">2024~</div><div class="h">Infra 폭증</div>
+        <div class="p">검증된 수요 위에 CAPEX. Big4 2026년 약 7,250억 달러</div>
+      </div>
+    </div>
+    <div class="banner" style="margin-top:20px">
+      <span class="bl">핵심</span>
+      Hyperscaler의 경쟁력은 GPU 보유가 아니라 GPU 위의 <b>Cloud Platform·AI Platform·Software Ecosystem</b>에서 나온다. GPU는 입장권이다.
+    </div>
+  </div>
+  <div class="src">출처: AWS re:Invent 2025 발표(Bedrock·AgentCore·Nova 2), Microsoft FY25 실적(Azure +34%), Alphabet Q3 2025(Cloud +34%, 백로그 $155B), FT 집계 Big4 2026 CAPEX 가이던스. 연도는 대표 사건 기준.</div>
+  <div class="notes">[5:00~8:00] 미국의 순서. 1999년 SaaS, 2006년 클라우드, 2010년대 플랫폼, 2022년 AI 플랫폼, 그리고 '마지막에' 인프라 CAPEX가 폭증했습니다. 7,250억 달러는 검증된 수요와 Lock-in 위에 올라간 돈입니다. AWS의 Bedrock·AgentCore, MS의 Fabric·Copilot, 구글의 Vertex·BigQuery — 이들은 GPU를 파는 게 아니라 스택 전체를 소유합니다.</div>
+</section>
+
+<!-- ========== 5 ========== -->
+<section class="slide" data-title="중국: 응용·모델이 먼저, 인프라는 제약 속에서">
+  <header class="shead">
+    <h2>중국: 응용·모델을 먼저 확보하고, 제약 속에서 인프라를 채운다</h2>
+    <p class="sub">수순 ② — 플랫폼·모델이 먼저, 칩과 컴퓨트는 '따라잡기'</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr 330px;gap:26px;align-items:center">
+      <div>
+        <div class="s5row">
+          <div class="num">1</div>
+          <div>
+            <h4>Apps / Platform</h4>
+            <p>알리바바·텐센트·바이트댄스 — 10억 사용자 응용·결제·커머스가 먼저. 알리바바는 2021년 11.11 전 그룹 시스템의 퍼블릭 클라우드 이전 완료 — '운영 수요'가 클라우드의 첫 고객</p>
+          </div>
+        </div>
+        <div class="s5row">
+          <div class="num">2</div>
+          <div>
+            <h4>Model (Open-weight) → 매출</h4>
+            <p>Qwen·DeepSeek 오픈웨이트로 생태계 확보. 알리바바 클라우드 외부 매출의 35%가 AI 관련 제품(2026.6 분기) — 컴퓨팅·MaaS·앱에 걸친 숫자, SaaS 비중 아님</p>
+          </div>
+        </div>
+        <div class="s5row" style="margin-bottom:0">
+          <div class="num">3</div>
+          <div>
+            <h4>Infra (제재 하)</h4>
+            <p>알리바바 3년 3,800억 위안. Huawei는 Atlas 칩 위에 CANN·MindSpore·MindIE·ModelArts까지 — '칩을 쓸 수 있게 하는 소프트웨어 계층'을 제품으로 묶는다</p>
+          </div>
+        </div>
+      </div>
+      <div class="card amber">
+        <h4>공통점</h4>
+        <p style="margin-bottom:10px">미국도 중국도 <b>'수요를 만드는 층(응용·플랫폼·모델)'이 먼저</b> 있었고, 인프라는 그 수요에 맞춰 뒤따랐다.</p>
+        <p>인프라를 아무리 짓더라도, 그 위에서 토큰을 소비할 자국 모델·플랫폼·소프트웨어가 없으면 결국 <b>남의 스택을 위한 부동산</b>이 된다.</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: Alibaba Cloud 2021.11.18(11.11 클라우드 이전) / Alibaba 2025.2.24(RMB 380B) / Alizila 2026.8.21 Eddie Wu 분기 설명(AI 관련 35%) / Huawei Ascend 공식 스택(hiascend.com, 성능·수익성 검증 아님). DeepSeek은 공개 보도 기반 정성 서술.</div>
+  <div class="notes">[8:00~10:30] 중국은 미국과 다른 경로지만 같은 원리입니다. 거대 응용 플랫폼이 먼저, 그 다음 자국 모델을 오픈웨이트로 뿌려 생태계를 만들고, 제재로 칩이 막히자 효율(DeepSeek)과 자국 가속기로 채워갑니다. 알리바바 3,800억 위안은 이미 매 분기 세 자릿수 성장하는 AI 제품 매출 위에 올라가는 투자입니다. 인프라는 '수요를 따라가는' 투자라는 점이 핵심입니다.</div>
+</section>
+
+<!-- ========== 6 ========== -->
+<section class="slide" data-title="한국: 인프라가 먼저, 위층은 비어 있다">
+  <header class="shead">
+    <h2>한국: 인프라를 먼저 사고, 그 위에 무엇을 올릴지는 나중에 정한다</h2>
+    <p class="sub">수순 ③ — 공급(아래층)이 먼저, 수요(위층)는 비어 있다</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:270px 1fr;gap:24px;align-items:start">
+      <div>
+        <div class="stack">
+          <div class="row">Enterprise AX (활용)</div>
+          <div class="row">Software (SaaS·Agent)</div>
+          <div class="row">AI Platform (API·RAG)</div>
+          <div class="row">Cloud Platform (PaaS·MLOps)</div>
+          <div class="row hi">Cloud Infra (IaaS·GPUaaS·K8s)</div>
+          <div class="row hi">AI Infra (AI DC·Power·Cooling)</div>
+          <div class="row hi">반도체 (GPU·NPU·HBM)</div>
+        </div>
+        <p style="margin-top:9px;font-size:10px;color:var(--faint);font-family:var(--mono)">■ 주황 = 한국 투자·정책·담론이 집중된 계층</p>
+      </div>
+      <div>
+        <table class="t">
+          <thead><tr><th style="width:96px"></th><th>미국</th><th>중국</th><th>한국</th></tr></thead>
+          <tbody>
+            <tr><th>출발점</th><td>SaaS·클라우드 <b>(위층)</b></td><td>응용 플랫폼·모델 <b>(위층)</b></td><td class="hi">반도체·GPU·AIDC <b>(아래층)</b></td></tr>
+            <tr><th>현재 무게중심</th><td>AI Platform + Infra 동시</td><td>Model + Infra 동시</td><td class="hi">Infra 단독<br>(예산 51% 인프라·기술개발)</td></tr>
+            <tr><th>자국 모델/플랫폼</th><td>OpenAI·Anthropic·Gemini·Nova + Bedrock·Vertex·Fabric</td><td>Qwen·DeepSeek·Doubao + 알리·텐센트 클라우드</td><td class="hi">HyperCLOVA X 등 소수, 플랫폼 계층 얇음</td></tr>
+            <tr><th>비어 있는 층</th><td>—</td><td>첨단 칩 (제재)</td><td class="hi">PaaS·AI Platform·SaaS·개발자 생태계 + 활용 환경·성과 지표</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:11px">주의: 세 나라의 '정답 순서'를 말하는 것이 아니다. 비교 단위는 누가 먼저 장비를 샀느냐가 아니라, <b style="color:var(--ink)">아래층 투자가 위층 사용으로 이어지는 연결과 책임이 설계되어 있는가</b>다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: 2026 AI 예산 설명자료(과기정통부 5.1조/9.9조) / 각사 IR·공개 발표. '비어 있는 층'은 발표자 해석(Interpretation). 미국·중국 기업 사례를 국가 전체 대표 표본으로 확장하지 않음.</div>
+  <div class="notes">[10:30~13:00] 한국의 순서입니다. HBM이라는 강력한 반도체를 가진 덕에, 자연스럽게 아래층에서 시작했고 GPU·데이터센터로 올라왔습니다. 그러나 그 위 — 플랫폼·모델·SaaS — 는 얇습니다. 표를 보시면 미국·중국은 위층에서 출발해 아래층을 채웠고, 한국은 아래층에서 출발해 위층이 비어 있습니다. 이것이 '수순 역전'입니다.</div>
+</section>
+
+<!-- ========== 7 ========== -->
+<section class="slide" data-title="왜 순서가 문제인가 ① 마진은 위에서 나온다">
+  <header class="shead">
+    <h2>왜 순서가 문제인가 ① — 마진은 위에서 나온다</h2>
+    <p class="sub">계층별 대표 기업의 이익률 (%)</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:26px;align-items:center">
+      <div class="bars">
+        <div class="b">
+          <div class="bn">NVIDIA<small>칩 설계 · 매출총이익률</small></div>
+          <div class="track"><div class="fill" style="width:94%"></div></div>
+          <div class="bv">75</div>
+        </div>
+        <div class="b">
+          <div class="bn">성숙 SaaS<small>Salesforce·ServiceNow · 매출총이익률</small></div>
+          <div class="track"><div class="fill" style="width:98%"></div></div>
+          <div class="bv">78</div>
+        </div>
+        <div class="b">
+          <div class="bn">AWS<small>클라우드 플랫폼 · 영업이익률</small></div>
+          <div class="track"><div class="fill mid" style="width:41%"></div></div>
+          <div class="bv">33</div>
+        </div>
+        <div class="b">
+          <div class="bn">Dell<small>서버 조립 · 영업이익률</small></div>
+          <div class="track"><div class="fill low" style="width:14%"></div></div>
+          <div class="bv">11</div>
+        </div>
+        <div class="b">
+          <div class="bn">CoreWeave<small>GPU 임대 · 영업이익률</small></div>
+          <div class="track"><div class="fill low" style="width:8%"></div></div>
+          <div class="bv">6</div>
+        </div>
+      </div>
+      <div class="card amber">
+        <h4>읽는 법</h4>
+        <p style="margin-bottom:9px">AI 가치사슬의 마진은 <b>양 끝</b> — 칩 설계·HBM(SK하이닉스)과 소프트웨어 — 에 몰려 있다.</p>
+        <p style="margin-bottom:9px">가운데 '조립·임대' 층은 매출이 폭증해도 마진을 거의 못 가져간다.</p>
+        <p>한국은 HBM에서 강하고, GPU·AIDC(임대 층)에 투자하며, 소프트웨어 층은 비어 있다.</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: NVIDIA FY2025 IR(GM ~75%), Salesforce·ServiceNow FY25 10-K(GM 75~78%), Amazon 2025 실적(AWS 영업마진 ~33%), Dell FY25 IR, CoreWeave FY2025 10-K. <b>지표(매출총이익률 vs 영업이익률)가 달라 수준 비교가 아닌 방향성 비교용.</b> SaaS 마진은 2026 사스포칼립스 이후 지속성 재평가 중 — 11장 참조.</div>
+  <div class="notes">[13:00~15:00] 첫 번째 데이터. 칩 75%, SaaS 78%, 클라우드 플랫폼 33%, 서버 조립 11%, GPU 임대 6%. 주의: 매출총이익률과 영업이익률이 섞여 있어 정밀 비교는 아니고 방향성입니다. 요점은 한국이 가장 많이 투자하는 층이 마진이 가장 얇은 층이라는 것입니다. 우리가 잘하는 HBM은 예외적으로 고마진인데, 그건 이미 갖고 있는 것이고 지금 국가 예산이 가는 곳이 아닙니다.</div>
+</section>
+
+<!-- ========== 8 ========== -->
+<section class="slide" data-title="왜 순서가 문제인가 ② AI Compute는 싸진다">
+  <header class="shead">
+    <h2>왜 순서가 문제인가 ② — AI Compute는 매년 10배씩 싸진다</h2>
+    <p class="sub">인프라는 빠르게 범용재(commodity)가 된다</p>
+  </header>
+  <div class="sbody">
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat">
+        <div class="v" style="font-size:36px">$60 → $0.06</div>
+        <div class="k">GPT-3급 성능 100만 토큰 추론 비용</div>
+        <div class="m">2021.11 → 2024 말 (약 1,000배 하락)<br><span style="font-family:var(--mono)">a16z 'LLMflation' 2024.11</span></div>
+      </div>
+      <div class="stat">
+        <div class="v" style="font-size:36px">10배 / 년</div>
+        <div class="k">동급 성능 LLM 추론 비용 하락 속도</div>
+        <div class="m">Epoch AI 추정 중앙값은 더 가파른 ~50배/년<br><span style="font-family:var(--mono)">a16z · Epoch AI · Stanford AI Index 2025</span></div>
+      </div>
+      <div class="stat">
+        <div class="v" style="font-size:36px">–64~75%</div>
+        <div class="k">클라우드 GPU 시간당 임대가 정점 대비 하락</div>
+        <div class="m">현재 H100 기준 $2.85~3.50/hr 수준<br><span style="font-family:var(--mono)">업계 가격 추적 자료 2025</span></div>
+      </div>
+    </div>
+    <div class="banner" style="margin-top:22px">
+      <span class="bl">의미</span>
+      '먼저 짓고 나중에 소프트웨어'는 위험하다. 짓는 사이 GPU는 세대가 바뀌고(H100→H200→B200→GB200), 토큰 값은 폭락하고, <b>남는 것은 감가상각</b>이다.
+    </div>
+  </div>
+  <div class="src">출처: a16z, Welcome to LLMflation (2024.11.12) / Epoch AI 추론 비용 추정 / Stanford AI Index 2025 (GPT-3.5급 $20→$0.07, 2022.11→2024.10). GPU 임대가는 복수 업계 추적치 종합.</div>
+  <div class="notes">[15:00~17:00] 두 번째 데이터. 같은 성능의 토큰 값이 매년 10배씩 떨어집니다. 3년이면 1,000배입니다. GPU 임대가도 정점 대비 3분의 1 수준입니다. 이 속도에서 '인프라를 먼저 확보하고 활용은 나중에'는 재무적으로 매우 위험한 순서입니다. 인프라 투자는 그 위에서 토큰을 소비할 수요가 이미 있을 때 정당화됩니다.</div>
+</section>
+
+<!-- ========== 9 ========== -->
+<section class="slide" data-title="왜 순서가 문제인가 ③ CoreWeave">
+  <header class="shead">
+    <h2>왜 순서가 문제인가 ③ — GPU 임대의 교과서, CoreWeave</h2>
+    <p class="sub">매출 170% 성장에도 적자 확대 — 인프라 단독 사업모델의 한계</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center">
+      <div>
+        <p class="lbl">FY2025 손익 ($B)</p>
+        <div class="bars">
+          <div class="b">
+            <div class="bn">매출<small>+170% YoY</small></div>
+            <div class="track"><div class="fill" style="width:86%"></div></div>
+            <div class="bv">5.13</div>
+          </div>
+          <div class="b">
+            <div class="bn">순손실</div>
+            <div class="track"><div class="fill" style="width:20%;background:#C0392B"></div></div>
+            <div class="bv" style="color:#C0392B">–1.17</div>
+          </div>
+          <div class="b">
+            <div class="bn">연간 이자비용</div>
+            <div class="track"><div class="fill" style="width:20%;background:#C0392B"></div></div>
+            <div class="bv" style="color:#C0392B">–1.20</div>
+          </div>
+        </div>
+        <div class="note" style="margin-top:14px">매출이 3배 가까이 늘어도 <b style="color:var(--ink)">이자비용만 12억 달러</b> — 차입으로 GPU를 사고 임대료로 갚는 구조에서는 성장이 곧 레버리지 확대다.</div>
+      </div>
+      <div class="stats" style="grid-template-columns:1fr 1fr">
+        <div class="stat"><div class="v">약 290억$</div><div class="k">총부채</div><div class="m">데이터센터·GPU 담보 차입</div></div>
+        <div class="stat"><div class="v">67%</div><div class="k">Microsoft 단일 고객 의존</div><div class="m">매출 집중도</div></div>
+        <div class="stat"><div class="v">$60.7B</div><div class="k">잔여계약(RPO)</div><div class="m">매출이 장기계약에 묶임</div></div>
+        <div class="stat"><div class="v">6%</div><div class="k">영업이익률</div><div class="m">조립(Dell 11%)보다 낮음</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: CoreWeave FY2025 Form 10-K / Sacra. 주의: 공공 연구자원·상업용 GPUaaS·업무 AI 제품은 같은 GPU라도 목적과 증거가 다르다(접근성·대기시간 / 유료사용·단위원가 / 완료업무·반복사용). 하나의 가동률·매출 숫자로 모두 설명하지 않는다. 단위원가는 유료 가동률에 반비례 — 80%를 100으로 놓으면 60%는 133, 40%는 200(FinOps Unit Economics 기준 계산 예시).</div>
+  <div class="notes">[17:00~19:00] 세 번째 데이터, 실제 기업 사례. CoreWeave는 GPU 임대만으로 세계에서 가장 빨리 성장한 회사입니다. 매출 51억 달러, 170% 성장. 그런데 순손실 11.7억 달러, 이자만 12억 달러, 매출의 3분의 2가 MS 한 곳. 자기 플랫폼·소프트웨어 없이 인프라만 파는 사업의 손익구조입니다. 한국의 GPUaaS·AIDC 사업자들이 참고해야 할 반면교사입니다.</div>
+</section>
+
+<!-- ========== 10 ========== -->
+<section class="slide" data-title="국내 CSP의 투자도 Stack 아래쪽에 머물러 있다">
+  <header class="shead">
+    <h2>국내 CSP의 투자도 Stack 아래쪽에 머물러 있다</h2>
+    <p class="sub">kt cloud · NAVER Cloud · NHN Cloud vs AWS — 계층별 강도</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr 330px;gap:22px;align-items:start">
+      <table class="t">
+        <thead><tr><th style="width:150px">계층</th><th>kt cloud</th><th>NAVER Cloud</th><th>NHN Cloud</th><th>AWS</th></tr></thead>
+        <tbody>
+          <tr><th>AI DC / Infra</th><td><span class="g-강">강</span></td><td><span class="g-강">강</span></td><td><span class="g-중">중</span></td><td><span class="g-강">강</span></td></tr>
+          <tr><th>GPU / GPUaaS</th><td><span class="g-강">강</span></td><td><span class="g-강">강</span></td><td><span class="g-강">강</span></td><td><span class="g-강">강</span></td></tr>
+          <tr><th>Cloud (IaaS·공공)</th><td><span class="g-강">강</span></td><td><span class="g-중">중</span></td><td><span class="g-강">강</span></td><td><span class="g-강">강</span></td></tr>
+          <tr><th>PaaS / Data Platform</th><td><span class="g-중">중</span></td><td><span class="g-중">중</span></td><td><span class="g-중">중</span></td><td><span class="g-강">강</span></td></tr>
+          <tr><th>AI Platform</th><td><span class="g-중">중</span></td><td><span class="g-중">중</span></td><td><span class="g-약">약</span></td><td><span class="g-강">강</span></td></tr>
+          <tr><th>Foundation Model</th><td><span class="g-없음">없음</span></td><td><span class="g-강">강</span></td><td><span class="g-없음">없음</span></td><td><span class="g-강">강</span></td></tr>
+          <tr><th>Software / SaaS</th><td><span class="g-약">약</span></td><td><span class="g-중">중</span></td><td><span class="g-약">약</span></td><td><span class="g-강">강</span></td></tr>
+          <tr><th>Developer Ecosystem</th><td><span class="g-약">약</span></td><td><span class="g-중">중</span></td><td><span class="g-약">약</span></td><td><span class="g-강">강</span></td></tr>
+          <tr><th>Global</th><td><span class="g-약">약</span></td><td><span class="g-중">중</span></td><td><span class="g-약">약</span></td><td><span class="g-강">강</span></td></tr>
+        </tbody>
+      </table>
+      <div class="card">
+        <h4>확인된 사실</h4>
+        <p style="margin-bottom:8px"><b style="color:var(--ink)">kt cloud</b> — KT그룹 5년 18조원 중 AIDC 5조, H200 GPUaaS, 1GW급 AIDC 준비. 모델은 파트너(AI Foundry).</p>
+        <p style="margin-bottom:8px"><b style="color:var(--ink)">NAVER Cloud</b> — 국내 유일 자체 FM(HyperCLOVA X)·소버린 AI. 그러나 대화형 클로바X·Cue:는 2026년 종료.</p>
+        <p style="margin-bottom:10px"><b style="color:var(--ink)">NHN Cloud</b> — 광주 국가AIDC·공공 특화, GPUaaS 등 '고수익 인프라' 지향(2.0 전략).</p>
+        <p style="border-top:1px solid var(--line);padding-top:9px"><b style="color:var(--amber-ink)">제품은 있다</b> — kt cloud PLATFORM(OpenStack on K8s·멀티리전/AZ·MKS·IAM), NAVER CLOVA Studio·API Gateway·WORKS. 질문은 존재가 아니라 '인프라 고객이 함께 쓰는가, 시범 후 다시 쓰는가, 운영을 누가 책임지는가'다. 강/중/약은 그 기준.</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: KT 그룹 투자 발표(2025), kt cloud 2분기 실적 보도(Bloter), NAVER Cloud 2024 2Q 실적·HyperCLOVA X 공개, NHN Cloud 2024 별도실적·2.0 전략(inside.nhn.com). 강/중/약은 발표자 정성 평가(Interpretation).</div>
+  <div class="notes">[19:00~21:00] 기업 차원으로 내려와도 같은 그림입니다. 국내 3사 모두 AIDC·GPU·공공 IaaS는 강하지만, 표 아래쪽 — AI Platform, 자체 모델, SaaS, 개발자 생태계, 글로벌 — 은 비어 있거나 약합니다. NAVER가 유일하게 자체 모델을 갖고 있는데, 그마저 소비자용 서비스는 접고 실용·버티컬로 선회했습니다. 강/중/약은 제 정성 평가임을 밝힙니다.</div>
+</section>
+
+<!-- ========== 11 ========== -->
+<section class="slide" data-title="위층이 비어 있다 — 기업이 아니라 시장이 없었다">
+  <header class="shead">
+    <h2>위층이 비어 있다 — 기업이 아니라 시장이 없었다</h2>
+    <p class="sub">소프트웨어 계층의 규모 격차, 그리고 2026년 그 계층에서 일어난 일</p>
+  </header>
+  <div class="sbody">
+    <div class="stats" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat">
+        <div class="v">$218.5B</div>
+        <div class="k">글로벌 엔터프라이즈 앱 SaaS 시장 (2024, +16.7%)</div>
+        <div class="m">Gartner, Market Share: Enterprise Application SaaS 2024</div>
+      </div>
+      <div class="stat">
+        <div class="v">1~2조원</div>
+        <div class="k">국내 SaaS 시장 — 국내 SW의 21.8%, 그중 약 70%는 글로벌 SaaS</div>
+        <div class="m">과기정통부·NIPA SW산업 실태조사 / 업계 추정</div>
+      </div>
+      <div class="stat" style="background:var(--amber-soft);border-color:var(--amber-line)">
+        <div class="v">150~300배</div>
+        <div class="k">시장 격차 — 글로벌 엔터프라이즈 앱 SaaS vs 국내 SaaS 시장</div>
+        <div class="m">Gartner 2024 / 과기정통부·NIPA / ₩1,380·$ 환산</div>
+      </div>
+      <div class="stat">
+        <div class="v">60.2%</div>
+        <div class="k">국내 민간 기업의 AWS 이용 비중</div>
+        <div class="m">Azure 24.0%, 네이버 20.5% (중복응답) · 과기정통부 부가통신사업 실태조사</div>
+      </div>
+    </div>
+    <div class="banner" style="margin-top:18px">
+      <span class="bl">2026 사스포칼립스</span>
+      좌석 기반 SaaS에서 에이전트·토큰으로 가치가 이동했다(2월 48시간 약 $285B 증발, Atlassian 첫 좌석 감소). 그러나 이동은 <b>'위층 안'에서</b> 일어났고 GPU 임대 마진으로 내려오지 않았다. 한국은 이전 판(SaaS 시장)도, 다음 판(에이전트가 일하는 환경)도 비어 있다.
+    </div>
+  </div>
+  <div class="src">주의: 기관별 시장 정의가 달라 절대치 비교는 규모 감각용(₩1,380/$ 환산). 기업 단위로 보면 Salesforce FY25 $37.9B vs 더존비즈온 2024 4,023억원 = 약 130배로, 오히려 시장 격차(150~300배)보다 작다 — 개별 기업의 제품력이 아니라 시장 자체가 형성되지 않은 것이 원인이다(Interpretation). 더존 매출은 SaaS+SW+구축 혼재. 사스포칼립스: Jefferies 명명(2026.2), 시장 데이터는 언론 집계(Long Angle Q1 2026 등). 원인(Interpretation): SI·구축형 관행, 공공 조달 편향, 캡티브 구조, 낮은 구독 문화.</div>
+  <div class="notes">[21:00~23:00] 스택 위층의 현실. 글로벌 SaaS 2,185억 달러 vs 한국 1~2조원 — 시장 자체가 150배에서 300배 차이입니다. 기업 단위로 보면 세일즈포스와 더존비즈온이 약 130배인데, 이건 시장 격차보다 오히려 작습니다. 개별 기업이 못해서가 아니라 시장이 만들어지지 않은 겁니다. 그래서 오늘 제가 드릴 말씀은 '누가 못했다'가 아니라 '무엇이 없었다'입니다. 민간 클라우드의 60%는 AWS입니다. 여기서 청중이 '그 SaaS가 지금 무너지고 있는데?'라고 물을 겁니다. 맞습니다. 올해 2월 사스포칼립스로 좌석 기반 SaaS에서 에이전트와 토큰으로 가치가 이동했습니다. 그런데 그 이동은 위층 안에서 일어났습니다. 토큰을 파는 것은 모델·에이전트 플랫폼이고, 8~9장에서 본 대로 GPU 임대업자는 그 마진을 못 가져갑니다. 한국은 이전 판인 SaaS도 못 만들었고, 다음 판인 '에이전트가 일하는 환경'도 비어 있습니다.</div>
+</section>
+
+<!-- ========== 12 ========== -->
+<section class="slide" data-title="이중화도 없이 AI 데이터센터를 짓는 역설">
+  <header class="shead">
+    <h2>이중화도 없이 AI 데이터센터를 짓는 역설 — 국정자원 화재</h2>
+    <p class="sub">공공 클라우드·DR — 기본 수순이 빠진 사례</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr 330px;gap:24px;align-items:start">
+      <div class="tl">
+        <div class="e"><div class="d">2022.10</div><div class="x">카카오 판교 DC 화재 → 공공 이중화 예산 <b>250억</b> 편성. 이후 상당액 반환(16억 잔존)으로 알려짐</div></div>
+        <div class="e"><div class="d">2025 예산</div><div class="x">국정자원 신규 DR 예산 <b>30억원</b>. 대전–공주 이원화 네트워크 75.6억 요구 중 <b>61% 삭감</b></div></div>
+        <div class="e"><div class="d">2025.9.26</div><div class="x">국정자원 대전 화재(배터리 이전 작업 중). <b>709개 시스템 중단</b> — 정부24·모바일신분증 마비</div></div>
+        <div class="e"><div class="d">2025.12.21</div><div class="x"><b>99.6% 복구</b> — 완전 복구까지 약 3개월</div></div>
+        <div class="e"><div class="d">2026.6.18</div><div class="x">행안부 DR ISP 착수 — 13개 시스템 액티브-액티브(민간 클라우드 3 + 대전·공주 연계 10, AP·DB 변경 포함, <b>2,120억</b>). 단 설계≠구현≠업무 복구 시험 — RTO·RPO는 목표와 측정치를 구분</div></div>
+      </div>
+      <div class="card amber">
+        <h4>수순의 문제</h4>
+        <p class="aside-p">글로벌 CSP는 멀티리전·액티브-액티브·복구 시험이 기본값이다. 단, 글로벌도 공통 의존성에서는 함께 멈춘다(Google Cloud 2025.6.12, 정책 메타데이터 전파 오류로 다수 리전 API 영향) — <b>리전 수가 아니라 실패 원인의 독립성</b>이 본질.</p>
+        <p class="aside-p">한국 공공은 '데이터센터 이중화'라는 1단계조차 예산 30억으로 미뤄 두고, 조 단위 AIDC를 논의했다.</p>
+        <p class="aside-p q">질문: 서버가 켜졌는가가 아니라 로그인·조회·저장·외부연계까지 업무가 돌아왔는가 — 그 시험 기록이 있는가?</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: 정책브리핑(행안부 중대본), 바이라인네트워크 2025.9, 보안뉴스(PPP·N2SF), 네이트뉴스 2025.12.21(99.6%), 행정안전부 2026.6.18(국정자원 DR 구축 ISP 착수), Google Cloud Service Health 2025.6.13, AWS Well-Architected REL13-BP03(복구 시험). 예산 반환 수치는 언론 보도 기반 — 재확인 필요.</div>
+  <div class="notes">[23:00~23:45] 수순이 뒤바뀐 가장 뼈아픈 사례입니다. 2022년 카카오 화재로 이중화 예산을 잡았다가 돌려보내고, 2025년 DR 예산은 30억. 그리고 9월 화재로 709개 시스템이 석 달간 흔들렸습니다. 같은 시기 우리는 조 단위 AI 데이터센터를 논의하고 있었습니다. 글로벌 CSP는 멀티리전·액티브-액티브가 기본값입니다. 기초 복원력 없이 위에 AI 인프라를 쌓는 것 — 이것도 수순의 문제입니다.</div>
+</section>
+
+<!-- ========== 13 ========== -->
+<section class="slide" data-title="주권은 GPU 장수가 아니라 모델·데이터·운영통제에서">
+  <header class="shead">
+    <h2>주권은 GPU 장수가 아니라 모델·데이터·운영통제에서 나온다</h2>
+    <p class="sub">Sovereign Cloud — '무엇의 주권'인지 구분해야 한다</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr 360px;gap:26px;align-items:center">
+      <div class="sov">
+        <div class="s"><div class="ic"></div><div><h4>Data Sovereignty</h4><p>데이터 위치·관할권. 한국 CSAP·N2SF가 주로 다루는 영역</p></div></div>
+        <div class="s"><div class="ic"></div><div><h4>Cloud Sovereignty</h4><p>운영 통제권 — 누가 키를 쥐고, 누구의 법이 적용되는가</p></div></div>
+        <div class="s"><div class="ic"></div><div><h4>AI Sovereignty</h4><p>자국 AI 역량 — 인력·연구·산업 응용</p></div></div>
+        <div class="s"><div class="ic"></div><div><h4>Model Sovereignty</h4><p>모델 가중치의 자국 통제 — HyperCLOVA X 오픈웨이트가 여기에 해당</p></div></div>
+        <div class="s hi"><div class="ic"></div><div><h4>Compute Sovereignty</h4><p>연산 자원 확보 — <b style="color:var(--amber-ink)">한국 담론이 사실상 여기에만 집중</b></p></div></div>
+      </div>
+      <div class="card">
+        <h4>글로벌은 어떻게 하는가</h4>
+        <p class="aside-p"><b>AWS European Sovereign Cloud</b>(2026.1 GA, 독일): 2040년까지 €7.8B, EU 거주 인력만 운영하는 별도 법인. 배경 — MS가 2025.6 프랑스 상원에서 '미국 정부 접근 차단 보장 불가'를 인정.</p>
+        <p class="aside-p"><b>일본</b>: GENIAC(자국 모델)·ABCI 3.0(H200 6,128장) 병행. <b>싱가포르</b>: SEA-LION(자국어 모델) + 컴퓨트.</p>
+        <p class="aside-p q">공통: 컴퓨트 확보와 자국 모델·운영통제를 '한 세트'로 설계. 한국은 세트 중 컴퓨트만 앞서 있다.</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: AWS 공식 발표 2026.1.15(Business Wire) / The Register 2025.6(MS 프랑스 상원 증언) / 일본 경제산업성 GENIAC·AIST ABCI 3.0 / 싱가포르 NAIS 2.0(OECD.AI). 개념 구분은 NRI·EU 논의 기반 정리.</div>
+  <div class="notes">[23:45~24:30] 소버린 클라우드 담론에서도 수순이 보입니다. 주권에는 다섯 층이 있는데, 한국 담론은 'Compute Sovereignty' — GPU 장수 — 에 집중되어 있습니다. 그런데 EU가 아마존·MS에 요구한 것은 GPU가 아니라 '누가 키를 쥐고 누구 법이 적용되는가'였고, 일본·싱가포르는 컴퓨트와 자국 모델을 한 세트로 설계합니다. 한국은 세트 중 컴퓨트만 앞서 있습니다.</div>
+</section>
+
+<!-- ========== 14 ========== -->
+<section class="slide" data-title="모델까지 생겼는데, 무엇을 바꿨는지 말하지 못한다">
+  <header class="shead">
+    <h2>모델까지 생겼는데, 무엇을 바꿨는지 말하지 못한다</h2>
+    <p class="sub">기업의 '커스텀 에이전트'와 국가의 '모두의 AI' — 같은 구조, 같은 질문</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <p class="lbl">기업 단위 — 커스텀 에이전트는 SI의 재탕이 된다</p>
+        <div class="s5row"><div class="num">1</div><div><h4>누가 유지보수하는가</h4><p>업무는 계속 바뀌는데 구조가 고정된 에이전트는 다시 뜯어 고쳐야 한다. 10개·100개·1,000개가 되면?</p></div></div>
+        <div class="s5row"><div class="num">2</div><div><h4>DX의 장벽이 먼저 온다</h4><p>데이터·인프라·보안·암묵지의 형식지화 — 만드는 시간과 비용이 눈덩이처럼 커진다.</p></div></div>
+        <div class="s5row"><div class="num">3</div><div><h4>기술 주기의 역설</h4><p>6개월 걸려 만든 사내 에이전트가 나오는 사이, 범용 모델은 두 달 주기로 갱신된다. 완성 시점에 이미 구형.</p></div></div>
+        <div class="note">예외: 반복적이고 변화가 적은 업무는 맞춤 구축이 맞다. 'SI 자체가 문제'가 아니라 <b style="color:var(--ink)">공통 제품과 맞춤 작업의 경계가 보이는가</b>의 문제.</div>
+      </div>
+      <div>
+        <p class="lbl">국가 단위 — '모두의 AI'는 SI의 국가판이 되지 않을까</p>
+        <div class="card" style="margin-bottom:11px">
+          <p style="margin-bottom:5px">2026.8.28 과기정통부, SKT·카카오·KT 세 컨소시엄 선정 — 전 국민 무료 국산 AI</p>
+          <p style="margin-bottom:5px">정부 보유 <b style="color:var(--ink)">B200 512장</b> 지원(1순위 256장) — 월 660만원 단가, 연 200억원대</p>
+          <p style="margin-bottom:5px">2027년부터 운영비 정부 지원, 규모 미정 · 자부담 대기업 10%/중견 6%/중소 5%</p>
+          <p>기본 무료, 일부 유료·광고 기준 미정 · 선정→본서비스 <b style="color:var(--ink)">4개월</b> · 국산 모델 비중은 제안서 라우팅 설계만 검토</p>
+        </div>
+        <div class="card amber">
+          <h4>이 사업의 가치는 무엇으로 잽니까?</h4>
+          <p style="margin-bottom:8px">가입자 수·질의 건수는 <b style="color:var(--amber-ink)">토끼</b>, 국민이 실제로 처리한 민원·예약·업무 건수가 <b style="color:var(--amber-ink)">호랑이</b>다. 연내 출시라는 4개월 일정은 토끼를 잡기에 딱 좋은 길이다.</p>
+          <p>스탠퍼드 AI 인덱스 2026: 한국은 주목할 모델 8개로 세계 3위(미 59·중 35). <b style="color:var(--ink)">모델이 없어서가 아니다. 모델을 가졌다고 AI 강국이 되는 것도 아니다.</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: 과기정통부 '모두의 AI' 사업자 선정 발표 및 공모 조건(2026.8~9), 업계 보도 / Stanford AI Index 2026(2026.4, 정정치: LG AI연구원 4·SKT·네이버클라우드·NC AI·업스테이지 각 1). 기업 사례는 발표자 실무 경험 기반(Interpretation).</div>
+  <div class="notes">[24:30~25:30] 여기서 스택 한 칸을 더 올라갑니다. 인프라도 있고, 이제 모델도 생겼습니다. 그런데 같은 문제가 반복됩니다. 기업에서 커스텀 에이전트를 만들어 보면 세 벽에 부딪힙니다 — 누가 유지보수하나, DX 장벽이 먼저 오고, 6개월 만든 에이전트가 두 달 주기 범용 모델에 밀립니다. 이건 SI 개발의 재탕입니다. 국가 단위로 옮기면 '모두의 AI'입니다. B200 512장, 4개월 일정, 운영비·수익은 기업 몫. 이 사업의 가치는 무엇으로 잽니까? 가입자와 질의 수는 토끼, 실제 처리된 민원·업무 건수가 호랑이입니다. 스탠퍼드 지수에서 한국은 모델 8개로 세계 3위입니다. 모델이 없어서가 아닙니다. 모델을 가졌다고 AI 강국이 되는 것도 아닙니다. 지능이 일할 환경과 그것으로 무엇을 바꿨는가의 지표가 빠져 있습니다.</div>
+</section>
+
+<!-- ========== 15 ========== -->
+<section class="slide" data-title="플랫폼 R&D는 있다 — 중복되고, 쓰는 곳이 없다">
+  <header class="shead">
+    <h2>플랫폼 R&amp;D는 있다 — 이미 팔리는 것을 다시 만들고, 쓰는 곳이 없다</h2>
+    <p class="sub">K-클라우드 추진단 기술전문위원회(2026 제2차) 자문 참석 관찰 — 배경과 현실</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <p class="lbl">과제 구성 (2026 제2차 발표 목차 기준 12개)</p>
+        <div class="card" style="margin-bottom:9px">
+          <h4>반도체 · HW</h4>
+          <p>컴포저블 클러스터(하이퍼엑셀) · Computational/Pooled 메모리 SoC·직렬 인터페이스(파네시아 3건) · Chiplet(디노티시아) · 광 인터페이스(KETI)</p>
+        </div>
+        <div class="card" style="margin-bottom:9px">
+          <h4>가속 · 클러스터 SW</h4>
+          <p>가속 라이브러리(리벨리온·스퀴즈비츠) · 이종 클러스터 프레임워크(모레)</p>
+        </div>
+        <div class="card amber">
+          <h4>클라우드 플랫폼</h4>
+          <p>AI반도체 클라우드 플랫폼(ETRI 총괄, 6세부: 자원관리·오케스트레이션·옵저버빌리티·비용최적화·LLM 서비스관리·개방형 인터페이스) · 클라우드 네이티브 SW스택·모델허브(오케스트로 주관, 112.5억원/45개월, 정부출연 100%)</p>
+        </div>
+        <p style="margin-top:9px;font-size:10.5px;color:var(--amber-ink);font-weight:600">→ 이번 회차 12개 중 위층(플랫폼·모델허브)은 2개 — 표본이지만 R&amp;D 포트폴리오의 쏠림을 보여준다.</p>
+      </div>
+      <div>
+        <p class="lbl">현실 — 그 2개마저</p>
+        <div class="card" style="margin-bottom:10px">
+          <h4 style="color:var(--red)">중복</h4>
+          <p>자원 풀링·오케스트레이션·옵저버빌리티·모델허브는 이노그리드·오케스트로·베스핀글로벌이 이미 B2B/B2G로 판매 중인 기능. NVIDIA·Google·AWS는 상용화 완료 — 과제 자료가 스스로 '시사점'으로 인정.</p>
+        </div>
+        <div class="card" style="margin-bottom:10px">
+          <h4 style="color:var(--red)">미채택</h4>
+          <p>국내 CSP가 결과물을 쓰지 않는다. ETRI 기술이전을 말하지만, 같은 추진단의 다른 과제는 이미 상용 솔루션(이노그리드 등)을 쓰고 있다.</p>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--red)">구조</h4>
+          <p>정부출연 100%, 민간부담 0. '오픈소스 공개' 명목이지만 글로벌 업스트림 연결 없이 또 하나의 갈라파고스가 될 위험. 성과 = 분기 워크샵 + GitHub 업로드.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: 2026년 제2차 K-클라우드추진단 기술전문위원회 자료집(목차·과제 개요, IITP) — 오케스트로 과제 총사업비 11,250,000천원·2026.4~2029.12·정부출연 100%는 자료 확인(Fact). 프로그램 전체는 30개 이상 과제·4,000억원 이상(자문 참석 기준 Hypothesis, 공식 집계 확인 필요). 고속 병렬 파일시스템 과제(KETI 주관, 총 130억·4년·TRL 4~6·공개SW·기술료 비징수)도 자료 확인(Fact). 중복·미채택은 발표자 자문 관찰(Interpretation).</div>
+  <div class="notes">[25:30~26:30] 위층 투자가 아예 없느냐 하면, 있습니다. K-클라우드 R&D입니다. 이번 회차 목차 12개 중 플랫폼·모델허브는 2개, 나머지는 반도체·HW·클러스터 SW — R&D 포트폴리오도 아래쪽에 쏠려 있습니다. 그리고 그 2개마저 세 가지 문제가 있습니다. 첫째 중복 — 자원 풀링, 오케스트레이션, 옵저버빌리티, 모델허브는 이노그리드·오케스트로·베스핀이 이미 팔고 있고, 과제 자료 자체가 NVIDIA·구글·AWS는 상용화 단계라고 씁니다. 둘째 미채택 — CSP가 안 씁니다. 셋째 구조 — 100% 출연금에 민간부담 0, 오픈소스 명목이지만 업스트림이 없으면 갈라파고스입니다. 전체는 30개가 넘는 과제에 4,000억원 이상이 들어갑니다. 공식 집계는 확인 전이라 슬라이드에도 추정으로 적었습니다.</div>
+</section>
+
+<!-- ========== 16 ========== -->
+<section class="slide" data-title="만드는 부처와 쓰는 부처가 다르다">
+  <header class="shead">
+    <h2>만드는 부처와 쓰는 부처가 다르다 — R&amp;D와 현장의 단절</h2>
+    <p class="sub">과기정통부 R&amp;D ↔ 행정안전부 실행, 그리고 자문에서 낸 네 가지 개선 제안</p>
+  </header>
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:330px 1fr;gap:24px;align-items:center">
+      <div>
+        <div class="card" style="margin-bottom:0">
+          <h4>과학기술정보통신부 — 만든다</h4>
+          <p>K-클라우드 R&amp;D · AI반도체 클라우드 플랫폼 · 오픈소스 공개 · 기술이전</p>
+          <p style="margin-top:6px;color:var(--faint)">성과 지표: 논문·특허·GitHub·워크샵·기술이전 건수</p>
+        </div>
+        <div style="text-align:center;padding:10px 0;font-size:11.5px;color:var(--red);font-weight:700;font-family:var(--mono)">
+          ✕ &nbsp;단절 — R&amp;D 결과물이 공공 현장 시스템에 배포되는 경로가 없다
+        </div>
+        <div class="card" style="margin-bottom:0">
+          <h4>행정안전부 — 쓴다</h4>
+          <p>국정자원·공공 클라우드 전환·DR 운영. '클라우드'라 부르지만 이중화조차 없던 현장(DR 예산 30억, 화재로 709개 시스템 중단). 실험실 결과물이 닿아야 할 곳에 받아들일 기반 자체가 없다.</p>
+        </div>
+      </div>
+      <div>
+        <div class="s5row"><div class="num">1</div><div><h4>갈라파고스가 아닌 업스트림</h4><p>같은 기능의 글로벌 오픈소스(Kubernetes·Ray·vLLM 등)에 기여하는 구조로. 국산 별도 스택은 CSP도 안 쓰고 세계도 안 쓴다. ETRI×모빌린트는 이미 했다 — Ray 업스트림 <span class="mono" style="font-family:var(--mono);color:var(--amber-ink)">[Core] Mobilint Accelerator Support #6898 Merged</span>. 예외가 아니라 표준으로.</p></div></div>
+        <div class="s5row"><div class="num">2</div><div><h4>차세대 프로젝트급 PMO</h4><p>30개 이상 과제·4,000억원 이상이면 통신사·금융 차세대 규모다. 강력한 PMO로도 성공할까 말까인데, 분기 워크샵과 GitHub 업로드를 성과라 부를 수 없다.</p></div></div>
+        <div class="s5row"><div class="num">3</div><div><h4>규모 검증을 설계에 포함</h4><p>단일·소규모 환경 검증은 쉽다. 대규모로 가면 문제의 '급'이 달라진다. 스케일 검증 계획과 실제 현장 배포가 성과 지표여야 한다.</p></div></div>
+        <div class="s5row" style="margin-bottom:0"><div class="num">4</div><div><h4>피봇이 가능한 거버넌스</h4><p>우리는 무빙 타깃을 맞춰야 한다. 기술 발전에 따라 목표를 수정·중단할 수 있는 단계별 게이트가 필요하다. 오케스트로 과제의 NVIDIA 레퍼런스는 DGX-1(2016년 세대)이다.</p></div></div>
+        <p style="margin-top:9px;font-size:11px;color:var(--amber-ink);font-weight:600">공통 원칙: 성과는 GitHub 스타가 아니라 공공·CSP 현장 배포 건수로 (14장 '토끼와 호랑이'와 같은 기준)</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">출처: 발표자 K-클라우드추진단 기술전문위원회 자문 코멘트(2026.9) / 국정자원 화재 관련 12장 출처 동일. 부처 간 단절 구조는 발표자 해석(Interpretation).</div>
+  <div class="notes">[26:30~27:15] 이 R&D는 과기정통부 것입니다. 쓰는 쪽은 행정안전부입니다. 만드는 부처의 성과 지표는 논문·특허·GitHub·기술이전 건수이고, 쓰는 부처의 현장은 이중화조차 없던 국정자원입니다. R&D 결과물이 현장에 배포되는 경로가 없습니다. 오늘 자문에서 낸 네 가지 제안입니다. 갈라파고스가 아니라 업스트림으로, 차세대 프로젝트급 PMO로, 규모 검증을 설계에 넣고, 무빙 타깃이니 피봇이 가능한 거버넌스로. 업스트림은 제가 새로 요구하는 게 아닙니다. ETRI가 모빌린트와 함께 Ray 본류에 이미 머지시켰습니다. 머지된 PR 하나가 백 개의 자체 리포지토리보다 무겁습니다.</div>
+</section>
+
+<!-- ========== 17 ========== -->
+<section class="slide" data-title="세 번의 인계 — 완료 조건과 책임자가 보이는가">
+  <header class="shead">
+    <h2>세 번의 인계 — 인계 지점마다 완료 조건과 책임자가 보이는가</h2>
+    <p class="sub">12~16장의 공통 구조 — 자원→서비스, 모델→제품, 시스템→업무</p>
+  </header>
+  <div class="sbody">
+    <table class="t">
+      <thead><tr><th style="width:110px">인계</th><th style="width:150px">흔히 '완료'로 보는 것</th><th>실제 완료 조건</th><th>책임이 필요한 항목</th><th style="width:150px">본편 연결</th></tr></thead>
+      <tbody>
+        <tr><th>자원 → 서비스</th><td>GPU 납품·검수 완료</td><td class="hi">사용자가 실제로 접속·실행·지원받는 상태</td><td>계정·권한 · 실행 환경·데이터 · 배포·장애 지원 · 사용량 측정</td><td>2장 국가AI컴퓨팅센터<br>15장 K-클라우드 R&amp;D</td></tr>
+        <tr><th>모델 → 제품</th><td>시연 성공·가중치 공개</td><td class="hi">고객이 자기 데이터·권한 안에서 업무를 끝내고 다시 쓰는 상태</td><td>데이터·권한 · 업무·평가 · 운영·지원·과금 · 버전 관리</td><td>14장 모두의 AI<br>커스텀 에이전트</td></tr>
+        <tr><th>시스템 → 업무</th><td>서버 이중화·전원 복구</td><td class="hi">로그인·조회·저장·외부연계까지 업무가 돌아온 상태</td><td>종단 간 동작 · 복구 시험 기록 · RTO/RPO 측정치 · 공통 의존성 점검</td><td>12장 국정자원<br>16장 부처 단절</td></tr>
+      </tbody>
+    </table>
+    <p class="lbl" style="margin-top:16px;margin-bottom:0">"몇 대 확보했나"와 함께 확인할 여섯 가지 증거</p>
+    <div class="chips">
+      <div class="chip"><div class="ch">개방</div><div class="cp">누가 언제 실제로 접속하는가</div></div>
+      <div class="chip"><div class="ch">사용</div><div class="cp">할당량과 실사용량이 구분되는가</div></div>
+      <div class="chip"><div class="ch">반복</div><div class="cp">시범 이후 다시 쓰는가</div></div>
+      <div class="chip"><div class="ch">단위 결과</div><div class="cp">품질 기준 통과 업무 한 건의 원가는</div></div>
+      <div class="chip"><div class="ch">책임</div><div class="cp">운영·변경·지원 책임이 문서에 있는가</div></div>
+      <div class="chip"><div class="ch">복구</div><div class="cp">업무 복구 시험 기록이 있는가</div></div>
+    </div>
+  </div>
+  <div class="src">한 회사·한 부처가 모두 소유할 필요는 없다 — 사업자·파트너·고객이 나눌 수 있다. 다만 인계 지점마다 완료 조건과 책임이 문서로 있어야 연결을 확인할 수 있다. 여섯 증거는 국가·사업자 점수표가 아니라 목적별 확인 질문이다. (NIST SP 800-145 · FinOps Unit Economics · AWS Well-Architected REL13 참조)</div>
+  <div class="notes">[27:15~28:15] 12장부터 16장까지 다섯 장은 사실 한 구조입니다. 인계가 세 번 일어나는데, 매번 '완료'의 정의가 어긋납니다. GPU 검수가 끝났다고 서비스가 아닙니다 — 계정, 권한, 실행 환경, 지원이 있어야 합니다. 모델을 공개했다고 제품이 아닙니다 — 고객 데이터와 업무에 붙어 다시 쓰여야 합니다. 서버가 켜졌다고 업무가 복구된 게 아닙니다 — 로그인·조회·저장·외부연계까지 돌아와야 합니다. 한 회사가 다 소유하라는 게 아닙니다. 인계 지점마다 완료 조건과 책임자가 보이느냐입니다.</div>
+</section>
+
+<!-- ========== 18 ========== -->
+<section class="slide" data-title="그래도 '인프라가 먼저'라는 주장 — 근거와 한계">
+  <header class="shead">
+    <h2>그래도 '인프라가 먼저'라는 주장 — 근거와 한계</h2>
+    <p class="sub">반론을 정직하게 다루기</p>
+  </header>
+  <div class="sbody">
+    <div class="deb">
+      <div class="d">
+        <h4>전력·부지는 리드타임이 길다</h4>
+        <p><span class="k">근거</span>AIDC 전력·냉각·부지 확보는 5~10년 걸린다. 하이퍼스케일러도 프로젝트의 상당수가 전력 병목. 지금 안 짓으면 나중에 못 짓는다.</p>
+        <p><span class="k lim">한계</span>타당. 단, '지어놓은 것을 채울 수요'가 없으면 GPU는 놀고 감가상각만 남는다. 가동률 50% 미만이면 손익분기 아래.</p>
+      </div>
+      <div class="d">
+        <h4>안보·주권상 GPU는 필수</h4>
+        <p><span class="k">근거</span>미·중 수출통제 시대. 컴퓨트 없이는 자국 모델도 못 만든다. 국가 안보의 물리적 기반.</p>
+        <p><span class="k lim">한계</span>타당. 단, 주권은 GPU 물량이 아니라 모델·데이터·운영통제에서 실현된다. 컴퓨트만 있고 모델이 없으면 남의 모델을 돌리는 주권이다.</p>
+      </div>
+      <div class="d">
+        <h4>한국 CSP는 하이퍼스케일러 전략이 불가능하다</h4>
+        <p><span class="k">근거</span>자본 격차 — Big4 2026 CAPEX 7,250억 달러 vs 국내 수조원. 같은 게임을 할 수 없다.</p>
+        <p><span class="k lim">한계</span>맞다. 그래서 정면 CAPEX 경쟁이 아닌 공공·소버린·금융·산업·보안 차별화가 유일한 길이다. 이것도 '위층' 전략이다.</p>
+      </div>
+      <div class="d">
+        <h4>SaaS는 정부가 육성한다고 되는 산업이 아니다</h4>
+        <p><span class="k">근거</span>제품력·시장·문화의 문제. 정부 예산으로 구독문화를 만들 수 없다.</p>
+        <p><span class="k lim">한계</span>맞다. 단, 정부는 '직접 육성'이 아닌 조달 개혁(SaaS First)·구독문화·공공 수요창출로 토양을 바꿀 수 있다. 미국 SaaS도 연방 클라우드 조달(FedRAMP)이 밀었다.</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">네 주장 모두 부분적으로 타당함. 알리바바도 3,800억 위안 인프라를 짓고, 구글 클라우드도 공통 제어 계층 장애를 겪는다 — '한국만 하드웨어'라는 이분법도, 해외 모방도 답이 아니다. 선투자 자체보다 인프라 예산과 위층의 책임을 분리하는 것이 더 큰 위험이다.</div>
+  <div class="notes">[28:15~28:45] 반론을 정직하게 다룹니다. 네 가지 모두 부분적으로 맞습니다. 전력은 리드타임이 길고, 안보상 컴퓨트는 필요하고, 우리는 하이퍼스케일러가 될 수 없고, SaaS는 정부가 만들 수 없습니다. 그래서 결론은 '인프라를 멈추자'가 아닙니다. '인프라를 사되, 그 위로 올라가는 순서를 지금 병행하자'입니다.</div>
+</section>
+
+<!-- ========== 19 ========== -->
+<section class="slide" data-title="수순 바로잡기 — 인프라를 사되, 플랫폼으로">
+  <header class="shead">
+    <h2>수순 바로잡기 — 인프라를 사되, 플랫폼으로 전환하라</h2>
+    <p class="sub">검토해야 할 6가지 선택지와 전환 임계치</p>
+  </header>
+  <div class="sbody">
+    <div class="opts">
+      <div class="opt">
+        <div class="oh"><div class="num">1</div><div class="ot">인프라 예산에 '위층 배정'을 묶는다</div></div>
+        <p>GPU·AIDC 예산의 일정 비율을 PaaS·AI Platform·MLOps·에이전트 플랫폼에 연동. 플랫폼 R&amp;D는 업스트림 기여·현장 배포·PMO를 조건으로 — 지표는 GitHub 공개가 아니라 업스트림 머지 PR 수·커미터 수·실제 배포 건수(기준선 ETRI #6898 = 1건)</p>
+      </div>
+      <div class="opt">
+        <div class="oh"><div class="num">2</div><div class="ot">공공 조달을 SaaS First로</div></div>
+        <p>구축형→구독형 우선 원칙 명문화. CSAP·디지털서비스 전문계약 확대로 공공 SaaS 수요 창출</p>
+      </div>
+      <div class="opt">
+        <div class="oh"><div class="num">3</div><div class="ot">공공 DR을 Cloud Native Resilience로</div></div>
+        <p>멀티리전·액티브-액티브·RTO/RPO 법제화. 1등급 시스템부터(2,120억→전면화 7천억~1조)</p>
+      </div>
+      <div class="opt">
+        <div class="oh"><div class="num">4</div><div class="ot">국내 CSP는 정면 CAPEX 경쟁을 접는다</div></div>
+        <p>공공·소버린·금융·산업·보안·하이브리드에 집중. 하이퍼스케일러와 '다른 링'에서 싸운다</p>
+      </div>
+      <div class="opt">
+        <div class="oh"><div class="num">5</div><div class="ot">커스텀 에이전트 양산 대신 '지능이 일할 환경'을 만든다</div></div>
+        <p>에이전트 1,000개는 SI의 재탕. 범용 AI가 조직·국가 맥락을 읽을 데이터·프로세스·형식지 자산에 투자. '모두의 AI' 성과는 가입자·질의 수가 아닌 실제 처리된 민원·업무 건수로 측정</p>
+      </div>
+      <div class="opt">
+        <div class="oh"><div class="num">6</div><div class="ot">소버린 AI를 Model·Data Sovereignty로 재정의</div></div>
+        <p>GPU 장수 아닌 자국 모델(HyperCLOVA X 등)·데이터·운영통제 세트로 설계</p>
+      </div>
+    </div>
+    <div class="banner" style="margin-top:16px">
+      <span class="bl">전환 임계치</span>
+      GPU 가동률이 지속 <b>50% 미만</b>이면 신규 인프라 CAPEX를 멈추고 위층으로 재배분 · 토큰 가격 하락이 <b>10배/년</b>을 유지하면 '임대 수익모델'을 접고 모델API·에이전트·SaaS 과금으로 전환 · '모두의 AI'가 가입자·질의 수만 공개하고 <b>실제 처리 건수</b>를 내지 못하면 성과지표부터 재설계
+    </div>
+  </div>
+  <div class="src">1~4는 정책·산업 구조 제안, 5~6은 발표자 견해 비중이 높은 항목(Interpretation). 임계치 수치는 8~9장 근거에 기반한 제안값으로, 합의된 기준이 아니다.</div>
+  <div class="notes">[28:45~29:30] 여섯 가지 선택지입니다. 핵심은 1번 — 인프라 예산에 위층 배정을 묶는 것 — 과 2번 공공 조달 SaaS First입니다. 5번은 제 개인 의견이 강하게 들어간 항목입니다. 커스텀 에이전트를 1,000개 만들면 그것을 누가 유지보수합니까? 업무는 계속 바뀌고 범용 모델은 두 달마다 나옵니다. 그래서 '만들 것'이 아니라 '범용 지능이 우리 맥락을 읽고 일할 수 있는 환경(데이터·프로세스·형식지)'에 투자하자는 것입니다. 아래 '전환 임계치'는 언제 방향을 바꿔야 하는지를 숫자로 미리 정해두자는 제안입니다.</div>
+</section>
+
+<!-- ========== 20 ========== -->
+<section class="slide dark s20" data-title="대한민국 클라우드가 선택해야 할 방향">
+  <header class="shead">
+    <h2 style="color:#F3F5F8">대한민국 클라우드가 선택해야 할 방향</h2>
+    <p class="sub" style="color:#98A2B3">결론 — 방향은 절반만 맞다</p>
+  </header>
+  <div class="sbody">
+    <div class="cols">
+      <div class="c">
+        <div class="n">1</div>
+        <h3>입장권은 샀다</h3>
+        <p>GPU·AIDC·HBM — 전력·안보·주권 관점에서 인프라 확보 자체는 합리적 근거가 있다.</p>
+      </div>
+      <div class="c">
+        <div class="n">2</div>
+        <h3>경기는 위층에서 벌어진다</h3>
+        <p>마진·Lock-in·차별화는 Cloud Platform·AI Platform·SaaS에서 생긴다. 미국·중국은 그 층을 먼저 채웠다.</p>
+      </div>
+      <div class="c">
+        <div class="n">3</div>
+        <h3>순서를 지금 병행하라</h3>
+        <p>인프라를 멈추는 게 아니라 조달·DR·소버린·CSP 전략을 위층 기준으로 다시 짠다. 에이전트를 만드는 것보다 지능이 일할 환경과 '무엇을 바꿨는가'의 지표가 먼저다.</p>
+      </div>
+    </div>
+    <div class="close">
+      GPU가 많아지면 강해지는가? — <em>아니다.</em><br>
+      모델을 가졌다고 AI 강국이 되는가? — <em>그것도 아니다.</em><br>
+      그 지능으로 <em>무엇을 바꿨는가</em>가 결정한다.
+    </div>
+  </div>
+  <div class="notes">[29:30~30:00] 마무리. 세 문장으로 정리합니다. 입장권은 샀다. 경기는 위층에서 벌어진다. 순서를 지금 병행하라. 오프닝의 질문으로 돌아가면 — GPU가 많아지면 강해지는가? 아니다. 모델을 가졌다고 AI 강국이 되는가? 그것도 아니다. 그 지능으로 무엇을 바꿨는가가 결정합니다. 감사합니다.</div>
+</section>
+
+<!-- ========== 21 ========== -->
+<section class="slide appendix" data-title="부록 — 예상 질문과 자료의 범위">
+  <header class="shead">
+    <h2>부록 — 예상 질문과 이 자료가 말할 수 있는 것의 범위</h2>
+    <p class="sub">Q&amp;A 참고</p>
+  </header>
+  <div class="sbody">
+    <div class="qa">
+      <div class="q"><h4>Q. GPU부터 확보하면 안 되나?</h4><p>된다. 전력·부지·안보상 선투자는 가능하다. 다만 서비스·운영 설계를 '자동 완성'으로 보지 않는다.</p></div>
+      <div class="q"><h4>Q. 한국에 플랫폼이 없다는 뜻인가?</h4><p>아니다. kt cloud PLATFORM·CLOVA Studio 등 제품은 있다. 제품의 존재와 실제 반복 사용·운영 책임을 구별한다.</p></div>
+      <div class="q"><h4>Q. 미국·중국처럼 전부 만들어야 하나?</h4><p>아니다. 파트너·오픈소스·외부 API도 경로다. 소유 범위보다 인계 지점의 연결 책임을 확인한다.</p></div>
+      <div class="q"><h4>Q. 한국의 순서가 틀렸다고 입증했나?</h4><p>국가 전체의 편중과 인과효과는 정량 입증하지 않았다. 예산·사례·자문 관찰로 방향을 제시하고, 사업·시스템 단위의 점검 질문을 구체화했다.</p></div>
+    </div>
+    <div class="banner" style="margin-top:14px;font-size:11.5px;line-height:1.7">
+      <span class="bl">숫자의 범위</span>
+      GPU 26만장 = 확대 계획(설치·개방·가동량과 다름) · Copilot 3,000만 = 유료 좌석(활성 사용자·생산성과 다름) · 알리바바 AI 관련 35% = 컴퓨팅·MaaS·앱 포함(순수 SaaS 아님) · DR 13개 = 설계·구축 추진(복구 시험 통과와 다름) · K-클라우드 4,000억 이상·30개 이상 과제 = 자문 참석 기준 추정(공식 집계 미확인) · CSP 강/중/약 = 발표자 정성 평가
+      <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--amber-line)">판단 원칙: 확인된 사실(Fact)·발표자 해석(Interpretation)·추가 검증 과제(Hypothesis)를 구분하고, 기업 사례를 국가 전체의 우열로 확대하지 않는다.</div>
+    </div>
+  </div>
+  <div class="notes">질의응답용. 네 질문은 발표 후 가장 자주 나올 반문이다. '숫자의 범위'는 본편에서 쓴 숫자가 무엇을 말하고 무엇을 말하지 않는지의 경계다.</div>
+</section>
+
+<!-- ========== 22 ========== -->
+<section class="slide appendix" data-title="Appendix — 주요 출처">
+  <header class="shead">
+    <h2>Appendix — 주요 출처</h2>
+    <p class="sub">원칙: 기업 IR·정부 공식자료 &gt; 리서치기관 &gt; 주요 언론</p>
+  </header>
+  <div class="sbody">
+    <ul class="srclist">
+      <li>Synergy Research Group, Cloud Infrastructure Market Q2·Q3 2025 (Big3 점유율 63%, 시장 $98.8B/분기)</li>
+      <li>AWS re:Invent 2025 발표자료; Amazon·Microsoft·Alphabet 2025 실적 발표; FT Big4 2026 CAPEX 집계(약 $725B)</li>
+      <li>Alibaba Group 공식 발표 2025.2.24 (RMB 380B/3년); Bloomberg·SCMP 동일자 보도</li>
+      <li>과학기술정보통신부·aikorea.go.kr, 2026년 AI 예산사업 통합 설명자료(9.9조원, 과기정통부 5.1조원)</li>
+      <li>과학기술정보통신부, 부가통신사업 실태조사 (AWS 60.2% 등, 중복응답)</li>
+      <li>ZDNet Korea·Bloter·비즈니스포스트 2025.6 (SK–AWS 울산 AIDC 7조원, GPU 6만장, 103MW)</li>
+      <li>CoreWeave Form 10-K FY2025; Sacra 재무 분석 (매출 $5.13B, 순손실 $1.17B, 부채 ~$29B)</li>
+      <li>a16z, Welcome to LLMflation (2024.11.12); Epoch AI; Stanford AI Index 2025 (토큰 가격 하락)</li>
+      <li>Gartner, Market Share: Enterprise Application SaaS, Worldwide, 2024 ($218.5B); Salesforce FY25 10-K; 더존비즈온 2024 사업보고서</li>
+      <li>KT 그룹 투자 발표(18조원/5년); NAVER Cloud·NHN Cloud 실적 공시 및 보도; NHN Cloud 2.0 전략(inside.nhn.com)</li>
+      <li>대한민국 정책브리핑(국정자원 화재 중대본 브리핑); 바이라인네트워크·보안뉴스·네이트뉴스 2025.9~12</li>
+      <li>AWS European Sovereign Cloud 발표(Business Wire 2026.1.15); The Register 2025.6; OECD.AI(일본·싱가포르 전략); NRI 2025.6</li>
+      <li>2026년 제2차 K-클라우드추진단 기술전문위원회 자료집(IITP·K-OpenCloud); 발표자 자문 코멘트(2026.9)</li>
+      <li>NVIDIA IR 2025.10.31(한국 26만 GPU 확대 계획); 과기정통부 2025.9.8 국가AI컴퓨팅센터 추진계획·정책브리핑 2026.5.11(삼성SDS 컨소시엄 확정); 행정안전부 2026.6.18(국정자원 DR ISP 착수)</li>
+      <li>Alibaba Cloud 2021.11.18(11.11 클라우드 이전)·Alizila 2026.8.21(AI 관련 매출 35%); Microsoft IR FY2026 Q4(Copilot 유료좌석); Huawei Ascend 공식 스택; Google Cloud Service Health 2025.6.13; NIST SP 800-145; FinOps Unit Economics; AWS Well-Architected REL13-BP03</li>
+      <li>과기정통부 '모두의 AI' 사업자 선정 발표·공모 조건(2026.8.28~9); Stanford AI Index 2026(2026.4); 사스포칼립스 관련 Jefferies·Long Angle Q1 2026 등 시장 보도</li>
+    </ul>
+  </div>
+  <div class="src">시장 정의가 다른 수치는 절대 비교하지 않음. Fact / Interpretation / Hypothesis를 각 슬라이드 출처란에 구분 표기.</div>
+  <div class="notes">질의응답용 출처 목록. 발표 중에는 넘어가고, 질문이 나오면 참조.</div>
+</section>
+
+</div></div>
+
+<div id="progress"></div>
+<div id="counter">1 / 20</div>
+<div id="hint"><b>← →</b> 이동 · <b>O</b> 전체보기 · <b>N</b> 대본 · <b>F</b> 전체화면</div>
+<div id="notes"><div class="nh">Speaker Notes</div><div id="notesBody"></div></div>
+<div id="ov"><div class="oh">전체 슬라이드 — 클릭해서 이동 (Esc 닫기)</div><div class="og" id="ovGrid"></div></div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var stage=document.getElementById('stage');
+  var progress=document.getElementById('progress');
+  var counter=document.getElementById('counter');
+  var notes=document.getElementById('notes');
+  var notesBody=document.getElementById('notesBody');
+  var ov=document.getElementById('ov');
+  var ovGrid=document.getElementById('ovGrid');
+  var main=slides.filter(function(s){return !s.classList.contains('appendix')}).length;
+  var cur=0;
+
+  /* running footer on every slide */
+  slides.forEach(function(s,i){
+    if(s.classList.contains('s1'))return;
+    var f=document.createElement('div');
+    f.className='runfoot';
+    f.innerHTML='<span>대한민국 클라우드, 수순이 맞는가?  ·  NeoAX</span><span>'+(i+1)+'</span>';
+    s.appendChild(f);
+  });
+
+  function fit(){
+    var s=Math.min(innerWidth/1280,innerHeight/720);
+    stage.style.transform='scale('+s+')';
+  }
+  fit();addEventListener('resize',fit);
+
+  function show(i){
+    cur=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(s,k){s.classList.toggle('active',k===cur)});
+    var isApp=slides[cur].classList.contains('appendix');
+    progress.style.width=(isApp?100:((cur+1)/main*100))+'%';
+    counter.textContent=isApp?('부록 '+(cur+1-main)+' / '+(slides.length-main)):((cur+1)+' / '+main);
+    var n=slides[cur].querySelector('.notes');
+    notesBody.textContent=n?n.textContent:'(노트 없음)';
+    [].slice.call(ovGrid.children).forEach(function(c,k){c.classList.toggle('cur',k===cur)});
+    if(location.hash!=='#'+(cur+1))history.replaceState(null,'','#'+(cur+1));
+  }
+  function next(){if(cur<slides.length-1)show(cur+1)}
+  function prev(){if(cur>0)show(cur-1)}
+
+  /* overview grid */
+  slides.forEach(function(s,i){
+    var d=document.createElement('div');
+    d.className='oi';
+    d.innerHTML='<div class="on">'+(i+1)+'</div><div class="ot">'+(s.dataset.title||'')+'</div>';
+    d.addEventListener('click',function(){ov.classList.remove('on');show(i)});
+    ovGrid.appendChild(d);
+  });
+
+  addEventListener('keydown',function(e){
+    if(e.key==='Escape'){ov.classList.remove('on');notes.classList.remove('on');return}
+    if(ov.classList.contains('on')&&e.key!=='o'&&e.key!=='O')return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next()}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
+    else if(e.key==='Home'){show(0)}
+    else if(e.key==='End'){show(slides.length-1)}
+    else if(e.key==='n'||e.key==='N'){notes.classList.toggle('on')}
+    else if(e.key==='o'||e.key==='O'){ov.classList.toggle('on')}
+    else if(e.key==='f'||e.key==='F'){
+      if(document.fullscreenElement)document.exitFullscreen();
+      else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+    }
+  });
+  addEventListener('click',function(e){
+    if(e.target.closest('#hint')||e.target.closest('#notes')||e.target.closest('#ov'))return;
+    next();
+  });
+
+  /* touch swipe */
+  var tx=0,ty=0;
+  addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+  addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){dx<0?next():prev()}
+  },{passive:true});
+
+  addEventListener('hashchange',function(){
+    var n=parseInt((location.hash||'').slice(1),10);
+    if(n>0&&n-1!==cur)show(n-1);
+  });
+
+  /* auto-hiding hint */
+  var hint=document.getElementById('hint'),hintT=null;
+  function pokeHint(){
+    hint.classList.remove('off');
+    clearTimeout(hintT);
+    hintT=setTimeout(function(){hint.classList.add('off')},3500);
+  }
+  pokeHint();
+  addEventListener('mousemove',pokeHint);
+  addEventListener('keydown',pokeHint);
+
+  var h=parseInt((location.hash||'').slice(1),10);
+  show(h>0?h-1:0);
+})();
+</script>
+
+</body>
+</html>
