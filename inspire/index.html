@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>당신이 본 최지웅</title>
-  <meta name="description" content="최지웅을 잘 아는 분들께 드리는 네 가지 질문 — 강점, 동기 스위치, 레드버튼, 그림자. 5분이면 됩니다.">
+  <title>당신이 본 나</title>
+  <meta name="description" content="저를 잘 아는 분들께 드리는 네 가지 질문 — 강점, 동기 스위치, 레드버튼, 그림자. 5분이면 됩니다.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="당신이 본 최지웅은 어떤 사람인가요?">
+  <meta property="og:title" content="당신이 본 저는 어떤 사람인가요?">
   <meta property="og:description" content="강점 · 동기 스위치 · 레드버튼 · 그림자. 네 가지만 솔직하게 들려주세요. 5분이면 됩니다.">
   <meta property="og:locale" content="ko_KR">
   <meta name="twitter:card" content="summary">
@@ -685,7 +685,7 @@
     <div class="stage">
 
       <header class="masthead">
-        <div class="wordmark"><b>최지웅</b> 발견하기</div>
+        <div class="wordmark"><b>나</b> 발견하기</div>
         <div class="counter" id="counter">강점 · 동기 · 레드버튼 · 그림자</div>
       </header>
 
@@ -702,8 +702,8 @@
           <span class="num">360°</span><span class="dash"></span>
           <span class="word">셀프 디스커버리</span>
         </div>
-        <h1 class="q" id="h-intro">당신이 본 최지웅은<br>어떤 사람인가요?</h1>
-        <p class="lede" id="introLede">저 최지웅입니다. 요즘 듣고 있는 과정에서 <b>저를 잘 아는 서너 분께 저에 대해 직접 여쭤보라</b>는 과제를 받았습니다. 거울로는 끝내 안 보이는 얼굴이
+        <h1 class="q" id="h-intro">당신이 본 저는<br>어떤 사람인가요?</h1>
+        <p class="lede" id="introLede">안녕하세요. 요즘 듣고 있는 과정에서 <b>저를 잘 아는 서너 분께 저에 대해 직접 여쭤보라</b>는 과제를 받았습니다. 거울로는 끝내 안 보이는 얼굴이
           있어서요.</p>
         <p class="lede">여쭐 것은 네 가지입니다. 제 <b>강점</b>, 제 <b>에너지가 켜지고 꺼지는 순간</b>, 제가 <b>발끈하는 지점</b>, 그리고 제가 잘 못 보는
           <b>그림자</b>.</p>
@@ -875,7 +875,7 @@
        OWNER    : 페이지에 표시할 이름. 비워두면 이름 없이 1인칭으로 나옵니다.
        ═══════════════════════════════════════════════════════════ */
     var ENDPOINT = "https://script.google.com/macros/s/AKfycbxXGXa_xjqBXw8RWTZhVJhKNTx8NDQf_fvXYmEx5nrKoO_RqgdeWTZ4jJZIS4fIsVbGqQ/exec";
-    var OWNER = "최지웅";
+    var OWNER = "";
 
     (function () {
       "use strict";
@@ -913,7 +913,7 @@
         document.getElementById("introLede").innerHTML =
           "저 " + N + "입니다. 요즘 듣고 있는 과정에서 <b>저를 잘 아는 서너 분께 저에 대해 직접 여쭤보라</b>는 과제를 받았습니다. 거울로는 끝내 안 보이는 얼굴이 있어서요.";
       }
-      /* 받침에 따라 조사를 고른다 — 최지웅"은", 김하나"는" */
+      /* 받침에 따라 조사를 고른다 — 홍길동"은", 김하나"는" */
       function josa(word, withJong, withoutJong) {
         var c = word.charCodeAt(word.length - 1);
         var hasJong = c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 !== 0;
