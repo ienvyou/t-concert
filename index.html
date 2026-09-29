@@ -60,10 +60,10 @@
     background:linear-gradient(135deg,var(--ocean),var(--midnight));border:1px solid var(--cyan-line);
     color:var(--cyan);font-weight:800;font-size:16px;
   }
-  nav ul{list-style:none;display:flex;gap:28px;font-size:14px;color:var(--muted);font-weight:500}
+  nav ul{list-style:none;display:flex;gap:24px;font-size:14px;color:var(--muted);font-weight:500}
   nav ul a{transition:color .2s}
   nav ul a:hover{color:var(--white)}
-  @media (max-width:760px){nav ul{display:none}}
+  @media (max-width:900px){nav ul{display:none}}
 
   /* hero */
   .hero{padding:110px 0 100px}
@@ -111,6 +111,62 @@
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
     transition:border-color .25s ease,transform .25s ease,box-shadow .25s ease;
   }
+
+  /* me */
+  .me-top{display:grid;grid-template-columns:1.15fr 1fr;gap:14px}
+  .origin{padding:30px 30px 26px}
+  .origin .k,.day .k,.hands .k,.want .k{font-family:var(--mono);font-size:11.5px;color:var(--cyan);font-weight:700;letter-spacing:.06em}
+  .origin p{margin-top:12px;font-size:15px}
+  .origin p:first-of-type{margin-top:14px}
+  .origin b{color:var(--white);font-weight:600}
+  .roots{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+  .roots span{font-size:14px;font-weight:700;color:var(--white);padding:6px 14px;border-radius:99px;border:1px solid var(--line-2);background:rgba(255,255,255,.04)}
+  .day{padding:30px 30px 26px;display:flex;flex-direction:column}
+  .day .yr{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .day p{margin-top:10px;font-size:14.5px}
+  .day blockquote{margin-top:16px;padding:16px 18px;border-radius:12px;background:rgba(255,255,255,.035);border-left:2px solid var(--cyan);color:var(--white);font-weight:600;font-size:16px;line-height:1.55}
+  .day .after{margin-top:auto;padding-top:16px;font-size:14px;color:var(--muted)}
+  .day .after b{color:var(--white);font-weight:600}
+  .chain{display:grid;grid-template-columns:1fr auto 1.2fr auto 1.5fr;gap:10px;margin-top:14px;align-items:stretch}
+  .chain .step{padding:20px 20px 18px}
+  .chain .k{font-family:var(--mono);font-size:11.5px;color:var(--cyan);font-weight:700;letter-spacing:.06em}
+  .chain .w{margin-top:10px;font-size:clamp(20px,2.3vw,24px);font-weight:800;color:var(--white);letter-spacing:-.03em}
+  .chain .w i{font-style:normal;color:var(--faint);font-weight:400;margin:0 6px}
+  .chain p{margin-top:8px;font-size:13.5px;line-height:1.65}
+  .chain .arrow{display:flex;align-items:center;color:var(--cyan);font-size:18px;opacity:.7}
+  .chain .split{display:grid;gap:10px}
+  .chain .split .step.hot{border-color:var(--cyan-line);background:linear-gradient(160deg,rgba(76,201,240,.12),rgba(28,37,65,.6))}
+  .chain .split .step.shade{border-style:dashed;border-color:var(--line-2)}
+  .chain .split .step.shade .k{color:var(--muted)}
+  .chain .split h3{margin-top:8px;font-size:15.5px;font-weight:700;color:var(--white);line-height:1.5;letter-spacing:-.01em}
+  .me-bot{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-top:14px}
+  .hands{padding:28px 30px 26px}
+  .hands>p{margin-top:12px;font-size:14.5px}
+  .hand{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+  .hand div{border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;background:rgba(255,255,255,.03)}
+  .hand div.free{border-color:var(--cyan-line);background:var(--cyan-soft)}
+  .hand b{display:block;font-size:15px;color:var(--white);font-weight:700}
+  .hand small{display:block;margin-top:2px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .hand ul{list-style:none;margin-top:10px;display:grid;gap:5px;font-size:13.5px;line-height:1.55}
+  .hand .free li::before{content:'✓ ';color:var(--cyan)}
+  .ratio{display:flex;height:8px;border-radius:99px;overflow:hidden;margin-top:18px;background:var(--line)}
+  .ratio i{display:block;background:linear-gradient(90deg,var(--deep),#6F87A8)}
+  .ratio i+i{background:var(--cyan)}
+  .ratio-l{display:flex;justify-content:space-between;margin-top:6px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .want{padding:28px 30px 26px;display:flex;flex-direction:column}
+  .want ul{list-style:none;margin-top:14px;display:grid;gap:12px}
+  .want li{font-size:14px;line-height:1.6;padding-left:14px;border-left:2px solid var(--line-2)}
+  .want li b{display:block;color:var(--white);font-weight:600;font-size:15px}
+  .want .letter{margin-top:auto;padding-top:22px}
+  .want .letter p{font-size:13px;color:var(--muted)}
+  .want .letter blockquote{margin-top:6px;font-size:clamp(18px,2vw,21px);font-weight:800;color:var(--white);letter-spacing:-.02em;line-height:1.45}
+  .want .letter blockquote span{color:var(--cyan)}
+  @media (max-width:900px){
+    .me-top,.me-bot{grid-template-columns:1fr}
+    .chain{grid-template-columns:1fr}
+    .chain .arrow{justify-content:center;transform:rotate(90deg);height:18px}
+  }
+  @media (max-width:520px){.hand{grid-template-columns:1fr}.origin,.day,.hands,.want{padding:24px 20px 22px}}
 
   /* path */
   .eras{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
@@ -291,6 +347,7 @@
 <nav id="nav"><div class="wrap">
   <a href="#top" class="brand"><i>β</i>아직 Beta</a>
   <ul>
+    <li><a href="#me">나라는 사람</a></li>
     <li><a href="#path">지나온 길</a></li>
     <li><a href="#talks">발표·강연</a></li>
     <li><a href="#now">요즘 생각</a></li>
@@ -314,9 +371,90 @@
 </div></header>
 
 <!-- 01 -->
+<section class="sec" id="me"><div class="wrap">
+  <div class="sh rv">
+    <div class="no">01 · 나라는 사람</div>
+    <h2>‘부족’과 ‘조급’이 만든 사람</h2>
+    <p>리더십 과정의 1:1 세션에서 어린 시절부터 다시 짚어 보았습니다. 지금의 강점도, 그 그림자도 같은 뿌리에서 자랐더군요.</p>
+  </div>
+
+  <div class="me-top">
+    <div class="origin card rv">
+      <div class="k">뿌리 · 10대</div>
+      <p>넉넉지 않은 집에서 일찍 철들어야 했던 10대였습니다. 웬만한 일은 스스로 알아서 해야 했고, 머릿속엔 <b>빨리 사회에 나가 돈을 벌어야 한다</b>는 생각밖에 없었어요.</p>
+      <p>대학도 최대한 빨리 마쳤고, 회사에선 더 독하게 버텼습니다. 강의를 하려면 수강생보다 한 수 위여야 해서 밤을 새웠고, 2002년 시작한 블로그는 3년 동안 새벽 1~2시까지 잠을 줄여 가며 썼습니다.</p>
+      <div class="roots"><span>무엇이든 부족했다</span><span>그래서 늘 조급했다</span></div>
+    </div>
+    <div class="day card rv" style="transition-delay:.08s">
+      <div class="k">인생을 바꾼 하루</div>
+      <div class="yr">서른 무렵 · 중요한 발표가 있던 날</div>
+      <p>고객 앞에서 발표하기로 한 날, 전날 술을 마시고 한참을 지각했습니다. 그날 들은 한마디가 지금까지 남아 있습니다.</p>
+      <blockquote>“여기 있는 사람들 시간이 얼마나 비싼 줄 알아?”</blockquote>
+      <p class="after">그 뒤로 평일 술자리를 끊었고, 모든 약속에 <b>최소 10분 먼저</b> 갑니다. “시간이 없어서 못 했다”는 말엔 지금도 되묻습니다. <b>시간은 없는 게 아니라 만드는 거 아닌가요?</b></p>
+    </div>
+  </div>
+
+  <div class="chain">
+    <div class="step card rv">
+      <div class="k">뿌리</div>
+      <div class="w">부족<i>·</i>조급</div>
+      <p>결국 둘 다 시간에 관한 것이었습니다. 모자라니 서둘러야 했으니까요.</p>
+    </div>
+    <div class="arrow rv" aria-hidden="true">→</div>
+    <div class="step card rv" style="transition-delay:.08s">
+      <div class="k">습관이 된 것</div>
+      <div class="w">빨리<i>·</i>최선<i>·</i>책임</div>
+      <p>무슨 일이든 빠르게, 최선을 다해, 결과까지 책임지는 방식으로 사회생활을 해 왔습니다.</p>
+    </div>
+    <div class="arrow rv" aria-hidden="true">→</div>
+    <div class="split">
+      <div class="step card hot rv" style="transition-delay:.16s">
+        <div class="k">강점</div>
+        <h3>변화 앞에서 빠르게 최선을 다해 결과를 만들어 낸다</h3>
+      </div>
+      <div class="step card shade rv" style="transition-delay:.22s">
+        <div class="k">그림자</div>
+        <h3>원하는 것이 빨리 이뤄지지 않으면, 어린 시절의 원점으로 돌아간다</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="me-bot">
+    <div class="hands card rv">
+      <div class="k">자동과 자유</div>
+      <p>오른손잡이는 무언가를 집을 때 오른손이 먼저 나갑니다. 그건 <b style="color:var(--white)">자동</b>, 뒤에서 미는 힘이자 강점입니다. 어설퍼도 일부러 왼손을 쓰는 것, 그게 <b style="color:var(--white)">자유</b>입니다. 둘 다 버릴 필요는 없고, 80 대 20이면 충분합니다.</p>
+      <div class="hand">
+        <div>
+          <b>오른손 · 자동</b><small>DRIVE</small>
+          <ul><li>빨리 한다</li><li>최선을 다한다</li><li>결과를 책임진다</li></ul>
+        </div>
+        <div class="free">
+          <b>왼손 · 자유</b><small>FREEDOM</small>
+          <ul><li>빨리 하지 않아도 괜찮아</li><li>최선을 다하지 않아도 괜찮아</li><li>성과를 못 내도 괜찮아</li></ul>
+        </div>
+      </div>
+      <div class="ratio" aria-hidden="true"><i style="width:80%"></i><i style="width:20%"></i></div>
+      <div class="ratio-l"><span>자동 80</span><span>자유 20</span></div>
+    </div>
+    <div class="want card rv" style="transition-delay:.08s">
+      <div class="k">돈도 명예도 다 채워졌다면</div>
+      <ul>
+        <li><b>새로운 것을 보고, 겪고, 도전하기</b>세계일주, 그리고 남들이 안 가 본 동네를 찾아다니는 여행.</li>
+        <li><b>누군가와 합을 맞추기</b>헤비메탈 테이프로 버티던 10대부터 30년 넘게 미뤄 온 기타. 결국 밴드, 결국 협업입니다.</li>
+        <li><b>주변 사람들이 잘 되는 것</b>제가 가진 경험을 가져다 쓰고, 그 덕에 조금 더 나은 삶을 사는 것. 남의 변화를 돕는 게 제 즐거움입니다.</li>
+      </ul>
+      <div class="letter">
+        <p>쉰셋의 내가 열여덟의 나를 만난다면</p>
+        <blockquote>“부족해도 되니까,<br><span>조급해하지 마.”</span></blockquote>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 02 -->
 <section class="sec" id="path"><div class="wrap">
   <div class="sh rv">
-    <div class="no">01 · 지나온 길</div>
+    <div class="no">02 · 지나온 길</div>
     <h2>자리는 바뀌었고, 생각은 이어졌습니다</h2>
     <p>네 번의 자리. 그 사이에 결론이 뒤집힌 적은 거의 없고, 달라진 건 버릴 것을 버리는 결단의 강도였습니다.</p>
   </div>
@@ -352,10 +490,10 @@
   </div>
 </div></section>
 
-<!-- 02 -->
+<!-- 03 -->
 <section class="sec" id="talks"><div class="wrap">
   <div class="sh rv">
-    <div class="no">02 · 발표·강연</div>
+    <div class="no">03 · 발표·강연</div>
     <h2>무대에서 꺼낸 생각들</h2>
     <p>발표와 강연, 그리고 말로 끝내지 않고 직접 만들어 본 것까지. 슬라이드는 웹에서 바로 넘겨 볼 수 있습니다(← → 또는 클릭).</p>
   </div>
@@ -398,10 +536,10 @@
   </div>
 </div></section>
 
-<!-- 03 -->
+<!-- 04 -->
 <section class="sec" id="now"><div class="wrap">
   <div class="sh rv">
-    <div class="no">03 · 요즘 생각</div>
+    <div class="no">04 · 요즘 생각</div>
     <h2>요즘 붙들고 있는 네 가지</h2>
     <p>회사를 떠난 뒤 현장에서 직접 해 보며 다듬고 있는 생각들입니다.</p>
   </div>
@@ -429,10 +567,10 @@
   </div>
 </div></section>
 
-<!-- 04 -->
+<!-- 05 -->
 <section class="sec" id="brain"><div class="wrap">
   <div class="sh rv">
-    <div class="no">04 · 두 번째 뇌</div>
+    <div class="no">05 · 두 번째 뇌</div>
     <h2>20년 넘게 쓴 3,000편이 원칙이 되기까지</h2>
     <p>날아간 블로그까지 합치면 20년 넘게 3,000편 정도를 썼습니다. 흩어진 글을 Obsidian에 모으고 AI 에이전트와 함께 다시 읽으며, 내가 무엇을 믿고 무엇을 아직 모르는지 정리하고 있습니다. 보관함이 아니라 다음 글을 쓰기 위한 바탕입니다.</p>
   </div>
@@ -497,10 +635,10 @@
   </div>
 </div></section>
 
-<!-- 05 -->
+<!-- 06 -->
 <section class="sec" id="principles"><div class="wrap">
   <div class="sh rv">
-    <div class="no">05 · 원칙</div>
+    <div class="no">06 · 원칙</div>
     <h2>시대를 넘어 반복된 열세 가지 원칙</h2>
     <p>서로 다른 시기에 같은 결론에 두 번 이상 닿은 것만 원칙이라 부릅니다. 눌러서 한 줄 풀이를 보세요.</p>
   </div>
@@ -508,10 +646,10 @@
   <p class="pnote rv">모든 원칙에는 그것이 깨지는 지점도 함께 적어 둡니다. 확신만 있는 원칙은 원칙이 아니라 고집이니까요.</p>
 </div></section>
 
-<!-- 06 -->
+<!-- 07 -->
 <section class="sec" id="questions"><div class="wrap">
   <div class="sh rv">
-    <div class="no">06 · 아직 못 푼 질문</div>
+    <div class="no">07 · 아직 못 푼 질문</div>
     <h2>답보다 오래 붙들고 있는 질문들</h2>
     <p>원칙이 되지 못한 생각은 질문으로 남겨 둡니다. 다음 발표는 아마 여기서 나올 겁니다.</p>
   </div>
