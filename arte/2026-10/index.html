@@ -791,7 +791,7 @@
           <div class="e in" style="--d:.15s"><div class="d">9.30~10.2</div><div class="x">KB(직원용 모바일 업무시스템)·하나(영업지원 ODS)·부산은행·예가람저축은행(외부 솔루션)·현대캐피탈(모집인 조회 페이지) — <b>10.6 기준 7개사 유출 확인</b></div></div>
           <div class="e" data-f="1"><div class="d">10.4~10.6</div><div class="x">대통령 "철저 조사" 지시 · KISA 24시간 비상체제, CISO 신고 2.8만 곳에 점검 권고 · 금감원 공격 IP 28개(12개국) 500개 금융사 공유</div></div>
         </div>
-        <div class="note" data-f="2" style="margin-top:12px"><b style="color:var(--ink)">공통 진입점은 '코어'가 아니라 '가장자리'</b> — 대출모집인·외주·직원용 모바일 등 외부 연계 페이지의 인증·세션 검증. 에이전트형 공격은 이런 가장자리를 <b style="color:var(--ink)">사람보다 빠르고 넓게</b> 훑는다.</div>
+        <div class="note" data-f="2" style="margin-top:12px"><b style="color:var(--ink)">공통 진입점은 '코어'가 아니라 '엣지'</b> — 대출모집인·외주·직원용 모바일 등 외부 연계 페이지의 인증·세션 검증. 에이전트형 공격은 이런 엣지를 <b style="color:var(--ink)">사람보다 빠르고 넓게</b> 훑는다.</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:11px">
         <div class="card" data-f="3">
@@ -890,7 +890,7 @@
     </table>
     <div class="banner" data-f="1" style="margin-top:12px">
       <span class="bl">공통점</span>
-      여섯 개 모두 <b>'가장자리'와 '게이트웨이'</b>의 문제다 — GPU 앞단, 외부 연계 페이지, 에이전트 출입구, MCP·API. 스택이 위로 길어질수록 그 사이의 게이트웨이가 늘어나고, 그것이 소프트웨어 기업의 자리다.
+      여섯 개 모두 <b>'엣지'와 '게이트웨이'</b>의 문제다 — GPU 앞단, 외부 연계 페이지, 에이전트 출입구, MCP·API. 스택이 위로 길어질수록 그 사이의 게이트웨이가 늘어나고, 그것이 소프트웨어 기업의 자리다.
     </div>
   </div>
   <div class="src">출처: 본편 2·8·10장 뉴스 출처. 벤더가 의뢰한 성능 시험은 독립 검증이 아니므로 고객 환경 측정으로 확인. 표의 대화 설계는 발표자 제안(Interpretation).</div>
@@ -950,7 +950,7 @@
     <div class="opts">
       <div class="opt in" style="--d:0s">
         <div class="oh"><div class="num" style="width:auto;padding:0 6px">30</div><div class="ot">대화 열기 — 사건이 식기 전에</div></div>
-        <p>· 금융 고객에 <b style="color:var(--ink)">'가장자리 점검'</b> 오퍼 — 외부 연계 페이지·API 인벤토리<br>· 설치 기반 제품 <b style="color:var(--ink)">하드닝·버전 점검 콜</b>(관리 인터페이스 비노출·EoS 교체)<br>· 팀 전원이 대화 6개(앞 장)를 리허설</p>
+        <p>· 금융 고객에 <b style="color:var(--ink)">'엣지 점검'</b> 오퍼 — 외부 연계 페이지·API 인벤토리<br>· 설치 기반 제품 <b style="color:var(--ink)">하드닝·버전 점검 콜</b>(관리 인터페이스 비노출·EoS 교체)<br>· 팀 전원이 대화 6개(앞 장)를 리허설</p>
       </div>
       <div class="opt in" style="--d:.15s">
         <div class="oh"><div class="num" style="width:auto;padding:0 6px">90</div><div class="ot">증명 — 산업별 측정 PoC 1건씩</div></div>
@@ -1035,7 +1035,7 @@
     <div class="qa">
       <div class="q"><h4>Q. AI는 거품 아닌가? 그럼 기다리는 게 맞지 않나?</h4><p>인프라 가격·밸류에이션은 거품일 수 있다(10.7~8 Dalio·Panmure 경고, OpenAI 매출 쇼크). 그러나 거품이 꺼져도 싸진 GPU·토큰 위에서 <b style="color:var(--ink)">사용은 계속된다</b>. 2000년 닷컴 붕괴 뒤 남은 것도 광케이블과 그 위의 서비스였다. 기다릴 것은 큰 CAPEX이지, 업무 단위의 측정과 실험이 아니다.</p></div>
       <div class="q"><h4>Q. 뮤즈가 한국에 오면 무엇이 달라지나?</h4><p>한국 출시는 미정이다. 다만 질문은 출시 전에 온다 — 국내 플랫폼·은행·커머스가 <b style="color:var(--ink)">타사 에이전트에게 문을 열 API와 인증</b>을 줄 것인가. '모두의 AI'가 그 국내판 경쟁자가 될지는 MAU가 아니라 대신 끝낸 일의 건수로 판가름 난다.</p></div>
-      <div class="q"><h4>Q. 금융권 해킹이 AI 공격이라는 게 확인됐나?</h4><p>아니다. 공격 서버의 LLM 침투도구 흔적은 보안업체 분석이고, 당국은 확정하지 않았다(Hypothesis). 이 자료의 요점은 AI 여부가 아니라 <b style="color:var(--ink)">공통 진입점이 외부 연계 '가장자리'</b>였다는 점과, 에이전트형 공격이 그 가장자리를 더 빨리 훑는다는 글로벌 보고다.</p></div>
+      <div class="q"><h4>Q. 금융권 해킹이 AI 공격이라는 게 확인됐나?</h4><p>아니다. 공격 서버의 LLM 침투도구 흔적은 보안업체 분석이고, 당국은 확정하지 않았다(Hypothesis). 이 자료의 요점은 AI 여부가 아니라 <b style="color:var(--ink)">공통 진입점이 외부 연계 '엣지'</b>였다는 점과, 에이전트형 공격이 그 엣지를 더 빨리 훑는다는 글로벌 보고다.</p></div>
       <div class="q"><h4>Q. 피지컬 AI는 한국이 잘할 수 있는 분야 아닌가?</h4><p>그렇다 — 로봇 밀도 1위, 자동차·반도체·조선 현장이 있다. 그래서 더더욱 '구매 대수'가 아니라 <b style="color:var(--ink)">공정 데이터 표준·시뮬레이션·안전검증·운영 모델</b>에 예산이 가야 한다. 강점(현장)을 위층으로 바꾸는 설계가 관건이다.</p></div>
     </div>
     <div class="banner" style="margin-top:10px;font-size:13.5px;line-height:1.7">
@@ -1634,7 +1634,7 @@
         <ul>
           <li><b>모델은 3~4주마다 바뀌는 부품</b> — MCP 연동·평가셋(evals)·트레이싱을 먼저 만들고, 모델 교체를 전제로 설계</li>
           <li><b>에이전트는 새로운 '사용자'</b> — 고유 신원, 최소·시간제한 권한, 고위험 행위는 사람 승인, 킬스위치, 감사 로그(AI안전연구소 8원칙)</li>
-          <li><b>가장자리부터 점검</b> — 외부 연계·외주·직원용 모바일 페이지의 인증·세션, MCP·npm 공급망 버전 고정과 샌드박스</li>
+          <li><b>엣지부터 점검</b> — 외부 연계·외주·직원용 모바일 페이지의 인증·세션, MCP·npm 공급망 버전 고정과 샌드박스</li>
           <li><b>원가 단위를 바꾼다</b> — GPU 시간·토큰이 아니라 '완료 업무 1건'. 가동률은 할당이 아닌 실사용으로 측정</li>
           <li><b>복구는 시험으로 증명</b> — RTO/RPO 목표가 아니라 업무 단위 복구 리허설 기록</li>
         </ul>
